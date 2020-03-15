@@ -1,3 +1,7 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="edtPassword_top">10dp</dimen>
+    <dimen name="etPasswordHeight">39dp</dimen>
+    <dimen name="editTextHeight">42dp</dimen>
+    <dimen name="shape_green_radius_button_width">264dp</dimen>
+    <dimen name="shape_green_radius_button_height">46dp</dimen>
 </resources>

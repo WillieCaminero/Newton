@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/lblId"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryText"
+        android:text="223-1233444-5"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/lblClientFullName"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Willie Manuel Caminero Mejia"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblId"/>
+    <TextView
+        android:id="@+id/lblAddress"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="C/Nicolas Casimiro #4, Prados de San Luis, Frente a Poas"
+        android:textSize="10sp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblClientFullName"/>
+    <TextView
+        android:id="@+id/lblDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="28-06-19"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toEndOf="@id/lblId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/lblId"
+        app:layout_constraintBottom_toBottomOf="@id/lblId"/>
+    <TextView
+        android:id="@+id/lblTaskTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:text="08:00 PM"
+        app:layout_constraintStart_toEndOf="@id/lblId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/lblClientFullName"
+        app:layout_constraintBottom_toBottomOf="@id/lblClientFullName"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

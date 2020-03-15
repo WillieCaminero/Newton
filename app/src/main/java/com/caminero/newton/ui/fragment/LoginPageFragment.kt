@@ -51,9 +51,6 @@ class LoginPageFragment : BaseFragment() {
         btnLogin.setOnClickListener {
             performLogin(it)
         }
-        lblBtnForgotPassword.setOnClickListener {
-            //viewModel.forgotPassword()
-        }
     }
 
     private fun setupObservers() {

@@ -8,6 +8,5 @@ data class Loan (
     @SerializedName("mount") val mount : Int,
     @SerializedName("startDate") val startDate : String,
     @SerializedName("endDate") val endDate : String,
-    @SerializedName("status") val status : String,
-    @SerializedName("creationDate") val creationDate : String
+    @SerializedName("status") val status : String
 )
