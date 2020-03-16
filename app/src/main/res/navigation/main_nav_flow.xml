@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.caminero.newton.ui.fragment.LoginPageFragment"
+        android:name="com.caminero.newton.ui.fragment.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" >
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navHostFragment"
-        android:name="com.caminero.newton.ui.fragment.HomePageFragment"
+        android:name="com.caminero.newton.ui.fragment.HomeFragment"
         android:label="MainPageFragment"
         tools:layout="@layout/fragment_home" >
     </fragment>

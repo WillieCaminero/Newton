@@ -19,8 +19,27 @@ buildscript {
     ext.espressoTest = '3.2.0'
 
     repositories {
-        google()
-        jcenter()
+        if (project.hasProperty('artifactory_contextUrl')) {
+            maven {
+                url "$artifactory_contextUrl/list/gradle-libs/"
+                name 'Unisigma'
+                credentials {
+                    username = "${artifactory_user}"
+                    password = "${artifactory_password}"
+                }
+            }
+            maven {
+                url "$artifactory_contextUrl/list/google/"
+                name 'Unisigma'
+                credentials {
+                    username = "${artifactory_user}"
+                    password = "${artifactory_password}"
+                }
+            }
+        } else {
+            jcenter()
+            google()
+        }
     }
 
     dependencies {
@@ -34,8 +53,27 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
+        if (project.hasProperty('artifactory_contextUrl')) {
+            maven {
+                url "$artifactory_contextUrl/list/gradle-libs/"
+                name 'Unisigma'
+                credentials {
+                    username = "${artifactory_user}"
+                    password = "${artifactory_password}"
+                }
+            }
+            maven {
+                url "$artifactory_contextUrl/list/google/"
+                name 'Unisigma'
+                credentials {
+                    username = "${artifactory_user}"
+                    password = "${artifactory_password}"
+                }
+            }
+        } else {
+            jcenter()
+            google()
+        }
     }
 }
 

@@ -4,7 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.caminero.newton.ui.fragment.LoginPageFragmentDirections
+import com.caminero.newton.ui.fragment.LoginFragment
+import com.caminero.newton.ui.fragment.LoginFragmentDirections
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -59,6 +60,6 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
 
     private fun navigateToHome() {
         Log.i(TAG, "Navigating to Home")
-        navigate(LoginPageFragmentDirections.actionLoginFragmentToHomeFragment())
+        navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
     }
 }

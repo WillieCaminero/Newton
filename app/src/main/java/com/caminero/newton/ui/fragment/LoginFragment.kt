@@ -9,16 +9,16 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.caminero.newton.R
-import com.caminero.newton.core.arch.BaseFragment
-import com.caminero.newton.core.arch.BaseViewModel
+import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoginViewModel
+import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginPageFragment : BaseFragment() {
+class LoginFragment : BaseFragment() {
 
     companion object {
-        val TAG: String = LoginPageFragment::class.java.simpleName
+        val TAG: String = LoginFragment::class.java.simpleName
     }
 
     private lateinit var viewModel: LoginViewModel
@@ -45,7 +45,7 @@ class LoginPageFragment : BaseFragment() {
         setupObservers()
     }
 
-    override fun getViewModel(): BaseViewModel = viewModel
+    override fun getViewModel(): BaseFragmentViewModel = viewModel
 
     private fun setupListeners() {
         btnLogin.setOnClickListener {
@@ -54,17 +54,15 @@ class LoginPageFragment : BaseFragment() {
     }
 
     private fun setupObservers() {
-        errorObserver = Observer {
-            Log.e(TAG, it)
-            //Change & Show the error string
-        }
-        viewModel.errorMessage.observe(viewLifecycleOwner, errorObserver)
+        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { Log.e(TAG, it) })
 
-        loadingObserver = Observer {
-            pbLoginUser.visibility = if (it) View.VISIBLE else View.GONE
-            btnLogin.isEnabled = !it
-        }
-        viewModel.isLoading.observe(viewLifecycleOwner, loadingObserver)
+        viewModel.isLoading.observe(
+            viewLifecycleOwner,
+            Observer {
+                pbLoginUser.visibility = if (it) View.VISIBLE else View.GONE
+                btnLogin.isEnabled = !it
+            }
+        )
     }
 
     private fun performLogin(view: View) {

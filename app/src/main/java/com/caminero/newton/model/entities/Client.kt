@@ -9,5 +9,6 @@ data class Client (
     @SerializedName("phoneNumber") val phoneNumber : String,
     @SerializedName("address") val address : String,
     @SerializedName("loans") val loans : List<Loan>,
-    @SerializedName("status") val status : String
+    @SerializedName("status") val status : String,
+    @SerializedName("createdDate") val createdDate : String
 )

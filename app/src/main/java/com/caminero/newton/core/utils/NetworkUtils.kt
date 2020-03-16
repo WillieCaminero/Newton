@@ -9,7 +9,7 @@ import java.net.URL
 
 class NetworkUtils (val app : Application) {
     @WorkerThread
-    fun isConnectedToNetwork(): Boolean {
+    fun  isConnectedToNetwork(): Boolean {
         val connectivityManager = app.getSystemService(
             Context.CONNECTIVITY_SERVICE
         ) as ConnectivityManager?

@@ -1,4 +1,4 @@
-package com.caminero.newton.core.arch
+package com.caminero.newton.ui.fragment.base
 
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
@@ -8,10 +8,11 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.caminero.newton.R
 import com.caminero.newton.core.utils.NavigationCommand
+import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment : Fragment() {
-    abstract fun getViewModel(): BaseViewModel
+    abstract fun getViewModel(): BaseFragmentViewModel
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -38,7 +39,6 @@ abstract class BaseFragment : Fragment() {
 
                 is NavigationCommand.Back -> {
                     //TODO("Controlar la navegacion atrás cuando sea desde el fragment home")
-                    //if (NavHostFragment.findNavController(this@BaseFragment).graph.label == HomePageFragment.TAG)
                     NavHostFragment.findNavController(this@BaseFragment).popBackStack()
                 }
 

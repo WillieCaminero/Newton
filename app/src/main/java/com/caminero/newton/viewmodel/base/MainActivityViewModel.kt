@@ -3,10 +3,9 @@ package com.caminero.newton.viewmodel.base
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.caminero.newton.core.arch.BaseViewModel
 import com.caminero.newton.model.entities.NewtonSession
 
-class MainActivityViewModel (val app : Application) : BaseViewModel(app) {
+class MainActivityViewModel (val app : Application) : BaseFragmentViewModel(app) {
     companion object {
         val TAG = MainActivityViewModel::class.java.simpleName
     }

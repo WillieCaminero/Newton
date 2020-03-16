@@ -3,6 +3,7 @@ package com.caminero.newton.viewmodel
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.caminero.newton.model.entities.Client
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -19,26 +20,27 @@ class HomeViewModel(app : Application) : BaseFragmentViewModel(app) {
     val clientList : LiveData<List<Client>> get() = mClientList
 
     fun getClients(){
-        /*
         activityViewModel.session.value?.let {session ->
-            CoroutineScope(Dispatchers.IO).launch {
+            viewModelScope.launch(Dispatchers.IO) {
                 if (isConnectedToInternet()){
-                    activityViewModel.userOfficer.value?.let { userOfficer ->
-                        val response = taskRepository.getTasksForUser(session,
-                            userOfficer.user.entity.entityId,
-                            userOfficer.user.userId)
-                        if (response.isSuccess){
-                            val tasks = response.response!!.data
-                            mTaskList.postValue(tasks)
-                        }
-                        else {
-                            handleHttpErrorMessage(response.responseError)
-                        }
-                    }
+//                    activityViewModel.userOfficer.value?.let { userOfficer ->
+//                        val response = taskRepository.getTasksForUser(session,
+//                            userOfficer.user.entity.entityId,
+//                            userOfficer.user.userId)
+//                        if (response.isSuccess){
+//                            val tasks = response.response!!.data
+//                            mTaskList.postValue(tasks)
+//                        }
+//                        else {
+//                            handleHttpErrorMessage(response.responseError)
+//                        }
+//                    }
                 }
+                setLoadingInactive()
             }
-        }*/
+        }
 
+        /*
         var client = Client(
             "223-0167667-4",
             "Willie Caminero",
@@ -46,7 +48,8 @@ class HomeViewModel(app : Application) : BaseFragmentViewModel(app) {
             "+18905554432",
             "C/CASAMIRA #4, PAROS DE ORSAS",
             emptyList(),
-            "OK"
+            "OK",
+            createdDate = "2012-12-12T08:00:00"
         )
 
         var clients : MutableList<Client> = mutableListOf<Client>()
@@ -55,6 +58,6 @@ class HomeViewModel(app : Application) : BaseFragmentViewModel(app) {
             clients.add(client)
         }
 
-        mClientList.postValue(clients)
+        mClientList.postValue(clients)*/
     }
 }
