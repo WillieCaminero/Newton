@@ -6,9 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.caminero.newton.R
 import com.caminero.newton.model.entities.Client
+import com.caminero.newton.model.listeners.ClientListener
 import kotlinx.android.synthetic.main.list_item_client.view.*
 
-class ClientAdapter(val items : List<Client>) : RecyclerView.Adapter<ClientAdapter.ClientViewHolder>() {
+class ClientAdapter(private val items : List<Client>,
+                    private val listener:ClientListener) : RecyclerView.Adapter<ClientAdapter.ClientViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClientViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,6 +28,10 @@ class ClientAdapter(val items : List<Client>) : RecyclerView.Adapter<ClientAdapt
         holder.lblClientFullName.text = item.name
         holder.lblAddress.text = item.address
         holder.lblTaskTime.text = item.createdDate
+
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(item)
+        }
     }
 
     inner class ClientViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {

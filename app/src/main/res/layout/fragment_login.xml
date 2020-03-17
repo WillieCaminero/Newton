@@ -109,8 +109,7 @@
         app:layout_constraintEnd_toStartOf="@id/lblBy"
         app:layout_constraintHorizontal_chainStyle="packed"
         android:text="@string/powered_by"
-        android:layout_marginBottom="25dp"
-        />
+        android:layout_marginBottom="45dp"/>
 
     <TextView
         android:id="@+id/lblBy"
@@ -121,8 +120,7 @@
         app:layout_constraintStart_toEndOf="@id/lblPowered"
         android:text="@string/author"
         android:layout_marginStart="10dp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glStart"

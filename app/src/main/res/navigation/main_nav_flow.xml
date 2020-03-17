@@ -22,5 +22,8 @@
         android:name="com.caminero.newton.ui.fragment.HomeFragment"
         android:label="MainPageFragment"
         tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="clientId"
+            app:argType="string" />
     </fragment>
 </navigation>

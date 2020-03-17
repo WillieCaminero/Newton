@@ -10,10 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.caminero.newton.R
 import com.caminero.newton.ui.fragment.base.BaseFragment
+import com.caminero.newton.viewmodel.HomeViewModel
 import com.caminero.newton.viewmodel.LoginViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LoginFragment : BaseFragment() {
 
@@ -21,6 +23,7 @@ class LoginFragment : BaseFragment() {
         val TAG: String = LoginFragment::class.java.simpleName
     }
 
+    private val viewModelHome: HomeViewModel by sharedViewModel()
     private lateinit var viewModel: LoginViewModel
     val activityViewModel: MainActivityViewModel by activityViewModels()
 

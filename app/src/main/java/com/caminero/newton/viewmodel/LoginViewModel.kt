@@ -35,7 +35,7 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
         CoroutineScope(Dispatchers.IO).launch {
             /*if (isConnectedToInternet()) {
                 setLoadingActive()
-                /*
+
                 loginRepository.validateUser(mUserName.value!!, mPassword.value!!) {
                     it?.isSuccess?.let { isSuccess ->
                         if (isSuccess) {
@@ -50,16 +50,15 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
                         }
                     }
                 }
-                */
-                activityViewModel.createSession(null)
-                activityViewModel.setUsername(userName.value!!)
-                navigateToHome()
             }*/
+            activityViewModel.createSession(null)
+            activityViewModel.setUsername(userName.value!!)
+            navigateToHome()
         }
     }
 
     private fun navigateToHome() {
         Log.i(TAG, "Navigating to Home")
-        navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+        navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment("ID"))
     }
 }
