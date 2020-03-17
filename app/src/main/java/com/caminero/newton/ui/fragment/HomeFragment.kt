@@ -58,6 +58,7 @@ class HomeFragment : BaseFragment() {
             override fun onItemClick(client: Client) {
                 viewModel.setLoadingActive()
                 //safeArgs.clientId
+
             }
         })
         rvClients.adapter = adapter
