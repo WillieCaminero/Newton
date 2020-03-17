@@ -59,14 +59,14 @@ class LoginFragment : BaseFragment() {
         viewModel.isLoading.observe(
             viewLifecycleOwner,
             Observer {
-                pbLoginUser.visibility = if (it) View.VISIBLE else View.GONE
+                pbProgress.visibility = if (it) View.VISIBLE else View.GONE
                 btnLogin.isEnabled = !it
             }
         )
     }
 
     private fun performLogin(view: View) {
-        val usr = txtUsername.text.toString()
+        val usr = txtEmail.text.toString()
         val pwd = txtPassword.text.toString()
 
         viewModel.setUserName(usr)

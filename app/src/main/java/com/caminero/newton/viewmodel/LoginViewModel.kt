@@ -33,7 +33,7 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
 
     fun loginWithUserName(){
         CoroutineScope(Dispatchers.IO).launch {
-            if (isConnectedToInternet()) {
+            /*if (isConnectedToInternet()) {
                 setLoadingActive()
                 /*
                 loginRepository.validateUser(mUserName.value!!, mPassword.value!!) {
@@ -54,7 +54,7 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
                 activityViewModel.createSession(null)
                 activityViewModel.setUsername(userName.value!!)
                 navigateToHome()
-            }
+            }*/
         }
     }
 

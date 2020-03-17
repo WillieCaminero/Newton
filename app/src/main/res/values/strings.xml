@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Newton</string>
+    <string name="author">Willie Caminero</string>
+    <string name="powered_by">Powered By</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_email">Email</string>
 
     <!--labels.Common-->
     <string name="common_login_header">Header del login</string>
-    <string name="common_application_logo">Logo de la aplicación</string>
 
     <!--Labels.Login -->
     <string name="login_session">Sign In</string>
@@ -12,4 +15,5 @@
     <string name="common_user_test">willie.caminero@gmail.com</string>
     <string name="common_password_test">Prueba01*</string>
     <string name="login_login_text">Log In</string>
+
 </resources>
