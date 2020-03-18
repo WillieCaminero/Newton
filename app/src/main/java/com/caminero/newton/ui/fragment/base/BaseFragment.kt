@@ -3,15 +3,19 @@ package com.caminero.newton.ui.fragment.base
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.caminero.newton.R
 import com.caminero.newton.core.utils.NavigationCommand
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
-import com.google.android.material.snackbar.Snackbar
+import com.caminero.newton.viewmodel.base.MainActivityViewModel
 
 abstract class BaseFragment : Fragment() {
+
+    protected val activityViewModel: MainActivityViewModel by activityViewModels()
+
     abstract fun getViewModel(): BaseFragmentViewModel
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

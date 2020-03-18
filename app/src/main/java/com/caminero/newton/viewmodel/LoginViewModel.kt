@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.caminero.newton.model.entities.NewtonSession
 import com.caminero.newton.ui.fragment.LoginFragmentDirections
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
+import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
@@ -16,6 +17,8 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
     companion object {
         val TAG = LoginViewModel::class.java.simpleName
     }
+
+    lateinit var activityViewModel: MainActivityViewModel
 
     private var mEmail = MutableLiveData<String>()
     val email : LiveData<String> get() = mEmail

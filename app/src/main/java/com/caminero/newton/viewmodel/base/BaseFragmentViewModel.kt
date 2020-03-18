@@ -23,8 +23,6 @@ open class BaseFragmentViewModel(app : Application): AndroidViewModel(app), Koin
     private val _navigationCommand = SingleLiveEvent<NavigationCommand>()
     val navigationCommand: LiveData<NavigationCommand> get() = _navigationCommand
 
-    lateinit var activityViewModel : MainActivityViewModel
-
     private var mIsLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> get() = mIsLoading
 
