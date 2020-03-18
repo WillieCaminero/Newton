@@ -21,19 +21,4 @@ class MainActivity : AppCompatActivity() {
 
         Log.i(TAG, "Successfully loaded activity")
     }
-
-    override fun onPause() {
-        viewModel.initTimeoutCountdown()
-        super.onPause()
-    }
-
-    override fun onResume() {
-        viewModel.stopTimeoutCountdown()
-        super.onResume()
-    }
-
-    override fun onDestroy() {
-        viewModel.destroySession()
-        super.onDestroy()
-    }
 }

@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.caminero.newton.R
 import com.caminero.newton.ui.fragment.base.BaseFragment
-import com.caminero.newton.viewmodel.HomeViewModel
+import com.caminero.newton.viewmodel.ClientViewModel
 import com.caminero.newton.viewmodel.LoginViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
@@ -23,12 +23,8 @@ class LoginFragment : BaseFragment() {
         val TAG: String = LoginFragment::class.java.simpleName
     }
 
-    private val viewModelHome: HomeViewModel by sharedViewModel()
     private lateinit var viewModel: LoginViewModel
     val activityViewModel: MainActivityViewModel by activityViewModels()
-
-    private lateinit var errorObserver: Observer<String>
-    private lateinit var loadingObserver: Observer<Boolean>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,28 +48,27 @@ class LoginFragment : BaseFragment() {
 
     private fun setupListeners() {
         btnLogin.setOnClickListener {
-            performLogin(it)
+            login(it)
         }
     }
 
     private fun setupObservers() {
-        viewModel.errorMessage.observe(viewLifecycleOwner, Observer { Log.e(TAG, it) })
-
         viewModel.isLoading.observe(
             viewLifecycleOwner,
             Observer {
-                pbProgress.visibility = if (it) View.VISIBLE else View.GONE
+                pvProgress.visibility = if (it) View.VISIBLE else View.GONE
+                pvProgress.bringToFront()
                 btnLogin.isEnabled = !it
             }
         )
     }
 
-    private fun performLogin(view: View) {
+    private fun login(view: View) {
         val usr = txtEmail.text.toString()
         val pwd = txtPassword.text.toString()
 
-        viewModel.setUserName(usr)
+        viewModel.setEmail(usr)
         viewModel.setPassword(pwd)
-        viewModel.loginWithUserName()
+        viewModel.logInUser()
     }
 }

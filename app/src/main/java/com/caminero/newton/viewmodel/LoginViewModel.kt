@@ -4,10 +4,10 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.caminero.newton.ui.fragment.LoginFragment
+import androidx.lifecycle.viewModelScope
+import com.caminero.newton.model.entities.NewtonSession
 import com.caminero.newton.ui.fragment.LoginFragmentDirections
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
@@ -17,22 +17,22 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
         val TAG = LoginViewModel::class.java.simpleName
     }
 
-    private var mUserName = MutableLiveData<String>()
-    val userName : LiveData<String> get() = mUserName
+    private var mEmail = MutableLiveData<String>()
+    val email : LiveData<String> get() = mEmail
 
     private var mPassword = MutableLiveData<String>()
     val password : LiveData<String> get() = mPassword
 
-    fun setUserName(usr : String) {
-        mUserName.postValue(usr)
+    fun setEmail(usr : String) {
+        mEmail.postValue(usr)
     }
 
     fun setPassword(pwd : String) {
         mPassword.postValue(pwd)
     }
 
-    fun loginWithUserName(){
-        CoroutineScope(Dispatchers.IO).launch {
+    fun logInUser(){
+        viewModelScope.launch(Dispatchers.IO) {
             /*if (isConnectedToInternet()) {
                 setLoadingActive()
 
@@ -51,14 +51,14 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
                     }
                 }
             }*/
-            activityViewModel.createSession(null)
-            activityViewModel.setUsername(userName.value!!)
-            navigateToHome()
+            activityViewModel.createSession(NewtonSession("","","","",""))
+            activityViewModel.setUsername(email.value!!)
+            navigateToClientFragment()
         }
     }
 
-    private fun navigateToHome() {
-        Log.i(TAG, "Navigating to Home")
-        navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment("ID"))
+    private fun navigateToClientFragment() {
+        Log.i(TAG, "Navigating to Client")
+        navigate(LoginFragmentDirections.actionLoginFragmentToClientFragment())
     }
 }

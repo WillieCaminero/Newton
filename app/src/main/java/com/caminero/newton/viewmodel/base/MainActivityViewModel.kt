@@ -16,24 +16,11 @@ class MainActivityViewModel (val app : Application) : BaseFragmentViewModel(app)
     private var mLoggedUsername = MutableLiveData<String>()
     val loggedUsername : LiveData<String> get() = mLoggedUsername
 
-    //Session Live Data
     fun createSession(session : NewtonSession?) {
         mSession.postValue(session)
     }
 
     fun setUsername(username : String){
         mLoggedUsername.postValue(username)
-    }
-
-    fun destroySession() {
-        mSession.postValue(null)
-    }
-
-    fun initTimeoutCountdown() {
-        //ToDo
-    }
-
-    fun stopTimeoutCountdown() {
-        //ToDo
     }
 }

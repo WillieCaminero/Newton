@@ -26,7 +26,6 @@ abstract class BaseFragment : Fragment() {
         activity?.onBackPressedDispatcher?.addCallback(this, callback)
 
         observeNavigation()
-        observeError()
     }
 
     private fun observeNavigation() = getViewModel().navigationCommand.observe(
@@ -63,12 +62,6 @@ abstract class BaseFragment : Fragment() {
                         .build()
                 )
             }
-        }
-    )
-
-    protected open fun observeError() = getViewModel().pushError.observe(
-        viewLifecycleOwner, Observer { error ->
-            view?.let { vista -> Snackbar.make(vista, error, Snackbar.LENGTH_LONG) }
         }
     )
 

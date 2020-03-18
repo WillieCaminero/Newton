@@ -20,16 +20,10 @@ open class BaseFragmentViewModel(app : Application): AndroidViewModel(app), Koin
 
     private val networkUtils : NetworkUtils by inject()
 
-    private val _pushError = SingleLiveEvent<String>()
-    val pushError: LiveData<String> get() = _pushError
-
     private val _navigationCommand = SingleLiveEvent<NavigationCommand>()
     val navigationCommand: LiveData<NavigationCommand> get() = _navigationCommand
 
     lateinit var activityViewModel : MainActivityViewModel
-
-    protected var mErrorMessage = MutableLiveData<String>()
-    val errorMessage : LiveData<String> get() = mErrorMessage
 
     private var mIsLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> get() = mIsLoading
@@ -49,10 +43,6 @@ open class BaseFragmentViewModel(app : Application): AndroidViewModel(app), Koin
 
     fun navigate(directions : NavDirections) {
         _navigationCommand.postValue(NavigationCommand.To(directions))
-    }
-
-    fun getStringResource(resourceId: Int) : String{
-        return getApplication<Application>().resources.getString(resourceId)
     }
 
     protected fun isConnectedToInternet() : Boolean {
