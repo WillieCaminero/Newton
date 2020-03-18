@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_clientFragment_to_loanFragment"
             app:destination="@id/navLoanFragment"/>
+        <action
+            android:id="@+id/action_clientFragment_to_addClientFragment"
+            app:destination="@id/navAddClientFragment"/>
     </fragment>
 
     <fragment
@@ -35,5 +38,11 @@
         <argument
             android:name="clientId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/navAddClientFragment"
+        android:name="com.caminero.newton.ui.fragment.AddClientFragment"
+        android:label="AddClientFragment"
+        tools:layout="@layout/fragment_add_client" >
     </fragment>
 </navigation>

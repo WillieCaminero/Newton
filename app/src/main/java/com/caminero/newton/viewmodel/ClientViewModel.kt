@@ -51,4 +51,9 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
         Log.i(TAG, "Navigating to Loan")
         navigate(ClientFragmentDirections.actionClientFragmentToLoanFragment(id))
     }
+
+    fun navigateToAddClientFragment() {
+        Log.i(TAG, "Navigating to Add Client")
+        navigate(ClientFragmentDirections.actionClientFragmentToAddClientFragment())
+    }
 }

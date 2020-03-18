@@ -52,7 +52,7 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
                 }
             }*/
             activityViewModel.createSession(NewtonSession("","","","",""))
-            activityViewModel.setUsername(email.value!!)
+            email.value?.let {  email -> activityViewModel.setUsername(email) }
             navigateToClientFragment()
         }
     }

@@ -5,21 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.caminero.newton.R
-import com.caminero.newton.model.entities.Client
-import com.caminero.newton.model.listeners.ClientListener
-import com.caminero.newton.ui.adapter.ClientAdapter
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.ClientViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
-import kotlinx.android.synthetic.main.fragment_client.*
+import com.google.android.material.snackbar.Snackbar
 
-class ClientFragment : BaseFragment() {
+class AddClientFragment : BaseFragment() {
     companion object{
-        val TAG: String = ClientFragment::class.java.simpleName
+        val TAG: String = AddClientFragment::class.java.simpleName
     }
 
     private lateinit var viewModel: ClientViewModel
@@ -34,31 +30,16 @@ class ClientFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_client, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_add_client, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupObservers()
-        viewModel.setLoadingActive()
-        viewModel.getClients()
+        //Snackbar.make(view, viewModel.activityViewModel.loggedUsername.value!!, Snackbar.LENGTH_LONG).show()
     }
 
     override fun getViewModel(): BaseFragmentViewModel = viewModel
 
     private fun setupObservers(){
-        viewModel.clientList.observe(viewLifecycleOwner, Observer {
-            setupRecyclerView(it)
-        })
-        btnAddClient.setOnClickListener {
-            viewModel.navigateToAddClientFragment()
-        }
-    }
 
-    private fun setupRecyclerView(list : List<Client>){
-        val adapter = ClientAdapter(list, object : ClientListener {
-            override fun onItemClick(client: Client) {
-                viewModel.navigateToLoanFragment(client.id)
-            }
-        })
-        rvClients.adapter = adapter
     }
 }

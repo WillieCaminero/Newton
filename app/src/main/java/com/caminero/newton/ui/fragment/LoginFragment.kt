@@ -24,7 +24,7 @@ class LoginFragment : BaseFragment() {
     }
 
     private lateinit var viewModel: LoginViewModel
-    val activityViewModel: MainActivityViewModel by activityViewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
