@@ -27,7 +27,7 @@ class ClientAdapter(private val items : List<Client>,
         holder.lblId.text = item.id
         holder.lblClientFullName.text = item.name
         holder.lblAddress.text = item.address
-        holder.lblTaskTime.text = item.createdDate
+        holder.lblNumberLoans.text = "15"
 
         holder.itemView.setOnClickListener {
             listener.onItemClick(item)
@@ -38,6 +38,6 @@ class ClientAdapter(private val items : List<Client>,
         val lblId = itemView.lblId
         val lblClientFullName = itemView.lblClientFullName
         val lblAddress  = itemView.lblAddress
-        val lblTaskTime = itemView.lblTaskTime
+        val lblNumberLoans = itemView.lblNumberLoans
     }
 }

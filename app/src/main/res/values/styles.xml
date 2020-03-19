@@ -9,14 +9,6 @@
         <item name="materialButtonStyle">@color/colorBackground</item>
     </style>
 
-    <style name="edit_text_enabled">
-        <item name="android:textColor">@color/colorPrimaryText</item>
-        <item name="android:textAppearance">?android:textAppearanceMedium</item>
-        <item name="android:lineSpacingMultiplier">1.17</item>
-        <item name="android:paddingStart">10dp</item>
-        <item name="android:background">@drawable/shape_edit_text_enabled</item>
-    </style>
-
     <style name="label_white_bold_medium">
         <item name="android:textColor">@color/colorHeaderText</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>

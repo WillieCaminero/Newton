@@ -36,7 +36,7 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
                 "Willie Caminero",
                 "Caminero Mejia",
                 "+18905554432",
-                "C/CASAMIRA #4, PAROS DE ORSAS",
+                "C/Nicolas Casimiro #5, El Encantador. Prados de San Luis. STO DGO Este",
                 emptyList(),
                 "OK",
                 createdDate = "2012-12-12T08:00:00"
