@@ -1,6 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.cardview.widget.CardView android:id="@+id/cvPrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glDevider"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
+
+            <TextView
+                android:id="@+id/lblStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Start Date:"
+                android:textStyle="normal|bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/txtStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2013-23-32"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@id/lblStartDate"
+                app:layout_constraintTop_toTopOf="@id/lblStartDate"
+                />
+
+            <TextView
+                android:id="@+id/lblEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="End Date:"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/lblStartDate"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/txtEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2014-12-11"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@id/lblEndDate"
+                app:layout_constraintTop_toTopOf="@id/lblEndDate"
+                />
+
+            <TextView
+                android:id="@+id/lblStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status:"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/lblEndDate"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="EC"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@id/lblStatus"
+                app:layout_constraintTop_toTopOf="@id/lblStatus"
+                />
+
+            <TextView
+                android:id="@+id/txtTotalMount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                tools:text="USA 1500"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintStart_toEndOf="@id/glDevider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/lblMount"/>
+
+            <TextView
+                android:id="@+id/lblMount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="Base mount:"
+                android:textStyle="normal|bold"
+                app:layout_constraintStart_toStartOf="@id/glDevider"
+                app:layout_constraintEnd_toStartOf="@id/txtMount"
+                app:layout_constraintTop_toBottomOf="@id/txtTotalMount"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_chainStyle="spread"/>
+
+            <TextView
+                android:id="@+id/txtMount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                tools:text="1200"
+                app:layout_constraintStart_toEndOf="@id/lblMount"
+                app:layout_constraintEnd_toStartOf="@id/lblInterest"
+                app:layout_constraintTop_toTopOf="@id/lblMount"
+                app:layout_constraintBottom_toBottomOf="@id/lblMount"/>
+
+            <TextView
+                android:id="@+id/lblInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:text="Interest:"
+                android:textStyle="normal|bold"
+                app:layout_constraintStart_toEndOf="@id/txtMount"
+                app:layout_constraintEnd_toStartOf="@+id/txtInterest"
+                app:layout_constraintTop_toTopOf="@id/lblMount"
+                app:layout_constraintBottom_toBottomOf="@id/lblMount"/>
+
+            <TextView
+                android:id="@+id/txtInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                tools:text="15%"
+                app:layout_constraintStart_toEndOf="@id/lblInterest"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/lblMount"
+                app:layout_constraintBottom_toBottomOf="@id/lblMount"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

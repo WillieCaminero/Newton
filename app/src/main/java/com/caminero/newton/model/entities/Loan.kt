@@ -3,6 +3,7 @@ package com.caminero.newton.model.entities
 import com.google.gson.annotations.SerializedName
 
 data class Loan (
+    @SerializedName("loanId") val loanId : String,
     @SerializedName("interest") val interest : Int,
     @SerializedName("days") val days : Int,
     @SerializedName("mount") val mount : Int,

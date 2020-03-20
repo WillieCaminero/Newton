@@ -33,7 +33,7 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
 
         for (i in 1 .. 100){
             var client = Client(
-                "${i}",
+                "$i",
                 "Willie Caminero",
                 "Caminero Mejia",
                 "+18905554432",
@@ -53,9 +53,9 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
         navigate(ClientFragmentDirections.actionClientFragmentToClientDetailFragment(id))
     }
 
-    fun navigateToLoanFragment(id: String) {
+    fun navigateToAddLoanFragment(id: String) {
         Log.i(TAG, "Navigating to Loan")
-        navigate(ClientDetailFragmentDirections.actionClientDetailFragmentToLoanFragment(id))
+        navigate(ClientDetailFragmentDirections.actionClientDetailFragmentToAddLoanFragment(id))
     }
 
     fun navigateToAddClientFragment() {

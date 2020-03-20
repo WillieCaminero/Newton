@@ -9,6 +9,8 @@ import com.caminero.newton.R
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.ClientViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_add_client.*
 
 class AddClientFragment : BaseFragment() {
     companion object {
@@ -27,5 +29,16 @@ class AddClientFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_add_client, container, false)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupListeners()
+    }
+
     override fun getViewModel(): BaseFragmentViewModel = viewModel
+
+    private fun setupListeners(){
+        btnBack.setOnClickListener {
+            handleOnBackPressed()
+        }
+    }
+
 }

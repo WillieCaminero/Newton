@@ -4,11 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
+import com.caminero.newton.model.entities.Loan
+import com.caminero.newton.model.listeners.LoanListener
+import com.caminero.newton.ui.adapter.LoanAdapter
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.ClientViewModel
+import com.caminero.newton.viewmodel.LoanViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_client_detail.*
@@ -19,11 +24,13 @@ class ClientDetailFragment : BaseFragment() {
     }
 
     private val safeArgs: ClientDetailFragmentArgs by navArgs()
-    private lateinit var viewModel: ClientViewModel
+    private lateinit var clientViewModel: ClientViewModel
+    private lateinit var loanViewModel: LoanViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ClientViewModel::class.java)
+        clientViewModel = ViewModelProvider(this).get(ClientViewModel::class.java)
+        loanViewModel = ViewModelProvider(this).get(LoanViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -32,15 +39,48 @@ class ClientDetailFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_client_detail, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initForm()
         setupListeners()
-        Snackbar.make(view, safeArgs.clientId, Snackbar.LENGTH_LONG).show()
+        setupObservers()
+        loanViewModel.setLoadingActive()
+        loanViewModel.getLoandsByClient(safeArgs.clientId)
     }
 
-    override fun getViewModel(): BaseFragmentViewModel = viewModel
+    override fun getViewModel(): BaseFragmentViewModel = clientViewModel
+
+    private fun initForm(){
+        txtName.setText("Willie Manuel")
+        txtLastName.setText("Caminero Mejia")
+        txtPhoneNumber.setText("(809) 755 - 2423)")
+    }
 
     private fun setupListeners(){
-        btnAddLoan.setOnClickListener {
-            viewModel.navigateToLoanFragment(safeArgs.clientId)
+        btnBack.setOnClickListener {
+            handleOnBackPressed()
         }
+        btnAddLoan.setOnClickListener {
+            clientViewModel.navigateToAddLoanFragment(safeArgs.clientId)
+        }
+    }
+
+    private fun setupObservers(){
+        loanViewModel.loanList.observe(viewLifecycleOwner, Observer {
+            setupRecyclerView(it)
+        })
+        loanViewModel.isLoading.observe(
+            viewLifecycleOwner,
+            Observer {
+                pvProgress.visibility = if (it) View.VISIBLE else View.GONE
+            }
+        )
+    }
+
+    private fun setupRecyclerView(list : List<Loan>){
+        val adapter = LoanAdapter(list, object : LoanListener {
+            override fun onItemClick(loan: Loan) {
+                Snackbar.make(view!!, loan.loanId, Snackbar.LENGTH_LONG).show()
+            }
+        })
+        rvClients.adapter = adapter
     }
 }

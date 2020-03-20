@@ -51,6 +51,12 @@ class ClientFragment : BaseFragment() {
         viewModel.clientList.observe(viewLifecycleOwner, Observer {
             setupRecyclerView(it)
         })
+        viewModel.isLoading.observe(
+            viewLifecycleOwner,
+            Observer {
+                pvProgress.visibility = if (it) View.VISIBLE else View.GONE
+            }
+        )
     }
 
     private fun setupRecyclerView(list : List<Client>){

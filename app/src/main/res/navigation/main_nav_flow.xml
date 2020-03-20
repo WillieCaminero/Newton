@@ -46,15 +46,15 @@
             android:name="clientId"
             app:argType="string" />
         <action
-            android:id="@+id/action_clientDetailFragment_to_loanFragment"
-            app:destination="@id/navLoanFragment"/>
+            android:id="@+id/action_clientDetailFragment_to_addLoanFragment"
+            app:destination="@id/navAddLoanFragment"/>
     </fragment>
 
     <fragment
-        android:id="@+id/navLoanFragment"
-        android:name="com.caminero.newton.ui.fragment.LoanFragment"
+        android:id="@+id/navAddLoanFragment"
+        android:name="com.caminero.newton.ui.fragment.AddLoanFragment"
         android:label="LoanFragment"
-        tools:layout="@layout/fragment_loan" >
+        tools:layout="@layout/fragment_add_loan" >
         <argument
             android:name="clientId"
             app:argType="string" />
