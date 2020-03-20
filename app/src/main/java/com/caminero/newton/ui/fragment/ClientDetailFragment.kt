@@ -61,6 +61,9 @@ class ClientDetailFragment : BaseFragment() {
         btnAddLoan.setOnClickListener {
             clientViewModel.navigateToAddLoanFragment(safeArgs.clientId)
         }
+        btnEditClient.setOnClickListener {
+            clientViewModel.navigateToEditClientFragment(safeArgs.clientId)
+        }
     }
 
     private fun setupObservers(){

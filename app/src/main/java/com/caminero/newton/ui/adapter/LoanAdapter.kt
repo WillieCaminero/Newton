@@ -27,10 +27,13 @@ class LoanAdapter(private val items : List<Loan>,
 
         holder.txtStartDate.text = item.startDate
         holder.txtEndDate.text = item.endDate
-        holder.txtStatus.text = item.status
-        holder.txtTotalMount.text = ((item.interest / 100 * item.mount) + item.mount).toString()
         holder.txtMount.text = item.mount.toString()
         holder.txtInterest.text = item.interest.toString()
+        holder.txtStatus.text = item.status
+        holder.txtTotalMount.text = ((item.interest / 100 * item.mount) + item.mount).toString()
+        holder.txtCurrentMount.text = "400"
+        holder.txtCurrentPayments.text = "10"
+        holder.txtlblPendingPayments.text = "30"
 
         holder.itemView.setOnClickListener {
             listener.onItemClick(item)
@@ -40,9 +43,12 @@ class LoanAdapter(private val items : List<Loan>,
     inner class LoanViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val txtStartDate = itemView.txtStartDate
         val txtEndDate  = itemView.txtEndDate
-        val txtStatus = itemView.txtStatus
-        val txtTotalMount = itemView.txtTotalMount
         val txtMount = itemView.txtMount
         val txtInterest = itemView.txtInterest
+        val txtStatus = itemView.txtStatus
+        val txtTotalMount = itemView.txtTotalMount
+        val txtCurrentMount = itemView.txtCurrentMount
+        val txtCurrentPayments = itemView.txtCurrentPayments
+        val txtlblPendingPayments = itemView.txtlblPendingPayments
     }
 }

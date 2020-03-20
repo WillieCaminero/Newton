@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/vBar"
         app:layout_constraintBottom_toBottomOf="@id/vBar"
-        app:layout_constraintStart_toStartOf="@id/glDevider"
+        app:layout_constraintStart_toStartOf="@id/glTowQuater"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorHeaderText"
         android:textStyle="bold"
@@ -43,7 +43,7 @@
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/glDevider"
+        app:layout_constraintStart_toStartOf="@id/glTowQuater"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         android:layout_width="0dp"
         android:layout_height="wrap_content">
@@ -123,7 +123,7 @@
         android:textStyle="bold"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/glDevider"
+        android:id="@+id/glTowQuater"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

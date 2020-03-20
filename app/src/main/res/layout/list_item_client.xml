@@ -20,7 +20,7 @@
             android:layout_margin="5dp">
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/glDevider"
+                android:id="@+id/glTowQuater"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -64,7 +64,7 @@
                 android:textStyle="normal|bold"
                 android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/glDevider"
+                app:layout_constraintEnd_toEndOf="@+id/glTowQuater"
                 app:layout_constraintTop_toBottomOf="@id/imgPerson"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -75,7 +75,7 @@
                 android:textSize="15sp"
                 android:text="Active Loans"
                 android:textColor="@color/colorPrimary"
-                app:layout_constraintStart_toEndOf="@id/glDevider"
+                app:layout_constraintStart_toEndOf="@id/glTowQuater"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
@@ -87,7 +87,7 @@
                 tools:text="15"
                 android:layout_marginTop="10dp"
                 app:layout_constraintTop_toTopOf="@id/lblId"
-                app:layout_constraintStart_toStartOf="@id/glDevider"
+                app:layout_constraintStart_toStartOf="@id/glTowQuater"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/lblAddress"/>
 
