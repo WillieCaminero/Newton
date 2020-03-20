@@ -23,11 +23,31 @@
         android:label="ClientFragment"
         tools:layout="@layout/fragment_client" >
         <action
-            android:id="@+id/action_clientFragment_to_loanFragment"
-            app:destination="@id/navLoanFragment"/>
+            android:id="@+id/action_clientFragment_to_clientDetailFragment"
+            app:destination="@id/navClientDetailFragment"/>
         <action
             android:id="@+id/action_clientFragment_to_addClientFragment"
             app:destination="@id/navAddClientFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navAddClientFragment"
+        android:name="com.caminero.newton.ui.fragment.AddClientFragment"
+        android:label="AddClientFragment"
+        tools:layout="@layout/fragment_add_client" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navClientDetailFragment"
+        android:name="com.caminero.newton.ui.fragment.ClientDetailFragment"
+        android:label="ClientDetailFragment"
+        tools:layout="@layout/fragment_client_detail" >
+        <argument
+            android:name="clientId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_clientDetailFragment_to_loanFragment"
+            app:destination="@id/navLoanFragment"/>
     </fragment>
 
     <fragment
@@ -39,10 +59,5 @@
             android:name="clientId"
             app:argType="string" />
     </fragment>
-    <fragment
-        android:id="@+id/navAddClientFragment"
-        android:name="com.caminero.newton.ui.fragment.AddClientFragment"
-        android:label="AddClientFragment"
-        tools:layout="@layout/fragment_add_client" >
-    </fragment>
+
 </navigation>

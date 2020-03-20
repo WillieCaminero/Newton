@@ -34,25 +34,29 @@ class ClientFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupObservers()
+        setupListeners()
         viewModel.setLoadingActive()
         viewModel.getClients()
     }
 
     override fun getViewModel(): BaseFragmentViewModel = viewModel
 
-    private fun setupObservers(){
-        viewModel.clientList.observe(viewLifecycleOwner, Observer {
-            setupRecyclerView(it)
-        })
+    private fun setupListeners() {
         btnAddClient.setOnClickListener {
             viewModel.navigateToAddClientFragment()
         }
     }
 
+    private fun setupObservers(){
+        viewModel.clientList.observe(viewLifecycleOwner, Observer {
+            setupRecyclerView(it)
+        })
+    }
+
     private fun setupRecyclerView(list : List<Client>){
         val adapter = ClientAdapter(list, object : ClientListener {
             override fun onItemClick(client: Client) {
-                viewModel.navigateToLoanFragment(client.id)
+                viewModel.navigateToClientDetailFragment(client.id)
             }
         })
         rvClients.adapter = adapter

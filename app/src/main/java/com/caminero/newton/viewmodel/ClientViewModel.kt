@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caminero.newton.model.entities.Client
+import com.caminero.newton.ui.fragment.ClientDetailFragmentDirections
 import com.caminero.newton.ui.fragment.ClientFragmentDirections
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import kotlinx.coroutines.Dispatchers
@@ -47,9 +48,14 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
         mClientList.postValue(clients)
     }
 
+    fun navigateToClientDetailFragment(id: String) {
+        Log.i(TAG, "Navigating to Client Detail")
+        navigate(ClientFragmentDirections.actionClientFragmentToClientDetailFragment(id))
+    }
+
     fun navigateToLoanFragment(id: String) {
         Log.i(TAG, "Navigating to Loan")
-        navigate(ClientFragmentDirections.actionClientFragmentToLoanFragment(id))
+        navigate(ClientDetailFragmentDirections.actionClientDetailFragmentToLoanFragment(id))
     }
 
     fun navigateToAddClientFragment() {

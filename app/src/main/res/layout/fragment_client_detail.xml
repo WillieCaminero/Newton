@@ -21,7 +21,7 @@
         app:layout_constraintStart_toEndOf="@+id/btnBack"
         app:layout_constraintTop_toTopOf="@id/btnBack"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        android:text="Add Client"
+        android:text="Client Detail"
         android:textSize="20sp"
         android:textStyle="normal|bold"
         />
@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:hintEnabled="true"
+        android:enabled="false"
         android:hint="Name"
         app:layout_constraintTop_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toStartOf="@id/glStart"
@@ -52,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:hintEnabled="true"
+        android:enabled="false"
         android:hint="Last name"
         app:layout_constraintTop_toBottomOf="@id/lblName"
         app:layout_constraintStart_toStartOf="@id/glStart"
@@ -72,6 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:hintEnabled="true"
+        android:enabled="false"
         android:hint="Phone Number"
         app:layout_constraintTop_toBottomOf="@id/lblLastName"
         app:layout_constraintStart_toStartOf="@id/glStart"
@@ -86,47 +89,45 @@
             android:paddingEnd="40dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lblAddress"
+    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:hintEnabled="true"
-        android:hint="Address"
-        app:layout_constraintTop_toBottomOf="@id/lblPhoneNumber"
-        app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintEnd_toEndOf="@id/glEnd">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="128"
-            tools:text="C/Nicolas Casimiro #5, El Encantador, Prados de San Luis"
-            android:paddingStart="10dp"
-            android:paddingEnd="40dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAddClient"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/lblAddress"
+        android:layout_marginBottom="10dp"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:text="Add"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblPhoneNumber">
 
-    <ProgressBar
-        android:id="@+id/pvProgress"
-        android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvClients"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/colorBackground"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:listitem="@layout/list_item_loan" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddLoan"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        tools:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/btnAddClient"
+        android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:srcCompat="@drawable/ic_add_black_24dp"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glStart"
