@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * A lifecycle-aware observable that sends only new updates after subscription, used for events like
- * main_nav_flow and Snackbar messages.
+ * main_navigation and Snackbar messages.
  *
  *
  * This avoids a common problem with events: on configuration change (like rotation) an update

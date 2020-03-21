@@ -44,12 +44,13 @@ class ClientDetailFragment : BaseFragment() {
         setupObservers()
         loanViewModel.setLoadingActive()
         loanViewModel.getLoandsByClient(safeArgs.clientId)
+        Snackbar.make(view, "clientId: ${safeArgs.clientId}", Snackbar.LENGTH_LONG).show()
     }
 
     override fun getViewModel(): BaseFragmentViewModel = clientViewModel
 
     private fun initForm(){
-        txtName.setText("Willie Manuel")
+        txtPaymentDate.setText("Willie Manuel")
         txtLastName.setText("Caminero Mejia")
         txtPhoneNumber.setText("(809) 755 - 2423)")
     }
@@ -58,7 +59,7 @@ class ClientDetailFragment : BaseFragment() {
         btnBack.setOnClickListener {
             handleOnBackPressed()
         }
-        btnAddLoan.setOnClickListener {
+        btnAddPayment.setOnClickListener {
             clientViewModel.navigateToAddLoanFragment(safeArgs.clientId)
         }
         btnEditClient.setOnClickListener {
@@ -81,9 +82,9 @@ class ClientDetailFragment : BaseFragment() {
     private fun setupRecyclerView(list : List<Loan>){
         val adapter = LoanAdapter(list, object : LoanListener {
             override fun onItemClick(loan: Loan) {
-                Snackbar.make(view!!, loan.loanId, Snackbar.LENGTH_LONG).show()
+                clientViewModel.navigateToLoanDetailFragment(loan.loanId)
             }
         })
-        rvClients.adapter = adapter
+        rvPayments.adapter = adapter
     }
 }

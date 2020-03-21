@@ -21,7 +21,7 @@
         app:layout_constraintStart_toEndOf="@+id/btnBack"
         app:layout_constraintTop_toTopOf="@id/btnBack"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        android:text="Client Detail"
+        android:text="Loan Detail"
         android:textSize="20sp"
         android:textStyle="normal|bold"
         />
@@ -31,76 +31,133 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:hintEnabled="true"
         android:enabled="false"
-        android:hint="Name"
+        android:hint="Start Date"
         app:layout_constraintTop_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintEnd_toEndOf="@id/glEnd">
+        app:layout_constraintEnd_toEndOf="@id/glMiddle">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtPaymentDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Willie Manuel"
+            tools:text="2012-01-01"
             android:maxLength="128"
             android:paddingStart="10dp"
             android:paddingEnd="40dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lblLastName"
+        android:id="@+id/lblEndDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:hintEnabled="true"
+        android:layout_marginTop="20dp"
         android:enabled="false"
-        android:hint="Last name"
+        android:hint="End Date"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toStartOf="@id/glMiddle"
+        app:layout_constraintEnd_toEndOf="@id/glEnd">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="128"
+            tools:text="2014-02-20"
+            android:paddingStart="10dp"
+            android:paddingEnd="40dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lblMount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:enabled="false"
+        android:hint="Mount"
         app:layout_constraintTop_toBottomOf="@id/lblPaymentDate"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintEnd_toEndOf="@id/glEnd">
+        app:layout_constraintEnd_toEndOf="@id/glMiddle">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtLastName"
+            android:id="@+id/txtMount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Caminero Mejía"
+            tools:text="1000"
+            android:maxLength="128"
+            android:paddingStart="10dp"
+            android:paddingEnd="40dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lblInterest"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:enabled="false"
+        android:hint="Interest"
+        app:layout_constraintTop_toBottomOf="@id/lblEndDate"
+        app:layout_constraintStart_toStartOf="@id/glMiddle"
+        app:layout_constraintEnd_toEndOf="@id/glEnd">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtInterest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="15%"
             android:maxLength="128"
             android:paddingStart="10dp"
             android:paddingEnd="40dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lblPhoneNumber"
+        android:id="@+id/lblDays"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:hintEnabled="true"
+        android:layout_marginTop="20dp"
         android:enabled="false"
-        android:hint="Phone Number"
-        app:layout_constraintTop_toBottomOf="@id/lblLastName"
-        app:layout_constraintBottom_toTopOf="@id/btnEditClient"
+        android:hint="Total Days"
+        app:layout_constraintTop_toBottomOf="@id/lblMount"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintEnd_toEndOf="@id/glEnd">
+        app:layout_constraintEnd_toEndOf="@id/glMiddle">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtPhoneNumber"
+            android:id="@+id/txtDays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="30"
             android:maxLength="128"
-            tools:text="(809) 788 - 12312"
+            android:paddingStart="10dp"
+            android:paddingEnd="40dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/lblStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:enabled="false"
+        android:hint="Status"
+        app:layout_constraintTop_toBottomOf="@id/lblInterest"
+        app:layout_constraintStart_toStartOf="@id/glMiddle"
+        app:layout_constraintEnd_toEndOf="@id/glEnd">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="In Progress"
+            android:maxLength="128"
             android:paddingStart="10dp"
             android:paddingEnd="40dp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnEditClient"
-        android:layout_width="match_parent"
+        android:id="@+id/btnDeleteLoan"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Edit Client"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        app:layout_constraintTop_toBottomOf="@id/lblPhoneNumber"
-        app:layout_constraintBottom_toTopOf="@id/cvPrincipal"
-        />
+        android:layout_marginTop="20dp"
+        android:text="Delete"
+        app:layout_constraintTop_toBottomOf="@id/lblDays"
+        app:layout_constraintStart_toStartOf="@id/glStart"
+        app:layout_constraintEnd_toEndOf="@id/glEnd"
+        style="@style/Widget.MaterialComponents.Button.TextButton" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvPrincipal"
@@ -111,7 +168,7 @@
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnEditClient">
+        app:layout_constraintTop_toBottomOf="@id/btnDeleteLoan">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -128,7 +185,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:listitem="@layout/list_item_loan" />
+                tools:listitem="@layout/list_item_payment" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -148,7 +205,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:elevation="4dp"
         android:layout_marginBottom="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -160,6 +216,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glMiddle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glEnd"

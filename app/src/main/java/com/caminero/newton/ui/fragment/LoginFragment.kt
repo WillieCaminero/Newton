@@ -43,7 +43,7 @@ class LoginFragment : BaseFragment() {
     private fun setupListeners() {
         btnLogin.setOnClickListener {
             viewModel.setLoadingActive()
-            perfomLogin(it)
+            performLogin(it)
         }
     }
 
@@ -58,7 +58,7 @@ class LoginFragment : BaseFragment() {
         )
     }
 
-    private fun perfomLogin(view: View) {
+    private fun performLogin(view: View) {
         val usr = txtEmail.text.toString()
         val pwd = txtPassword.text.toString()
 

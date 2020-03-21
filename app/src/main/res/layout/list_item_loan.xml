@@ -41,7 +41,7 @@
                 app:layout_constraintGuide_percent="0.88" />
 
             <TextView
-                android:id="@+id/lblStartDate"
+                android:id="@+id/lblPaymentDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Start Date:"
@@ -51,12 +51,12 @@
                 />
 
             <TextView
-                android:id="@+id/txtStartDate"
+                android:id="@+id/txtPaymentDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="2013-23-32"
                 app:layout_constraintStart_toEndOf="@id/glOneQuater"
-                app:layout_constraintTop_toTopOf="@id/lblStartDate"
+                app:layout_constraintTop_toTopOf="@id/lblPaymentDate"
                 />
 
             <TextView
@@ -66,7 +66,7 @@
                 android:text="End Date:"
                 android:textStyle="normal|bold"
                 android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@id/lblStartDate"
+                app:layout_constraintTop_toBottomOf="@id/lblPaymentDate"
                 app:layout_constraintStart_toStartOf="parent"
                 />
 

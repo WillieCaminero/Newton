@@ -48,23 +48,28 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
         mClientList.postValue(clients)
     }
 
-    fun navigateToClientDetailFragment(id: String) {
-        Log.i(TAG, "Navigating to Client Detail")
-        navigate(ClientFragmentDirections.actionClientFragmentToClientDetailFragment(id))
-    }
-
-    fun navigateToEditClientFragment(id: String) {
-        Log.i(TAG, "Navigating to Edit Client")
-        navigate(ClientDetailFragmentDirections.actionClientDetailFragmentToEditClientFragment(id))
-    }
-
-    fun navigateToAddLoanFragment(id: String) {
-        Log.i(TAG, "Navigating to Loan")
-        navigate(ClientDetailFragmentDirections.actionClientDetailFragmentToAddLoanFragment(id))
-    }
-
     fun navigateToAddClientFragment() {
         Log.i(TAG, "Navigating to Add Client")
         navigate(ClientFragmentDirections.actionClientFragmentToAddClientFragment())
+    }
+
+    fun navigateToClientDetailFragment(clientId: String) {
+        Log.i(TAG, "Navigating to Client Detail")
+        navigate(ClientFragmentDirections.actionClientFragmentToClientDetailFragment(clientId))
+    }
+
+    fun navigateToAddLoanFragment(clientId: String) {
+        Log.i(TAG, "Navigating to Add Loan")
+        navigate(ClientDetailFragmentDirections.actionClientDetailFragmentToAddLoanFragment(clientId))
+    }
+
+    fun navigateToEditClientFragment(clientId: String) {
+        Log.i(TAG, "Navigating to Edit Client")
+        navigate(ClientDetailFragmentDirections.actionClientDetailFragmentToEditClientFragment(clientId))
+    }
+
+    fun navigateToLoanDetailFragment(loanId: String) {
+        Log.i(TAG, "Navigating to Loan Detail")
+        navigate(ClientDetailFragmentDirections.actionClientDetailFragmentToLoanDetailFragment(loanId))
     }
 }

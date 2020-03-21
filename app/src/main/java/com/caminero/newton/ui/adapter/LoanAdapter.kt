@@ -41,7 +41,7 @@ class LoanAdapter(private val items : List<Loan>,
     }
 
     inner class LoanViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val txtStartDate = itemView.txtStartDate
+        val txtStartDate = itemView.txtPaymentDate
         val txtEndDate  = itemView.txtEndDate
         val txtMount = itemView.txtMount
         val txtInterest = itemView.txtInterest

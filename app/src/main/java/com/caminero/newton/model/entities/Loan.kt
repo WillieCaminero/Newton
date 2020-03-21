@@ -9,5 +9,6 @@ data class Loan (
     @SerializedName("mount") val mount : Int,
     @SerializedName("startDate") val startDate : String,
     @SerializedName("endDate") val endDate : String,
+    @SerializedName("payments") val payments : List<Payment>,
     @SerializedName("status") val status : String
 )

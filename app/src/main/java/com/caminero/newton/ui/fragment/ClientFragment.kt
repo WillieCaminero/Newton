@@ -65,6 +65,6 @@ class ClientFragment : BaseFragment() {
                 viewModel.navigateToClientDetailFragment(client.id)
             }
         })
-        rvClients.adapter = adapter
+        rvPayments.adapter = adapter
     }
 }

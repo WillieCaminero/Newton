@@ -28,8 +28,8 @@
 
             <ImageView
                 android:id="@+id/imgPerson"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/ic_person"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -47,12 +47,13 @@
 
             <TextView
                 android:id="@+id/lblClientFullName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 tools:text="Willie Manuel Caminero Mejia"
                 android:textSize="14sp"
                 android:layout_marginStart="10dp"
                 app:layout_constraintStart_toEndOf="@id/imgPerson"
+                app:layout_constraintEnd_toStartOf="@id/glTowQuater"
                 app:layout_constraintTop_toBottomOf="@id/lblId"/>
 
             <TextView

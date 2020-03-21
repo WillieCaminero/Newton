@@ -12,14 +12,14 @@ import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoanViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_add_loan.*
+import kotlinx.android.synthetic.main.fragment_add_payment.*
 
-class AddLoanFragment : BaseFragment() {
+class AddPaymentFragment : BaseFragment() {
     companion object{
-        val TAG: String = AddLoanFragment::class.java.simpleName
+        val TAG: String = AddPaymentFragment::class.java.simpleName
     }
 
-    private val safeArgs: AddLoanFragmentArgs by navArgs()
+    private val safeArgs: AddPaymentFragmentArgs by navArgs()
     private lateinit var viewModel: LoanViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,12 +30,12 @@ class AddLoanFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_add_loan, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_add_payment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupListeners()
         setupObservers()
-        Snackbar.make(view, "cliendId: ${safeArgs.clientId}", Snackbar.LENGTH_LONG).show()
+        Snackbar.make(view, "loanId: ${safeArgs.loanId}", Snackbar.LENGTH_LONG).show()
     }
 
     override fun getViewModel(): BaseFragmentViewModel = viewModel
