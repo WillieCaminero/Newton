@@ -62,7 +62,7 @@ class ClientFragment : BaseFragment() {
     private fun setupRecyclerView(list : List<Client>){
         val adapter = ClientAdapter(list, object : ClientListener {
             override fun onItemClick(client: Client) {
-                viewModel.navigateToClientDetailFragment(client.id)
+                viewModel.navigateToClientDetailFragment(client.clientId)
             }
         })
         rvPayments.adapter = adapter

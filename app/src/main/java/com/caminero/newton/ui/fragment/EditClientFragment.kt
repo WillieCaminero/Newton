@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
+import com.caminero.newton.model.entities.Client
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.ClientViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
@@ -33,19 +34,20 @@ class EditClientFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_edit_client, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initForm()
         setupListeners()
         setupObservers()
-        Snackbar.make(view, "clientId: ${safeArgs.clientId}", Snackbar.LENGTH_LONG).show()
+        viewModel.setLoadingActive()
+        viewModel.getClientByClientId(safeArgs.clientId)
     }
 
     override fun getViewModel(): BaseFragmentViewModel = viewModel
 
-    private fun initForm(){
-        txtPaymentDate.setText("Willie Manuel")
-        txtLastName.setText("Caminero Mejia")
-        txtPhoneNumber.setText("(809) 755 - 2423)")
-        txtAddress.setText("C/Nicolas Casimiro #5, El Encantador. Prados de San Luis. STO DGO Este")
+    private fun initForm(client: Client){
+        txtId.setText(client.id)
+        txtName.setText(client.name)
+        txtLastName.setText(client.lastName)
+        txtPhoneNumber.setText(client.phoneNumber)
+        txtAddress.setText(client.address)
     }
 
     private fun setupListeners(){
@@ -58,6 +60,12 @@ class EditClientFragment : BaseFragment() {
     }
 
     private fun setupObservers(){
+        viewModel.client.observe(
+            viewLifecycleOwner,
+            Observer {
+                initForm(it)
+            }
+        )
         viewModel.isLoading.observe(
             viewLifecycleOwner,
             Observer {

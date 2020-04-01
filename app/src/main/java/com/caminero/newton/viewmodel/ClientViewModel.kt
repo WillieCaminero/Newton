@@ -5,12 +5,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.caminero.newton.core.utils.enums.ClientStatusType
 import com.caminero.newton.model.entities.Client
+import com.caminero.newton.model.repositories.ClientRepository
 import com.caminero.newton.ui.fragment.ClientDetailFragmentDirections
 import com.caminero.newton.ui.fragment.ClientFragmentDirections
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.core.inject
 
 class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
 
@@ -18,34 +21,44 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
         val TAG = ClientViewModel::class.java.simpleName
     }
 
+    private val clientRepository : ClientRepository by inject()
+
     private var mClientList = MutableLiveData<List<Client>>()
     val clientList : LiveData<List<Client>> get() = mClientList
+
+    private var mClient = MutableLiveData<Client>()
+    val client : LiveData<Client> get() = mClient
 
     fun getClients(){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-
+                val response = clientRepository.getClientsByUser("1", ClientStatusType.Active.code)
+                if (response.isSuccess){
+                    val clients = response.response!!.data
+                    mClientList.postValue(clients)
+                }
+                else {
+                    handleHttpErrorMessage(response.responseError)
+                }
             }
             setLoadingInactive()
         }
+    }
 
-        var clients : MutableList<Client> = mutableListOf<Client>()
-
-        for (i in 1 .. 100){
-            var client = Client(
-                "$i",
-                "Willie Caminero",
-                "Caminero Mejia",
-                "+18905554432",
-                "C/Nicolas Casimiro #5, El Encantador. Prados de San Luis. STO DGO Este",
-                emptyList(),
-                "OK",
-                createdDate = "2012-12-12T08:00:00"
-            )
-            clients.add(client)
+    fun getClientByClientId(clientId: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isConnectedToInternet()){
+                val response = clientRepository.getClientByClientId("1", clientId)
+                if (response.isSuccess){
+                    val client = response.response!!.data
+                    mClient.postValue(client)
+                }
+                else {
+                    handleHttpErrorMessage(response.responseError)
+                }
+            }
+            setLoadingInactive()
         }
-
-        mClientList.postValue(clients)
     }
 
     fun navigateToAddClientFragment() {

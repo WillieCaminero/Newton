@@ -10,5 +10,7 @@ data class Loan (
     @SerializedName("startDate") val startDate : String,
     @SerializedName("endDate") val endDate : String,
     @SerializedName("payments") val payments : List<Payment>,
-    @SerializedName("status") val status : String
+    @SerializedName("status") val status : String,
+    @SerializedName("createdDate") val createdDate : String,
+    @SerializedName("updatedDate") val updatedDate : String?
 )

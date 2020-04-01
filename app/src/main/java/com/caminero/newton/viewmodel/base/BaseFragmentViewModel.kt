@@ -1,6 +1,7 @@
 package com.caminero.newton.viewmodel.base
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +11,7 @@ import com.caminero.newton.core.utils.enums.ClientStatusType
 import com.caminero.newton.core.utils.enums.LoanStatusType
 import com.caminero.newton.core.utils.NetworkUtils
 import com.caminero.newton.core.utils.SingleLiveEvent
+import com.caminero.newton.model.api.common.ResponseError
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -53,5 +55,9 @@ open class BaseFragmentViewModel(app : Application): AndroidViewModel(app), Koin
 
     fun setLoadingInactive(){
         mIsLoading.postValue(false)
+    }
+
+    protected fun handleHttpErrorMessage(error : ResponseError){
+        Log.wtf(TAG, error.errorCode.toString() + " |  " + error.errorString)
     }
 }

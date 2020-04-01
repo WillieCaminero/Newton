@@ -50,7 +50,7 @@ class LoanDetailFragment : BaseFragment() {
     override fun getViewModel(): BaseFragmentViewModel = loanViewModel
 
     private fun initForm(){
-        txtPaymentDate.setText("2020-02-01")
+        txtName.setText("2020-02-01")
         txtEndDate.setText("2020-03-04")
         txtMount.setText("1030")
         txtInterest.setText("15%")
