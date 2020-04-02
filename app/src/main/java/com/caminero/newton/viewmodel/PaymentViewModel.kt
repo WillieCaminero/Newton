@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.caminero.newton.model.api.payloads.PaymentPayLoad
 import com.caminero.newton.model.entities.Payment
 import com.caminero.newton.model.repositories.PaymentRepository
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
@@ -19,16 +20,12 @@ class PaymentViewModel (app : Application) : BaseFragmentViewModel(app) {
 
     private val paymentRepository : PaymentRepository by inject()
 
-    private var mPaymentList = MutableLiveData<List<Payment>>()
-    val paymentList : LiveData<List<Payment>> get() = mPaymentList
-
-    fun getPaymentsByLoan(loanId: String){
+    fun addPaymentToLoan(loanId: String, paymentPayLoad: PaymentPayLoad){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                val response = paymentRepository.getPaymentsByLoan("1", "fc77df87-23d7-498b-bc4a-36a9b960d6df", loanId)
+                val response = paymentRepository.addPaymentToLoan("1", "fc77df87-23d7-498b-bc4a-36a9b960d6df", loanId, paymentPayLoad)
                 if (response.isSuccess){
-                    val clients = response.response!!.data
-                    mPaymentList.postValue(clients)
+                    navigateBack()
                 }
                 else {
                     handleHttpErrorMessage(response.responseError)

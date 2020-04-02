@@ -34,7 +34,7 @@ class PaymentAdapter(private val items : List<Payment>,
     }
 
     inner class PaymentViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val txtPaymentDate = itemView.txtName
+        val txtPaymentDate = itemView.txtPaymentDate
         val txtMount = itemView.txtMount
     }
 }

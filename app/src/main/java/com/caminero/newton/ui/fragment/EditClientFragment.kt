@@ -8,11 +8,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.enums.ClientStatusType
+import com.caminero.newton.model.api.payloads.ClientPayLoad
 import com.caminero.newton.model.entities.Client
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.ClientViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_edit_client.*
 
 class EditClientFragment : BaseFragment() {
@@ -44,7 +45,7 @@ class EditClientFragment : BaseFragment() {
 
     private fun initForm(client: Client){
         txtId.setText(client.id)
-        txtName.setText(client.name)
+        txtPaymentDate.setText(client.name)
         txtLastName.setText(client.lastName)
         txtPhoneNumber.setText(client.phoneNumber)
         txtAddress.setText(client.address)
@@ -55,7 +56,16 @@ class EditClientFragment : BaseFragment() {
             handleOnBackPressed()
         }
         btnEditClient.setOnClickListener {
-            Snackbar.make(it, "EDIT", Snackbar.LENGTH_LONG).show()
+            viewModel.setLoadingActive()
+
+            val id = txtId.text.toString()
+            val name = txtPaymentDate.text.toString()
+            val lastName = txtLastName.text.toString()
+            val phoneNumber = txtPhoneNumber.text.toString()
+            val address = txtAddress.text.toString()
+            val status = ClientStatusType.Active.code
+
+            viewModel.updateClientToUser(safeArgs.clientId, ClientPayLoad(id, name, lastName, phoneNumber, address, status))
         }
     }
 

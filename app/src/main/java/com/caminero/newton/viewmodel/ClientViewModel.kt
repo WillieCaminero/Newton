@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caminero.newton.core.utils.enums.ClientStatusType
+import com.caminero.newton.model.api.payloads.ClientPayLoad
 import com.caminero.newton.model.entities.Client
 import com.caminero.newton.model.repositories.ClientRepository
 import com.caminero.newton.ui.fragment.ClientDetailFragmentDirections
@@ -52,6 +53,36 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
                 if (response.isSuccess){
                     val client = response.response!!.data
                     mClient.postValue(client)
+                }
+                else {
+                    handleHttpErrorMessage(response.responseError)
+                }
+            }
+            setLoadingInactive()
+        }
+    }
+
+    fun addClientToUser(clientPayLoad: ClientPayLoad){
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isConnectedToInternet()){
+                val response = clientRepository.addClientToUser("1", clientPayLoad)
+                if (response.isSuccess){
+                    navigateBack()
+                }
+                else {
+                    handleHttpErrorMessage(response.responseError)
+                }
+            }
+            setLoadingInactive()
+        }
+    }
+
+    fun updateClientToUser(clientId: String, clientPayLoad: ClientPayLoad){
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isConnectedToInternet()){
+                val response = clientRepository.updateClientToUser("1", clientId, clientPayLoad)
+                if (response.isSuccess){
+                    navigateBack()
                 }
                 else {
                     handleHttpErrorMessage(response.responseError)

@@ -8,12 +8,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.enums.PaymentStatusType
+import com.caminero.newton.model.entities.Loan
 import com.caminero.newton.model.entities.Payment
 import com.caminero.newton.model.listeners.PaymentListener
 import com.caminero.newton.ui.adapter.PaymentAdapter
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoanViewModel
-import com.caminero.newton.viewmodel.PaymentViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_loan_detail.*
@@ -24,13 +25,11 @@ class LoanDetailFragment : BaseFragment() {
     }
 
     private val safeArgs: LoanDetailFragmentArgs by navArgs()
-    private lateinit var loanViewModel: LoanViewModel
-    private lateinit var paymentViewModel: PaymentViewModel
+    private lateinit var viewModel: LoanViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loanViewModel = ViewModelProvider(this).get(LoanViewModel::class.java)
-        paymentViewModel = ViewModelProvider(this).get(PaymentViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LoanViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -39,23 +38,21 @@ class LoanDetailFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_loan_detail, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initForm()
         setupListeners()
         setupObservers()
-        paymentViewModel.setLoadingActive()
-        paymentViewModel.getPaymentsByLoan(safeArgs.loanId)
-        Snackbar.make(view, "loanId: ${safeArgs.loanId}", Snackbar.LENGTH_LONG).show()
+        viewModel.setLoadingActive()
+        viewModel.getLoanByLoanId(safeArgs.loanId)
     }
 
-    override fun getViewModel(): BaseFragmentViewModel = loanViewModel
+    override fun getViewModel(): BaseFragmentViewModel = viewModel
 
-    private fun initForm(){
-        txtName.setText("2020-02-01")
-        txtEndDate.setText("2020-03-04")
-        txtMount.setText("1030")
-        txtInterest.setText("15%")
-        txtDays.setText("30")
-        txtStatus.setText("In Progress")
+    private fun initForm(loan: Loan){
+        txtPaymentDate.setText(loan.startDate)
+        txtEndDate.setText(loan.endDate)
+        txtMount.setText(loan.mount.toString())
+        txtInterest.setText(loan.interest.toString())
+        txtDays.setText(loan.days.toString())
+        txtStatus.setText(loan.status)
     }
 
     private fun setupListeners(){
@@ -63,7 +60,7 @@ class LoanDetailFragment : BaseFragment() {
             handleOnBackPressed()
         }
         btnAddPayment.setOnClickListener {
-            loanViewModel.navigateToAddPaymentFragment(safeArgs.loanId)
+            viewModel.navigateToAddPaymentFragment(safeArgs.loanId)
         }
         btnDeleteLoan.setOnClickListener {
             Snackbar.make(it, "DELETE", Snackbar.LENGTH_LONG).show()
@@ -71,10 +68,15 @@ class LoanDetailFragment : BaseFragment() {
     }
 
     private fun setupObservers(){
-        paymentViewModel.paymentList.observe(viewLifecycleOwner, Observer {
-            setupRecyclerView(it)
-        })
-        paymentViewModel.isLoading.observe(
+        viewModel.loan.observe(
+            viewLifecycleOwner,
+            Observer {loan ->
+                initForm(loan)
+                val payments = loan.payments.filter { payment -> payment.status == PaymentStatusType.Active.code }
+                if(payments.isNotEmpty()) setupRecyclerView(payments)
+            }
+        )
+        viewModel.isLoading.observe(
             viewLifecycleOwner,
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
@@ -89,5 +91,6 @@ class LoanDetailFragment : BaseFragment() {
             }
         })
         rvPayments.adapter = adapter
+        rvPayments.visibility = View.VISIBLE
     }
 }

@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.enums.ClientStatusType
+import com.caminero.newton.model.api.payloads.ClientPayLoad
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.ClientViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
@@ -43,7 +45,16 @@ class AddClientFragment : BaseFragment() {
             handleOnBackPressed()
         }
         btnAddClient.setOnClickListener {
-            Snackbar.make(it, "ADD", Snackbar.LENGTH_LONG).show()
+            viewModel.setLoadingActive()
+
+            val id = txtId.text.toString()
+            val name = txtPaymentDate.text.toString()
+            val lastName = txtLastName.text.toString()
+            val phoneNumber = txtPhoneNumber.text.toString()
+            val address = txtAddress.text.toString()
+            val status = ClientStatusType.Active.code
+
+            viewModel.addClientToUser(ClientPayLoad(id, name, lastName, phoneNumber, address, status))
         }
     }
 

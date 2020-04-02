@@ -8,6 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.enums.LoanStatusType
+import com.caminero.newton.model.api.payloads.LoanPayLoad
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoanViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
@@ -45,7 +47,18 @@ class AddLoanFragment : BaseFragment() {
             handleOnBackPressed()
         }
         btnAddPayment.setOnClickListener {
-            Snackbar.make(it, "ADD", Snackbar.LENGTH_LONG).show()
+            viewModel.setLoadingActive()
+
+            val interest = txtInterest.text.toString().toInt()
+            val mount = txtMount.text.toString().toInt()
+            //val startDate = txtStartDate.text.toString()
+            val startDate = "2020-01-02T00:00:00"
+            //val endDate = txtEndDate.text.toString()
+            val endDate = "2020-12-02T00:00:00"
+            val days = txtDays.text.toString().toInt()
+            val status = LoanStatusType.InProgress.code
+
+            viewModel.addLoanToClient(safeArgs.clientId, LoanPayLoad(interest, days, mount, startDate, endDate, status))
         }
     }
 

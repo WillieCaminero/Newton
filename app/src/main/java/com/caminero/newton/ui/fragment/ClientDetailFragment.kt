@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.enums.LoanStatusType
 import com.caminero.newton.model.entities.Client
 import com.caminero.newton.model.entities.Loan
 import com.caminero.newton.model.listeners.LoanListener
@@ -46,7 +47,7 @@ class ClientDetailFragment : BaseFragment() {
 
     private fun initForm(client: Client){
         txtId.setText(client.id)
-        txtName.setText(client.name)
+        txtPaymentDate.setText(client.name)
         txtLastName.setText(client.lastName)
         txtPhoneNumber.setText(client.phoneNumber)
     }
@@ -66,9 +67,10 @@ class ClientDetailFragment : BaseFragment() {
     private fun setupObservers(){
         viewModel.client.observe(
             viewLifecycleOwner,
-            Observer {
-                initForm(it)
-                setupRecyclerView(it.loans)
+            Observer {client ->
+                initForm(client)
+                val loans = client.loans.filter { loan -> loan.status == LoanStatusType.InProgress.code }
+                if(loans.isNotEmpty()) setupRecyclerView(loans)
             }
         )
         viewModel.isLoading.observe(
@@ -86,5 +88,6 @@ class ClientDetailFragment : BaseFragment() {
             }
         })
         rvPayments.adapter = adapter
+        rvPayments.visibility = View.VISIBLE
     }
 }

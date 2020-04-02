@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.StringUtils
+import com.caminero.newton.core.utils.enums.LoanStatusType
 import com.caminero.newton.model.entities.Client
 import com.caminero.newton.model.listeners.ClientListener
 import kotlinx.android.synthetic.main.list_item_client.view.*
@@ -23,11 +25,12 @@ class ClientAdapter(private val items : List<Client>,
 
     override fun onBindViewHolder(holder: ClientViewHolder, position: Int) {
         val item = items[position]
+        val loans = item.loans.filter { it.status == LoanStatusType.InProgress.code }
 
         holder.lblId.text = item.id
-        holder.lblClientFullName.text = item.name
+        holder.lblClientFullName.text = StringUtils.getFullName(item.name, item.lastName)
         holder.lblAddress.text = item.address
-        holder.lblNumberLoans.text = "15"
+        holder.lblNumberLoans.text = loans.size.toString()
 
         holder.itemView.setOnClickListener {
             listener.onItemClick(item)

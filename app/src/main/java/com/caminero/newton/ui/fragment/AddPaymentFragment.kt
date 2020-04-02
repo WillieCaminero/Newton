@@ -8,10 +8,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.enums.PaymentStatusType
+import com.caminero.newton.model.api.payloads.PaymentPayLoad
 import com.caminero.newton.ui.fragment.base.BaseFragment
-import com.caminero.newton.viewmodel.LoanViewModel
+import com.caminero.newton.viewmodel.PaymentViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_add_payment.*
 
 class AddPaymentFragment : BaseFragment() {
@@ -20,11 +21,11 @@ class AddPaymentFragment : BaseFragment() {
     }
 
     private val safeArgs: AddPaymentFragmentArgs by navArgs()
-    private lateinit var viewModel: LoanViewModel
+    private lateinit var viewModel: PaymentViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoanViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PaymentViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -35,7 +36,6 @@ class AddPaymentFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupListeners()
         setupObservers()
-        Snackbar.make(view, "loanId: ${safeArgs.loanId}", Snackbar.LENGTH_LONG).show()
     }
 
     override fun getViewModel(): BaseFragmentViewModel = viewModel
@@ -45,7 +45,14 @@ class AddPaymentFragment : BaseFragment() {
             handleOnBackPressed()
         }
         btnAddPayment.setOnClickListener {
-            Snackbar.make(it, "ADD", Snackbar.LENGTH_LONG).show()
+            viewModel.setLoadingActive()
+
+            //val paymentDate = txtPaymentDate.text.toString()
+            val paymentDate = "2020-02-11T07:00:00"
+            val mount = txtMount.text.toString().toInt()
+            val status = PaymentStatusType.Active.code
+
+            viewModel.addPaymentToLoan(safeArgs.loanId, PaymentPayLoad(paymentDate, mount, status))
         }
     }
 
