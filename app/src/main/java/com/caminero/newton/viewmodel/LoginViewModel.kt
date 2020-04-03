@@ -36,27 +36,11 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
 
     fun logInUser(){
         viewModelScope.launch(Dispatchers.IO) {
-            /*if (isConnectedToInternet()) {
-                setLoadingActive()
-
-                loginRepository.validateUser(mUserName.value!!, mPassword.value!!) {
-                    it?.isSuccess?.let { isSuccess ->
-                        if (isSuccess) {
-                            activityViewModel.createSession(it.response?.data)
-                            activityViewModel.setUsername(userName.value!!)
-                            navigateToLogin()
-                        } else {
-                            setLoadingInactive()
-                            handleHttpErrorMessage(it.responseError)
-                            mUserName.postValue("")
-                            mPassword.postValue("")
-                        }
-                    }
-                }
-            }*/
-            activityViewModel.createSession(NewtonSession("","","","",""))
-            email.value?.let {  email -> activityViewModel.setUsername(email) }
-            navigateToClientFragment()
+            if (isConnectedToInternet()) {
+                activityViewModel.createSession(NewtonSession("TOKEN","ACCESS","REFRESH","","TIME"))
+                activityViewModel.setLoggedUser(mEmail.value!!)
+                navigateToClientFragment()
+            }
         }
     }
 

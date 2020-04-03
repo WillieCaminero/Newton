@@ -23,17 +23,24 @@ class LoanRepository {
         )
     }
 
-    suspend fun addLoanToClient(email : String, clientId: String, loanPayLoad: LoanPayLoad)
+    suspend fun addLoanInClient(email : String, clientId: String, loanPayLoad: LoanPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.addLoanToClient(email, clientId, loanPayLoad)
+            NewtonApiClient.endpoints.addLoanInClient(email, clientId, loanPayLoad)
         )
     }
 
-    suspend fun updateLoanToClient(email : String, clientId: String, loanId: String, loanPayLoad: LoanPayLoad)
+    suspend fun updateLoanInClient(email : String, clientId: String, loanId: String, loanPayLoad: LoanPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.updateLoanToClient(email, clientId, loanId, loanPayLoad)
+            NewtonApiClient.endpoints.updateLoanInClient(email, clientId, loanId, loanPayLoad)
+        )
+    }
+
+    suspend fun deleteLoanInClient(email : String, clientId: String, loanId: String)
+            : BaseResponse<ResponseData<String>> {
+        return ResponseHandler().handleResponse(
+            NewtonApiClient.endpoints.deleteLoanInClient(email, clientId, loanId)
         )
     }
 }

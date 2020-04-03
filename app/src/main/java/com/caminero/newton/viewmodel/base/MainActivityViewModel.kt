@@ -13,14 +13,21 @@ class MainActivityViewModel (val app : Application) : BaseFragmentViewModel(app)
     private var mSession = MutableLiveData<NewtonSession?>()
     val session : LiveData<NewtonSession?> get() = mSession
 
-    private var mLoggedUsername = MutableLiveData<String>()
-    val loggedUsername : LiveData<String> get() = mLoggedUsername
+    private var mLoggedUser = MutableLiveData<String>()
+    val loggedUser : LiveData<String> get() = mLoggedUser
+
+    private var mCurrentClientId = MutableLiveData<String>()
+    val currentClientId : LiveData<String> get() = mCurrentClientId
 
     fun createSession(session : NewtonSession?) {
         mSession.postValue(session)
     }
 
-    fun setUsername(username : String){
-        mLoggedUsername.postValue(username)
+    fun setLoggedUser(username : String){
+        mLoggedUser.postValue(username)
+    }
+
+    fun setCurrentClientId(clientId : String){
+        mCurrentClientId.postValue(clientId)
     }
 }

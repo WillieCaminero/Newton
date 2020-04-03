@@ -30,10 +30,10 @@ class ClientRepository {
         )
     }
 
-    suspend fun updateClientToUser(email : String, clientId: String, clientPayLoad: ClientPayLoad)
+    suspend fun updateClientInUser(email : String, clientId: String, clientPayLoad: ClientPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.updateClientToUser(email, clientId, clientPayLoad)
+            NewtonApiClient.endpoints.updateClientInUser(email, clientId, clientPayLoad)
         )
     }
 }

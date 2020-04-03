@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.caminero.newton.R
@@ -12,6 +13,7 @@ import com.caminero.newton.model.api.payloads.ClientPayLoad
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.ClientViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
+import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_add_client.*
 
@@ -21,10 +23,12 @@ class AddClientFragment : BaseFragment() {
     }
 
     private lateinit var viewModel: ClientViewModel
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ClientViewModel::class.java)
+        viewModel.activityViewModel = activityViewModel
     }
 
     override fun onCreateView(

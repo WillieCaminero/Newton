@@ -33,7 +33,7 @@ interface NewtonApiEndpoints {
     ): Response<ResponseData<Client>>
 
     @PUT("{email}/clients/{clientId}/update")
-    suspend fun updateClientToUser(
+    suspend fun updateClientInUser(
         @Path("email") email: String,
         @Path("clientId") clientId: String,
         @Body payLoad: ClientPayLoad
@@ -48,7 +48,7 @@ interface NewtonApiEndpoints {
     ): Response<ResponseData<List<Loan>>>
 
     @POST("{email}/clients/{clientId}/loans/add")
-    suspend fun addLoanToClient(
+    suspend fun addLoanInClient(
         @Path("email") email: String,
         @Path("clientId") clientId: String,
         @Body payLoad: LoanPayLoad
@@ -62,11 +62,18 @@ interface NewtonApiEndpoints {
     ): Response<ResponseData<Loan>>
 
     @PUT("{email}/clients/{clientId}/loans/{loanId}/update")
-    suspend fun updateLoanToClient(
+    suspend fun updateLoanInClient(
         @Path("email") email: String,
         @Path("clientId") clientId: String,
         @Path("loanId") loanId: String,
         @Body payLoad: LoanPayLoad
+    ): Response<ResponseData<String>>
+
+    @DELETE("{email}/clients/{clientId}/loans/{loanId}/delete")
+    suspend fun deleteLoanInClient(
+        @Path("email") email: String,
+        @Path("clientId") clientId: String,
+        @Path("loanId") loanId: String
     ): Response<ResponseData<String>>
 
     //Payments sections
@@ -79,7 +86,7 @@ interface NewtonApiEndpoints {
     ): Response<ResponseData<List<Payment>>>
 
     @POST("{email}/clients/{clientId}/loans/{loanId}/payments/add")
-    suspend fun addPaymentToLoan(
+    suspend fun addPaymentInLoan(
         @Path("email") email: String,
         @Path("clientId") clientId: String,
         @Path("loanId") loanId: String,

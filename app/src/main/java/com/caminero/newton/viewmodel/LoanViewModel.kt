@@ -10,6 +10,7 @@ import com.caminero.newton.model.entities.Loan
 import com.caminero.newton.model.repositories.LoanRepository
 import com.caminero.newton.ui.fragment.LoanDetailFragmentDirections
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
+import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.inject
@@ -20,6 +21,7 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
         val TAG = LoanViewModel::class.java.simpleName
     }
 
+    lateinit var activityViewModel: MainActivityViewModel
     private val loanRepository : LoanRepository by inject()
 
     private var mLoan = MutableLiveData<Loan>()
@@ -28,13 +30,17 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
     fun getLoanByLoanId(loanId: String){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                val response = loanRepository.getLoanByLoanId("1", "fc77df87-23d7-498b-bc4a-36a9b960d6df", loanId)
-                if (response.isSuccess){
-                    val loan = response.response!!.data
-                    mLoan.postValue(loan)
-                }
-                else {
-                    handleHttpErrorMessage(response.responseError)
+                activityViewModel.session.value?.let {
+                    val currentUser =  activityViewModel.loggedUser.value!!
+                    val currentClientId = activityViewModel.currentClientId.value!!
+                    val response = loanRepository.getLoanByLoanId(currentUser, currentClientId, loanId)
+                    if (response.isSuccess){
+                        val loan = response.response!!.data
+                        mLoan.postValue(loan)
+                    }
+                    else {
+                        handleHttpErrorMessage(response.responseError)
+                    }
                 }
             }
             setLoadingInactive()
@@ -44,12 +50,34 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
     fun addLoanToClient(clientId: String, loanPayLoad: LoanPayLoad){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                val response = loanRepository.addLoanToClient("1", clientId, loanPayLoad)
-                if (response.isSuccess){
-                    navigateBack()
+                activityViewModel.session.value?.let {
+                    val currentUser =  activityViewModel.loggedUser.value!!
+                    val response = loanRepository.addLoanInClient(currentUser, clientId, loanPayLoad)
+                    if (response.isSuccess){
+                        navigateBack()
+                    }
+                    else {
+                        handleHttpErrorMessage(response.responseError)
+                    }
                 }
-                else {
-                    handleHttpErrorMessage(response.responseError)
+            }
+            setLoadingInactive()
+        }
+    }
+
+    fun deleteLoanInClient(loanId: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isConnectedToInternet()){
+                activityViewModel.session.value?.let {
+                    val currentUser =  activityViewModel.loggedUser.value!!
+                    val currentClientId = activityViewModel.currentClientId.value!!
+                    val response = loanRepository.deleteLoanInClient(currentUser, currentClientId, loanId)
+                    if (response.isSuccess){
+                        navigateBack()
+                    }
+                    else {
+                        handleHttpErrorMessage(response.responseError)
+                    }
                 }
             }
             setLoadingInactive()

@@ -1,9 +1,8 @@
 package com.caminero.newton.ui.activity
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.caminero.newton.R
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
 
@@ -17,8 +16,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
-
-        Log.i(TAG, "Successfully loaded activity")
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
     }
 }

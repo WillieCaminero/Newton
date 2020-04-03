@@ -12,6 +12,7 @@ import com.caminero.newton.model.repositories.ClientRepository
 import com.caminero.newton.ui.fragment.ClientDetailFragmentDirections
 import com.caminero.newton.ui.fragment.ClientFragmentDirections
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
+import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.koin.core.inject
@@ -22,6 +23,7 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
         val TAG = ClientViewModel::class.java.simpleName
     }
 
+    lateinit var activityViewModel: MainActivityViewModel
     private val clientRepository : ClientRepository by inject()
 
     private var mClientList = MutableLiveData<List<Client>>()
@@ -33,13 +35,16 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
     fun getClients(){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                val response = clientRepository.getClientsByUser("1", ClientStatusType.Active.code)
-                if (response.isSuccess){
-                    val clients = response.response!!.data
-                    mClientList.postValue(clients)
-                }
-                else {
-                    handleHttpErrorMessage(response.responseError)
+                activityViewModel.session.value?.let {
+                    val currentUser =  activityViewModel.loggedUser.value!!
+                    val response = clientRepository.getClientsByUser(currentUser, ClientStatusType.Active.code)
+                    if (response.isSuccess){
+                        val clients = response.response!!.data
+                        mClientList.postValue(clients)
+                    }
+                    else {
+                        handleHttpErrorMessage(response.responseError)
+                    }
                 }
             }
             setLoadingInactive()
@@ -49,13 +54,16 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
     fun getClientByClientId(clientId: String){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                val response = clientRepository.getClientByClientId("1", clientId)
-                if (response.isSuccess){
-                    val client = response.response!!.data
-                    mClient.postValue(client)
-                }
-                else {
-                    handleHttpErrorMessage(response.responseError)
+                activityViewModel.session.value?.let {
+                    val currentUser =  activityViewModel.loggedUser.value!!
+                    val response = clientRepository.getClientByClientId(currentUser, clientId)
+                    if (response.isSuccess){
+                        val client = response.response!!.data
+                        mClient.postValue(client)
+                    }
+                    else {
+                        handleHttpErrorMessage(response.responseError)
+                    }
                 }
             }
             setLoadingInactive()
@@ -65,12 +73,15 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
     fun addClientToUser(clientPayLoad: ClientPayLoad){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                val response = clientRepository.addClientToUser("1", clientPayLoad)
-                if (response.isSuccess){
-                    navigateBack()
-                }
-                else {
-                    handleHttpErrorMessage(response.responseError)
+                activityViewModel.session.value?.let {
+                    val currentUser =  activityViewModel.loggedUser.value!!
+                    val response = clientRepository.addClientToUser(currentUser, clientPayLoad)
+                    if (response.isSuccess){
+                        navigateBack()
+                    }
+                    else {
+                        handleHttpErrorMessage(response.responseError)
+                    }
                 }
             }
             setLoadingInactive()
@@ -80,12 +91,15 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
     fun updateClientToUser(clientId: String, clientPayLoad: ClientPayLoad){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                val response = clientRepository.updateClientToUser("1", clientId, clientPayLoad)
-                if (response.isSuccess){
-                    navigateBack()
-                }
-                else {
-                    handleHttpErrorMessage(response.responseError)
+                activityViewModel.session.value?.let {
+                    val currentUser =  activityViewModel.loggedUser.value!!
+                    val response = clientRepository.updateClientInUser(currentUser, clientId, clientPayLoad)
+                    if (response.isSuccess){
+                        navigateBack()
+                    }
+                    else {
+                        handleHttpErrorMessage(response.responseError)
+                    }
                 }
             }
             setLoadingInactive()
@@ -99,6 +113,7 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
 
     fun navigateToClientDetailFragment(clientId: String) {
         Log.i(TAG, "Navigating to Client Detail")
+        activityViewModel.setCurrentClientId(clientId)
         navigate(ClientFragmentDirections.actionClientFragmentToClientDetailFragment(clientId))
     }
 

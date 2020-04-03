@@ -16,10 +16,10 @@ class PaymentRepository {
         )
     }
 
-    suspend fun addPaymentToLoan(email : String, clientId: String, loanId: String, paymentPayLoad: PaymentPayLoad)
+    suspend fun addPaymentInLoan(email : String, clientId: String, loanId: String, paymentPayLoad: PaymentPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.addPaymentToLoan(email, clientId, loanId, paymentPayLoad)
+            NewtonApiClient.endpoints.addPaymentInLoan(email, clientId, loanId, paymentPayLoad)
         )
     }
 }

@@ -14,8 +14,6 @@ import com.caminero.newton.viewmodel.base.MainActivityViewModel
 
 abstract class BaseFragment : Fragment() {
 
-    protected val activityViewModel: MainActivityViewModel by activityViewModels()
-
     abstract fun getViewModel(): BaseFragmentViewModel
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

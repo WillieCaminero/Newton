@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -13,6 +14,7 @@ import com.caminero.newton.model.api.payloads.PaymentPayLoad
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.PaymentViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
+import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_add_payment.*
 
 class AddPaymentFragment : BaseFragment() {
@@ -22,10 +24,12 @@ class AddPaymentFragment : BaseFragment() {
 
     private val safeArgs: AddPaymentFragmentArgs by navArgs()
     private lateinit var viewModel: PaymentViewModel
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PaymentViewModel::class.java)
+        viewModel.activityViewModel = activityViewModel
     }
 
     override fun onCreateView(
