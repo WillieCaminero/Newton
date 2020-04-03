@@ -3,6 +3,7 @@ package com.caminero.newton.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.caminero.newton.R
 import com.caminero.newton.core.utils.StringUtils
@@ -38,9 +39,9 @@ class ClientAdapter(private val items : List<Client>,
     }
 
     inner class ClientViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val lblId = itemView.lblId
-        val lblClientFullName = itemView.lblClientFullName
-        val lblAddress  = itemView.lblAddress
-        val lblNumberLoans = itemView.lblNumberLoans
+        val lblId: TextView  = itemView.lblId
+        val lblClientFullName: TextView  = itemView.lblClientFullName
+        val lblAddress: TextView = itemView.lblAddress
+        val lblNumberLoans: TextView  = itemView.lblNumberLoans
     }
 }

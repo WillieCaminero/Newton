@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
 import com.caminero.newton.core.utils.enums.PaymentStatusType
+import com.caminero.newton.core.utils.setDatePickerDialog
 import com.caminero.newton.model.api.payloads.PaymentPayLoad
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.PaymentViewModel
@@ -38,6 +39,7 @@ class AddPaymentFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_add_payment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        txtPaymentDate.setDatePickerDialog()
         setupListeners()
         setupObservers()
     }
@@ -51,12 +53,12 @@ class AddPaymentFragment : BaseFragment() {
         btnAddPayment.setOnClickListener {
             viewModel.setLoadingActive()
 
-            //val paymentDate = txtPaymentDate.text.toString()
-            val paymentDate = "2020-02-11T07:00:00"
-            val mount = txtMount.text.toString().toInt()
-            val status = PaymentStatusType.Active.code
+            if(!validateForm()) {
+                viewModel.setLoadingInactive()
+                return@setOnClickListener
+            }
 
-            viewModel.addPaymentToLoan(safeArgs.loanId, PaymentPayLoad(paymentDate, mount, status))
+            performAddPayment()
         }
     }
 
@@ -67,5 +69,30 @@ class AddPaymentFragment : BaseFragment() {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
             }
         )
+    }
+
+    private fun performAddPayment() {
+        val paymentDate = txtPaymentDate.text.toString()
+        val mount = txtMount.text.toString().toInt()
+        val status = PaymentStatusType.Active.code
+
+        viewModel.addPaymentToLoan(safeArgs.loanId, PaymentPayLoad(paymentDate, mount, status))
+    }
+
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        if (txtPaymentDate.text.toString().isNullOrBlank()) {
+            txtPaymentDate.error = "Required"
+            valid =  false
+        }
+        else txtPaymentDate.error = null
+
+        if (txtMount.text.toString().isNullOrBlank()) {
+            txtMount.error = "Required"
+            valid =  false
+        }
+
+        return valid
     }
 }

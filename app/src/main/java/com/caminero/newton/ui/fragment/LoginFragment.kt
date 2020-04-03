@@ -46,6 +46,12 @@ class LoginFragment : BaseFragment() {
     private fun setupListeners() {
         btnLogin.setOnClickListener {
             viewModel.setLoadingActive()
+
+            if(!validateForm()) {
+                viewModel.setLoadingInactive()
+                return@setOnClickListener
+            }
+
             performLogin()
         }
     }
@@ -62,11 +68,27 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun performLogin() {
-        val usr = txtEmail.text.toString()
+        val usr = txtEmail.text.toString().toLowerCase()
         val pwd = txtPassword.text.toString()
 
         viewModel.setEmail(usr)
         viewModel.setPassword(pwd)
         viewModel.logInUser()
+    }
+
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        if (txtEmail.text.toString().isNullOrBlank()) {
+            txtEmail.error = "Required"
+            valid =  false
+        }
+
+        if (txtPassword.text.toString().isNullOrBlank()) {
+            txtPassword.error = "Required"
+            valid =  false
+        }
+
+        return valid
     }
 }

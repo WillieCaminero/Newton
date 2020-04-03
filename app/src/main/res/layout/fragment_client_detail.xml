@@ -139,13 +139,11 @@
             android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvPayments"
+                android:id="@+id/rvLoans"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:visibility="invisible"
-                android:background="@color/colorHighlightedBackground"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

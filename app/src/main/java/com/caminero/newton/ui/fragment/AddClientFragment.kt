@@ -54,14 +54,7 @@ class AddClientFragment : BaseFragment() {
                 return@setOnClickListener
             }
 
-            val id = txtId.text.toString()
-            val name = txtName.text.toString()
-            val lastName = txtLastName.text.toString()
-            val phoneNumber = txtPhoneNumber.text.toString()
-            val address = txtAddress.text.toString()
-            val status = ClientStatusType.Active.code
-
-            viewModel.addClientToUser(ClientPayLoad(id, name, lastName, phoneNumber, address, status))
+            performAddClient()
         }
     }
 
@@ -74,6 +67,17 @@ class AddClientFragment : BaseFragment() {
         )
     }
 
+    private fun performAddClient() {
+        val id = txtId.text.toString()
+        val name = txtName.text.toString()
+        val lastName = txtLastName.text.toString()
+        val phoneNumber = txtPhoneNumber.text.toString()
+        val address = txtAddress.text.toString()
+        val status = ClientStatusType.Active.code
+
+        viewModel.addClientToUser(ClientPayLoad(id, name, lastName, phoneNumber, address, status))
+    }
+
     private fun validateForm(): Boolean {
         var valid = true
 
@@ -81,22 +85,18 @@ class AddClientFragment : BaseFragment() {
             txtId.error = "Required"
             valid =  false
         }
-
         if (txtName.text.toString().isNullOrBlank()) {
             txtName.error = "Required"
             valid =  false
         }
-
         if (txtLastName.text.toString().isNullOrBlank()) {
             txtLastName.error = "Required"
             valid =  false
         }
-
         if (txtPhoneNumber.text.toString().isNullOrBlank()) {
             txtPhoneNumber.error = "Required"
             valid =  false
         }
-
         if (txtAddress.text.toString().isNullOrBlank()) {
             txtAddress.error = "Required"
             valid =  false

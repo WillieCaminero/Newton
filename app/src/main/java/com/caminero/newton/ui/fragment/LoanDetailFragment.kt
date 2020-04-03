@@ -77,7 +77,7 @@ class LoanDetailFragment : BaseFragment() {
             Observer {loan ->
                 initForm(loan)
                 val payments = loan.payments.filter { payment -> payment.status == PaymentStatusType.Active.code }
-                if(payments.isNotEmpty()) setupRecyclerView(payments)
+                setupRecyclerView(payments)
             }
         )
         viewModel.isLoading.observe(
@@ -95,6 +95,5 @@ class LoanDetailFragment : BaseFragment() {
             }
         })
         rvPayments.adapter = adapter
-        rvPayments.visibility = View.VISIBLE
     }
 }

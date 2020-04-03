@@ -55,9 +55,12 @@
             app:hintEnabled="true"
             android:hint="@string/hint_email"
             app:startIconDrawable="@drawable/ic_person"
-            app:endIconMode="clear_text">
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtEmail"
+                android:text="Willie.Caminero@hotmail.com"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"/>
@@ -70,7 +73,9 @@
             android:layout_marginTop="20dp"
             app:hintEnabled="true"
             android:hint="@string/hint_password"
-            app:passwordToggleEnabled="true">
+            app:errorEnabled="true"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtPassword"
                 android:layout_width="match_parent"

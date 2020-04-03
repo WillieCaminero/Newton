@@ -43,6 +43,7 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
                         mClientList.postValue(clients)
                     }
                     else {
+                        mClientList.postValue(mutableListOf())
                         handleHttpErrorMessage(response.responseError)
                     }
                 }

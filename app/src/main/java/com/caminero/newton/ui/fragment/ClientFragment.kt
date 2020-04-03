@@ -70,6 +70,5 @@ class ClientFragment : BaseFragment() {
             }
         })
         rvPayments.adapter = adapter
-        rvPayments.visibility = View.VISIBLE
     }
 }

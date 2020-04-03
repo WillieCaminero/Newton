@@ -62,14 +62,12 @@ class EditClientFragment : BaseFragment() {
         btnEditClient.setOnClickListener {
             viewModel.setLoadingActive()
 
-            val id = txtId.text.toString()
-            val name = txtName.text.toString()
-            val lastName = txtLastName.text.toString()
-            val phoneNumber = txtPhoneNumber.text.toString()
-            val address = txtAddress.text.toString()
-            val status = ClientStatusType.Active.code
+            if(!validateForm()) {
+                viewModel.setLoadingInactive()
+                return@setOnClickListener
+            }
 
-            viewModel.updateClientToUser(safeArgs.clientId, ClientPayLoad(id, name, lastName, phoneNumber, address, status))
+            performEditClient()
         }
     }
 
@@ -86,5 +84,47 @@ class EditClientFragment : BaseFragment() {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
             }
         )
+    }
+
+    private fun performEditClient() {
+        val id = txtId.text.toString()
+        val name = txtName.text.toString()
+        val lastName = txtLastName.text.toString()
+        val phoneNumber = txtPhoneNumber.text.toString()
+        val address = txtAddress.text.toString()
+        val status = ClientStatusType.Active.code
+
+        viewModel.updateClientToUser(safeArgs.clientId, ClientPayLoad(id, name, lastName, phoneNumber, address, status))
+    }
+
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        if (txtId.text.toString().isNullOrBlank()) {
+            txtId.error = "Required"
+            valid =  false
+        }
+
+        if (txtName.text.toString().isNullOrBlank()) {
+            txtName.error = "Required"
+            valid =  false
+        }
+
+        if (txtLastName.text.toString().isNullOrBlank()) {
+            txtLastName.error = "Required"
+            valid =  false
+        }
+
+        if (txtPhoneNumber.text.toString().isNullOrBlank()) {
+            txtPhoneNumber.error = "Required"
+            valid =  false
+        }
+
+        if (txtAddress.text.toString().isNullOrBlank()) {
+            txtAddress.error = "Required"
+            valid =  false
+        }
+
+        return valid
     }
 }

@@ -74,7 +74,7 @@ class ClientDetailFragment : BaseFragment() {
             Observer {client ->
                 initForm(client)
                 val loans = client.loans.filter { loan -> loan.status == LoanStatusType.InProgress.code }
-                if(loans.isNotEmpty()) setupRecyclerView(loans)
+                setupRecyclerView(loans)
             }
         )
         viewModel.isLoading.observe(
@@ -91,7 +91,6 @@ class ClientDetailFragment : BaseFragment() {
                 viewModel.navigateToLoanDetailFragment(loan.loanId)
             }
         })
-        rvPayments.adapter = adapter
-        rvPayments.visibility = View.VISIBLE
+        rvLoans.adapter = adapter
     }
 }

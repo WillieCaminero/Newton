@@ -9,13 +9,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.daysBetweenDates
 import com.caminero.newton.core.utils.enums.LoanStatusType
+import com.caminero.newton.core.utils.setDatePickerDialog
 import com.caminero.newton.model.api.payloads.LoanPayLoad
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoanViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_add_loan.*
 
 class AddLoanFragment : BaseFragment() {
@@ -39,9 +40,10 @@ class AddLoanFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_add_loan, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        txtStartDate.setDatePickerDialog()
+        txtEndDate.setDatePickerDialog()
         setupListeners()
         setupObservers()
-        Snackbar.make(view, "cliendId: ${safeArgs.clientId}", Snackbar.LENGTH_LONG).show()
     }
 
     override fun getViewModel(): BaseFragmentViewModel = viewModel
@@ -53,16 +55,14 @@ class AddLoanFragment : BaseFragment() {
         btnAddPayment.setOnClickListener {
             viewModel.setLoadingActive()
 
-            val interest = txtInterest.text.toString().toInt()
-            val mount = txtMount.text.toString().toInt()
-            //val startDate = txtStartDate.text.toString()
-            val startDate = "2020-01-02T00:00:00"
-            //val endDate = txtEndDate.text.toString()
-            val endDate = "2020-12-02T00:00:00"
-            val days = txtDays.text.toString().toInt()
-            val status = LoanStatusType.InProgress.code
+            calculateDays()
 
-            viewModel.addLoanToClient(safeArgs.clientId, LoanPayLoad(interest, days, mount, startDate, endDate, status))
+            if(!validateForm()) {
+                viewModel.setLoadingInactive()
+                return@setOnClickListener
+            }
+
+            performAddLoan()
         }
     }
 
@@ -73,5 +73,50 @@ class AddLoanFragment : BaseFragment() {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
             }
         )
+    }
+
+    private fun performAddLoan() {
+        val interest = txtInterest.text.toString().toInt()
+        val mount = txtMount.text.toString().toInt()
+        val startDate = txtStartDate.text.toString()
+        val endDate = txtEndDate.text.toString()
+        val days = txtDays.text.toString().toInt()
+        val status = LoanStatusType.InProgress.code
+
+        viewModel.addLoanToClient(safeArgs.clientId, LoanPayLoad(interest, days, mount, startDate, endDate, status))
+    }
+
+    private fun calculateDays() {
+        if (!txtStartDate.text.toString().isNullOrBlank() && !txtEndDate.text.toString().isNullOrBlank() ){
+            val startDate = txtStartDate.text.toString()
+            val endDate = txtEndDate.text.toString()
+            txtDays.setText(daysBetweenDates(startDate, endDate).toString())
+        }
+    }
+
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        if (txtInterest.text.toString().isNullOrBlank()) {
+            txtInterest.error = "Required"
+            valid =  false
+        }
+        if (txtMount.text.toString().isNullOrBlank()) {
+            txtMount.error = "Required"
+            valid =  false
+        }
+        if (txtStartDate.text.toString().isNullOrBlank()) {
+            txtStartDate.error = "Required"
+            valid =  false
+        }
+        else txtStartDate.error = null
+
+        if (txtEndDate.text.toString().isNullOrBlank()) {
+            txtEndDate.error = "Required"
+            valid =  false
+        }
+        else txtEndDate.error = null
+
+        return valid
     }
 }
