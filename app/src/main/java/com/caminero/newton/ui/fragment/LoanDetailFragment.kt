@@ -18,7 +18,6 @@ import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoanViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_loan_detail.*
 
 class LoanDetailFragment : BaseFragment() {
@@ -51,7 +50,7 @@ class LoanDetailFragment : BaseFragment() {
     override fun getViewModel(): BaseFragmentViewModel = viewModel
 
     private fun initForm(loan: Loan){
-        txtPaymentDate.setText(loan.startDate)
+        txtStartDate.setText(loan.startDate)
         txtEndDate.setText(loan.endDate)
         txtMount.setText(loan.mount.toString())
         txtInterest.setText(loan.interest.toString())

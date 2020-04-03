@@ -51,7 +51,7 @@ class ClientDetailFragment : BaseFragment() {
 
     private fun initForm(client: Client){
         txtId.setText(client.id)
-        txtPaymentDate.setText(client.name)
+        txtName.setText(client.name)
         txtLastName.setText(client.lastName)
         txtPhoneNumber.setText(client.phoneNumber)
     }

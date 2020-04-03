@@ -49,7 +49,7 @@ class EditClientFragment : BaseFragment() {
 
     private fun initForm(client: Client){
         txtId.setText(client.id)
-        txtPaymentDate.setText(client.name)
+        txtName.setText(client.name)
         txtLastName.setText(client.lastName)
         txtPhoneNumber.setText(client.phoneNumber)
         txtAddress.setText(client.address)
@@ -63,7 +63,7 @@ class EditClientFragment : BaseFragment() {
             viewModel.setLoadingActive()
 
             val id = txtId.text.toString()
-            val name = txtPaymentDate.text.toString()
+            val name = txtName.text.toString()
             val lastName = txtLastName.text.toString()
             val phoneNumber = txtPhoneNumber.text.toString()
             val address = txtAddress.text.toString()

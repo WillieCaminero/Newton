@@ -27,7 +27,7 @@
         />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lblPaymentDate"
+        android:id="@+id/lblStartDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintEnd_toEndOf="@id/glMiddle">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtPaymentDate"
+            android:id="@+id/txtStartDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="2012-01-01"
@@ -73,7 +73,7 @@
         android:layout_marginTop="20dp"
         android:enabled="false"
         android:hint="Mount"
-        app:layout_constraintTop_toBottomOf="@id/lblPaymentDate"
+        app:layout_constraintTop_toBottomOf="@id/lblStartDate"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintEnd_toEndOf="@id/glMiddle">
         <com.google.android.material.textfield.TextInputEditText

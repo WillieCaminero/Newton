@@ -14,7 +14,6 @@ import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.ClientViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_add_client.*
 
 class AddClientFragment : BaseFragment() {
@@ -39,7 +38,6 @@ class AddClientFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupListeners()
         setupObservers()
-        Snackbar.make(view, "MainActivity.email", Snackbar.LENGTH_LONG).show()
     }
 
     override fun getViewModel(): BaseFragmentViewModel = viewModel
@@ -51,8 +49,13 @@ class AddClientFragment : BaseFragment() {
         btnAddClient.setOnClickListener {
             viewModel.setLoadingActive()
 
+            if(!validateForm()) {
+                viewModel.setLoadingInactive()
+                return@setOnClickListener
+            }
+
             val id = txtId.text.toString()
-            val name = txtPaymentDate.text.toString()
+            val name = txtName.text.toString()
             val lastName = txtLastName.text.toString()
             val phoneNumber = txtPhoneNumber.text.toString()
             val address = txtAddress.text.toString()
@@ -69,5 +72,36 @@ class AddClientFragment : BaseFragment() {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
             }
         )
+    }
+
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        if (txtId.text.toString().isNullOrBlank()) {
+            txtId.error = "Required"
+            valid =  false
+        }
+
+        if (txtName.text.toString().isNullOrBlank()) {
+            txtName.error = "Required"
+            valid =  false
+        }
+
+        if (txtLastName.text.toString().isNullOrBlank()) {
+            txtLastName.error = "Required"
+            valid =  false
+        }
+
+        if (txtPhoneNumber.text.toString().isNullOrBlank()) {
+            txtPhoneNumber.error = "Required"
+            valid =  false
+        }
+
+        if (txtAddress.text.toString().isNullOrBlank()) {
+            txtAddress.error = "Required"
+            valid =  false
+        }
+        
+        return valid
     }
 }
