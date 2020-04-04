@@ -18,6 +18,7 @@ import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoanViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_loan_detail.*
 
 class LoanDetailFragment : BaseFragment() {
@@ -65,10 +66,26 @@ class LoanDetailFragment : BaseFragment() {
         btnAddPayment.setOnClickListener {
             viewModel.navigateToAddPaymentFragment(safeArgs.loanId)
         }
-        btnDeleteLoan.setOnClickListener {
-            viewModel.setLoadingActive()
-            viewModel.deleteLoanInClient(safeArgs.loanId)
+        btnEditLoan.setOnClickListener {
+            viewModel.navigateToEditLoanFragment(safeArgs.loanId)
         }
+        btnDeleteLoan.setOnClickListener {
+             MaterialAlertDialogBuilder(context)
+                .setTitle("Deleting Loan")
+                .setMessage("Are you sure you want delete this loan?")
+                .setPositiveButton("Ok") { _, _ ->
+                    performDeleteLoan()
+                }.show()
+        }
+    }
+
+    private fun performDeleteLoan(){
+        viewModel.setLoadingActive()
+        viewModel.deleteLoanInClient(safeArgs.loanId)
+    }
+
+    private fun performDeletePayment(){
+        //ToDo
     }
 
     private fun setupObservers(){
@@ -91,7 +108,12 @@ class LoanDetailFragment : BaseFragment() {
     private fun setupRecyclerView(list : List<Payment>){
         val adapter = PaymentAdapter(list, object : PaymentListener {
             override fun onItemClick(payment: Payment) {
-                //ToDo
+                MaterialAlertDialogBuilder(context)
+                    .setTitle("Deleting Payment")
+                    .setMessage("Are you sure you want delete this payment?")
+                    .setPositiveButton("Ok") { _, _ ->
+                        performDeletePayment()
+                    }
             }
         })
         rvPayments.adapter = adapter

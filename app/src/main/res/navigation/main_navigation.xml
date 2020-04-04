@@ -77,6 +77,19 @@
         <action
             android:id="@+id/action_loanDetailFragment_to_addPaymentFragment"
             app:destination="@id/navAddPaymentFragment"/>
+        <action
+            android:id="@+id/action_loanDetailFragment_to_editLoanFragment"
+            app:destination="@id/navEditLoanFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navEditLoanFragment"
+        android:name="com.caminero.newton.ui.fragment.EditLoanFragment"
+        android:label="EditLoanFragment"
+        tools:layout="@layout/fragment_edit_loan" >
+        <argument
+            android:name="loanId"
+            app:argType="string" />
     </fragment>
 
     <fragment

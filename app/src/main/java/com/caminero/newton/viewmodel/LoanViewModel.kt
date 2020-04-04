@@ -65,6 +65,25 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
         }
     }
 
+    fun updateLoanInClient(loanId: String, loanPayLoad: LoanPayLoad){
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isConnectedToInternet()){
+                activityViewModel.session.value?.let {session ->
+                    val currentUser =  activityViewModel.loggedUser.value!!
+                    val currentClientId = activityViewModel.currentClientId.value!!
+                    val response = loanRepository.updateLoanInClient(session.idToken, currentUser, currentClientId, loanId, loanPayLoad)
+                    if (response.isSuccess){
+                        navigateBack()
+                    }
+                    else {
+                        handleHttpErrorMessage(response.responseError)
+                    }
+                }
+            }
+            setLoadingInactive()
+        }
+    }
+
     fun deleteLoanInClient(loanId: String){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
@@ -82,6 +101,11 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
             }
             setLoadingInactive()
         }
+    }
+
+    fun navigateToEditLoanFragment(loanId: String) {
+        Log.i(TAG, "Navigating to Edit Loan")
+        navigate(LoanDetailFragmentDirections.actionLoanDetailFragmentToEditLoanFragment(loanId))
     }
 
     fun navigateToAddPaymentFragment(loanId: String) {

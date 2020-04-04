@@ -2,6 +2,8 @@ package com.caminero.newton.viewmodel
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caminero.newton.core.utils.addSeconds
 import com.caminero.newton.model.api.payloads.InitiateAuthPayLoad
@@ -23,6 +25,9 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
     lateinit var activityViewModel: MainActivityViewModel
     private val cognitoRepository : CognitoRepository by inject()
 
+    private var mLoginFail = MutableLiveData<Boolean>()
+    val loginFail : LiveData<Boolean> get() = mLoginFail
+
     fun logInUser(email: String, password: String){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()) {
@@ -30,13 +35,13 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
                 val response = cognitoRepository.initiateAuth(initiateAuthPayLoad)
                 if (response.isSuccess){
                     val currentSession = response.response!!.data
-                    //activityViewModel.setSessionExpiration(Date().addSeconds(currentSession.expirationTime))
-                    activityViewModel.setSessionExpiration(Date().addSeconds(10))
+                    activityViewModel.setSessionExpiration(Date().addSeconds(currentSession.expirationTime))
                     activityViewModel.createSession(currentSession)
                     activityViewModel.setLoggedUser(email)
                     navigateToClientFragment()
                 }
                 else {
+                    mLoginFail.postValue(true)
                     handleHttpErrorMessage(response.responseError)
                 }
             }

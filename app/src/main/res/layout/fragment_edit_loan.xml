@@ -21,7 +21,7 @@
         app:layout_constraintStart_toEndOf="@+id/btnBack"
         app:layout_constraintTop_toTopOf="@id/btnBack"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"
-        android:text="Loan Detail"
+        android:text="Edit Loan"
         android:textSize="20sp"
         android:textStyle="normal|bold"
         />
@@ -31,17 +31,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:enabled="false"
+        app:hintEnabled="true"
         android:hint="Start Date"
+        app:errorEnabled="true"
+        android:layout_marginEnd="1dp"
         app:layout_constraintTop_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintEnd_toEndOf="@id/glMiddle">
+        app:layout_constraintEnd_toEndOf="@id/glMiddle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtStartDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="2012-01-01"
-            android:maxLength="128"
+            android:singleLine="true"
+            android:inputType="date"
             android:paddingStart="10dp"
             android:paddingEnd="40dp"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -51,17 +54,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:enabled="false"
+        app:hintEnabled="true"
         android:hint="End Date"
+        app:errorEnabled="true"
+        android:layout_marginStart="1dp"
         app:layout_constraintTop_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toStartOf="@id/glMiddle"
-        app:layout_constraintEnd_toEndOf="@id/glEnd">
+        app:layout_constraintEnd_toEndOf="@id/glEnd"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtEndDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxLength="128"
-            tools:text="2014-02-20"
+            android:inputType="date"
+            android:singleLine="true"
             android:paddingStart="10dp"
             android:paddingEnd="40dp"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -71,38 +77,48 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:enabled="false"
+        app:hintEnabled="true"
         android:hint="Mount"
+        app:counterEnabled="true"
+        app:counterMaxLength="9"
+        app:errorEnabled="true"
+        android:layout_marginEnd="1dp"
         app:layout_constraintTop_toBottomOf="@id/lblStartDate"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintEnd_toEndOf="@id/glMiddle">
+        app:layout_constraintEnd_toEndOf="@id/glMiddle"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtMount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="1000"
-            android:maxLength="128"
+            android:inputType="number"
+            android:maxLength="9"
             android:paddingStart="10dp"
             android:paddingEnd="40dp"/>
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/lblInterest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:enabled="false"
+        app:hintEnabled="true"
         android:hint="Interest"
+        app:counterEnabled="true"
+        app:counterMaxLength="3"
+        android:layout_marginStart="1dp"
         app:layout_constraintTop_toBottomOf="@id/lblEndDate"
         app:layout_constraintStart_toStartOf="@id/glMiddle"
-        app:layout_constraintEnd_toEndOf="@id/glEnd">
+        app:layout_constraintEnd_toEndOf="@id/glEnd"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtInterest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="15%"
-            android:maxLength="128"
+            android:inputType="number"
+            android:maxLength="3"
             android:paddingStart="10dp"
             android:paddingEnd="40dp"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -121,12 +137,10 @@
             android:id="@+id/txtDays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="30"
-            android:maxLength="128"
+            android:text="0"
             android:paddingStart="10dp"
             android:paddingEnd="40dp"/>
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/lblStatus"
@@ -143,7 +157,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="In Progress"
-            android:maxLength="128"
             android:paddingStart="10dp"
             android:paddingEnd="40dp"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -156,60 +169,9 @@
         android:text="Edit"
         app:layout_constraintTop_toBottomOf="@id/lblDays"
         app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintEnd_toStartOf="@id/btnDeleteLoan"
-        style="@style/Widget.MaterialComponents.Button.TextButton" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnDeleteLoan"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Delete"
-        app:layout_constraintTop_toBottomOf="@id/lblDays"
-        app:layout_constraintStart_toEndOf="@id/btnEditLoan"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
-        android:textColor="@android:color/holo_red_dark"
-        style="@style/Widget.MaterialComponents.Button.TextButton" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvPrincipal"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintStart_toStartOf="@id/glStart"
-        app:layout_constraintEnd_toEndOf="@id/glEnd"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnDeleteLoan">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvPayments"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingTop="20dp"
-                android:layout_marginBottom="20dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:listitem="@layout/list_item_payment" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAddPayment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_black_24dp"/>
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        />
 
     <ProgressBar
         android:id="@+id/pvProgress"

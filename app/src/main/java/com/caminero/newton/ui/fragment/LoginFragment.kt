@@ -12,6 +12,7 @@ import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoginViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment() {
@@ -62,6 +63,15 @@ class LoginFragment : BaseFragment() {
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
                 btnLogin.isEnabled = !it
+            }
+        )
+        viewModel.loginFail.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle("Login Fail")
+                    .setMessage("The user and/or password are incorrect!!!")
+                    .show()
             }
         )
     }
