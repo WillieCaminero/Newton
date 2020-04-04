@@ -35,9 +35,9 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
     fun getClients(){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                activityViewModel.session.value?.let {
+                activityViewModel.session.value?.let { session ->
                     val currentUser =  activityViewModel.loggedUser.value!!
-                    val response = clientRepository.getClientsByUser(currentUser, ClientStatusType.Active.code)
+                    val response = clientRepository.getClientsByUser(session.idToken, currentUser, ClientStatusType.Active.code)
                     if (response.isSuccess){
                         val clients = response.response!!.data
                         mClientList.postValue(clients)
@@ -55,9 +55,9 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
     fun getClientByClientId(clientId: String){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                activityViewModel.session.value?.let {
+                activityViewModel.session.value?.let { session ->
                     val currentUser =  activityViewModel.loggedUser.value!!
-                    val response = clientRepository.getClientByClientId(currentUser, clientId)
+                    val response = clientRepository.getClientByClientId(session.idToken, currentUser, clientId)
                     if (response.isSuccess){
                         val client = response.response!!.data
                         mClient.postValue(client)
@@ -74,9 +74,9 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
     fun addClientToUser(clientPayLoad: ClientPayLoad){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                activityViewModel.session.value?.let {
+                activityViewModel.session.value?.let { session ->
                     val currentUser =  activityViewModel.loggedUser.value!!
-                    val response = clientRepository.addClientToUser(currentUser, clientPayLoad)
+                    val response = clientRepository.addClientToUser(session.idToken, currentUser, clientPayLoad)
                     if (response.isSuccess){
                         navigateBack()
                     }
@@ -92,9 +92,9 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
     fun updateClientToUser(clientId: String, clientPayLoad: ClientPayLoad){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                activityViewModel.session.value?.let {
+                activityViewModel.session.value?.let { session ->
                     val currentUser =  activityViewModel.loggedUser.value!!
-                    val response = clientRepository.updateClientInUser(currentUser, clientId, clientPayLoad)
+                    val response = clientRepository.updateClientInUser(session.idToken, currentUser, clientId, clientPayLoad)
                     if (response.isSuccess){
                         navigateBack()
                     }

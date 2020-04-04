@@ -9,31 +9,31 @@ import com.caminero.newton.model.entities.Client
 
 class ClientRepository {
 
-    suspend fun getClientsByUser(email : String, status : String)
+    suspend fun getClientsByUser(token : String, email : String, status : String)
             : BaseResponse<ResponseData<List<Client>>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getClientsByUser(email, status)
+            NewtonApiClient.endpoints.getClientsByUser(token, email, status)
         )
     }
 
-    suspend fun getClientByClientId(email : String, clientId: String)
+    suspend fun getClientByClientId(token : String, email : String, clientId: String)
             : BaseResponse<ResponseData<Client>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getClientByClientId(email, clientId)
+            NewtonApiClient.endpoints.getClientByClientId(token, email, clientId)
         )
     }
 
-    suspend fun addClientToUser(email : String, clientPayLoad: ClientPayLoad)
+    suspend fun addClientToUser(token : String, email : String, clientPayLoad: ClientPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.addClientToUser(email, clientPayLoad)
+            NewtonApiClient.endpoints.addClientToUser(token, email, clientPayLoad)
         )
     }
 
-    suspend fun updateClientInUser(email : String, clientId: String, clientPayLoad: ClientPayLoad)
+    suspend fun updateClientInUser(token : String, email : String, clientId: String, clientPayLoad: ClientPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.updateClientInUser(email, clientId, clientPayLoad)
+            NewtonApiClient.endpoints.updateClientInUser(token, email, clientId, clientPayLoad)
         )
     }
 }

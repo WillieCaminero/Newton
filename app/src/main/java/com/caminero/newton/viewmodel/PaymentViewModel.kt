@@ -22,10 +22,10 @@ class PaymentViewModel (app : Application) : BaseFragmentViewModel(app) {
     fun addPaymentToLoan(loanId: String, paymentPayLoad: PaymentPayLoad){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
-                activityViewModel.session.value?.let {
+                activityViewModel.session.value?.let {session ->
                     val currentUser =  activityViewModel.loggedUser.value!!
                     val currentClientId = activityViewModel.currentClientId.value!!
-                    val response = paymentRepository.addPaymentInLoan(currentUser, currentClientId, loanId, paymentPayLoad)
+                    val response = paymentRepository.addPaymentInLoan(session.idToken, currentUser, currentClientId, loanId, paymentPayLoad)
                     if (response.isSuccess){
                         navigateBack()
                     }

@@ -9,17 +9,17 @@ import com.caminero.newton.model.entities.Payment
 
 class PaymentRepository {
 
-    suspend fun getPaymentsByLoan(email : String, clientId: String, loanId: String)
+    suspend fun getPaymentsByLoan(token : String, email : String, clientId: String, loanId: String)
             : BaseResponse<ResponseData<List<Payment>>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getPaymentsByLoan(email, clientId, loanId)
+            NewtonApiClient.endpoints.getPaymentsByLoan(token, email, clientId, loanId)
         )
     }
 
-    suspend fun addPaymentInLoan(email : String, clientId: String, loanId: String, paymentPayLoad: PaymentPayLoad)
+    suspend fun addPaymentInLoan(token : String, email : String, clientId: String, loanId: String, paymentPayLoad: PaymentPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.addPaymentInLoan(email, clientId, loanId, paymentPayLoad)
+            NewtonApiClient.endpoints.addPaymentInLoan(token, email, clientId, loanId, paymentPayLoad)
         )
     }
 }

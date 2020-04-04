@@ -9,38 +9,38 @@ import com.caminero.newton.model.entities.Loan
 
 class LoanRepository {
 
-    suspend fun getLoansByClient(email : String, clientId: String)
+    suspend fun getLoansByClient(token : String, email : String, clientId: String)
             : BaseResponse<ResponseData<List<Loan>>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getLoansByClient(email, clientId)
+            NewtonApiClient.endpoints.getLoansByClient(token, email, clientId)
         )
     }
 
-    suspend fun getLoanByLoanId(email : String, clientId: String, loanId: String)
+    suspend fun getLoanByLoanId(token : String, email : String, clientId: String, loanId: String)
             : BaseResponse<ResponseData<Loan>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getLoanByLoanId(email, clientId, loanId)
+            NewtonApiClient.endpoints.getLoanByLoanId(token, email, clientId, loanId)
         )
     }
 
-    suspend fun addLoanInClient(email : String, clientId: String, loanPayLoad: LoanPayLoad)
+    suspend fun addLoanInClient(token : String, email : String, clientId: String, loanPayLoad: LoanPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.addLoanInClient(email, clientId, loanPayLoad)
+            NewtonApiClient.endpoints.addLoanInClient(token, email, clientId, loanPayLoad)
         )
     }
 
-    suspend fun updateLoanInClient(email : String, clientId: String, loanId: String, loanPayLoad: LoanPayLoad)
+    suspend fun updateLoanInClient(token : String, email : String, clientId: String, loanId: String, loanPayLoad: LoanPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.updateLoanInClient(email, clientId, loanId, loanPayLoad)
+            NewtonApiClient.endpoints.updateLoanInClient(token, email, clientId, loanId, loanPayLoad)
         )
     }
 
-    suspend fun deleteLoanInClient(email : String, clientId: String, loanId: String)
+    suspend fun deleteLoanInClient(token : String, email : String, clientId: String, loanId: String)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.deleteLoanInClient(email, clientId, loanId)
+            NewtonApiClient.endpoints.deleteLoanInClient(token, email, clientId, loanId)
         )
     }
 }

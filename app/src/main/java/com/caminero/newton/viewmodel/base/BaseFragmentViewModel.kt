@@ -7,10 +7,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavDirections
 import com.caminero.newton.core.utils.NavigationCommand
-import com.caminero.newton.core.utils.enums.ClientStatusType
-import com.caminero.newton.core.utils.enums.LoanStatusType
 import com.caminero.newton.core.utils.NetworkUtils
 import com.caminero.newton.core.utils.SingleLiveEvent
+import com.caminero.newton.core.utils.enums.ClientStatusType
+import com.caminero.newton.core.utils.enums.LoanStatusType
 import com.caminero.newton.model.api.common.ResponseError
 import org.koin.core.KoinComponent
 import org.koin.core.inject

@@ -61,19 +61,16 @@ class LoginFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
-                pvProgress.bringToFront()
                 btnLogin.isEnabled = !it
             }
         )
     }
 
     private fun performLogin() {
-        val usr = txtEmail.text.toString().toLowerCase()
-        val pwd = txtPassword.text.toString()
+        val userName = txtEmail.text.toString().toLowerCase()
+        val password = txtPassword.text.toString()
 
-        viewModel.setEmail(usr)
-        viewModel.setPassword(pwd)
-        viewModel.logInUser()
+        viewModel.logInUser(userName, password)
     }
 
     private fun validateForm(): Boolean {
