@@ -101,6 +101,9 @@ class LoanDetailFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
+                btnAddPayment.isEnabled = !it
+                btnEditLoan.isEnabled = !it
+                btnDeleteLoan.isEnabled = !it
             }
         )
     }

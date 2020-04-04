@@ -6,20 +6,21 @@ import com.caminero.newton.model.api.common.BaseResponse
 import com.caminero.newton.model.api.payloads.PaymentPayLoad
 import com.caminero.newton.model.api.responses.ResponseData
 import com.caminero.newton.model.entities.Payment
+import com.caminero.newton.model.entities.common.NewtonSession
 
 class PaymentRepository {
 
-    suspend fun getPaymentsByLoan(token : String, email : String, clientId: String, loanId: String)
+    suspend fun getPaymentsByLoan(session: NewtonSession, clientId: String, loanId: String)
             : BaseResponse<ResponseData<List<Payment>>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getPaymentsByLoan(token, email, clientId, loanId)
+            NewtonApiClient.endpoints.getPaymentsByLoan(session.idToken, session.loggedUser, clientId, loanId)
         )
     }
 
-    suspend fun addPaymentInLoan(token : String, email : String, clientId: String, loanId: String, paymentPayLoad: PaymentPayLoad)
+    suspend fun addPaymentInLoan(session: NewtonSession, loanId: String, paymentPayLoad: PaymentPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.addPaymentInLoan(token, email, clientId, loanId, paymentPayLoad)
+            NewtonApiClient.endpoints.addPaymentInLoan(session.idToken, session.loggedUser, session.currentClientId, loanId, paymentPayLoad)
         )
     }
 }

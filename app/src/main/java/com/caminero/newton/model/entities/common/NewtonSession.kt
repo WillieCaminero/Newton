@@ -8,5 +8,10 @@ data class NewtonSession (
     @SerializedName("accessToken") val accessToken : String,
     @SerializedName("refreshToken") val refreshToken : String,
     @SerializedName("expiresIn") val expirationTime : Int,
-    @SerializedName("tokenType") val tokenType : String
+    @SerializedName("tokenType") val tokenType : String,
+
+    //Tags
+    var loggedUser: String,
+    var sessionExpiration: Date,
+    var currentClientId: String
 )

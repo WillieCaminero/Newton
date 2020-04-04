@@ -43,6 +43,8 @@ class ClientFragment : BaseFragment() {
         viewModel.getClients()
     }
 
+    override fun handleOnBackPressed() { }
+
     override fun getViewModel(): BaseFragmentViewModel = viewModel
 
     private fun setupListeners() {

@@ -6,41 +6,42 @@ import com.caminero.newton.model.api.common.BaseResponse
 import com.caminero.newton.model.api.payloads.LoanPayLoad
 import com.caminero.newton.model.api.responses.ResponseData
 import com.caminero.newton.model.entities.Loan
+import com.caminero.newton.model.entities.common.NewtonSession
 
 class LoanRepository {
 
-    suspend fun getLoansByClient(token : String, email : String, clientId: String)
+    suspend fun getLoansByClient(session: NewtonSession, clientId: String)
             : BaseResponse<ResponseData<List<Loan>>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getLoansByClient(token, email, clientId)
+            NewtonApiClient.endpoints.getLoansByClient(session.idToken, session.loggedUser, clientId)
         )
     }
 
-    suspend fun getLoanByLoanId(token : String, email : String, clientId: String, loanId: String)
+    suspend fun getLoanByLoanId(session: NewtonSession, loanId: String)
             : BaseResponse<ResponseData<Loan>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getLoanByLoanId(token, email, clientId, loanId)
+            NewtonApiClient.endpoints.getLoanByLoanId(session.idToken, session.loggedUser, session.currentClientId, loanId)
         )
     }
 
-    suspend fun addLoanInClient(token : String, email : String, clientId: String, loanPayLoad: LoanPayLoad)
+    suspend fun addLoanInClient(session: NewtonSession, clientId: String, loanPayLoad: LoanPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.addLoanInClient(token, email, clientId, loanPayLoad)
+            NewtonApiClient.endpoints.addLoanInClient(session.idToken, session.loggedUser, clientId, loanPayLoad)
         )
     }
 
-    suspend fun updateLoanInClient(token : String, email : String, clientId: String, loanId: String, loanPayLoad: LoanPayLoad)
+    suspend fun updateLoanInClient(session: NewtonSession, loanId: String, loanPayLoad: LoanPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.updateLoanInClient(token, email, clientId, loanId, loanPayLoad)
+            NewtonApiClient.endpoints.updateLoanInClient(session.idToken, session.loggedUser, session.currentClientId, loanId, loanPayLoad)
         )
     }
 
-    suspend fun deleteLoanInClient(token : String, email : String, clientId: String, loanId: String)
+    suspend fun deleteLoanInClient(session: NewtonSession, loanId: String)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.deleteLoanInClient(token, email, clientId, loanId)
+            NewtonApiClient.endpoints.deleteLoanInClient(session.idToken, session.loggedUser, session.currentClientId, loanId)
         )
     }
 }

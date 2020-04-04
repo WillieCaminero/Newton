@@ -6,34 +6,35 @@ import com.caminero.newton.model.api.common.BaseResponse
 import com.caminero.newton.model.api.payloads.ClientPayLoad
 import com.caminero.newton.model.api.responses.ResponseData
 import com.caminero.newton.model.entities.Client
+import com.caminero.newton.model.entities.common.NewtonSession
 
 class ClientRepository {
 
-    suspend fun getClientsByUser(token : String, email : String, status : String)
+    suspend fun getClientsByUser(session: NewtonSession, status : String)
             : BaseResponse<ResponseData<List<Client>>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getClientsByUser(token, email, status)
+            NewtonApiClient.endpoints.getClientsByUser(session.idToken, session.loggedUser, status)
         )
     }
 
-    suspend fun getClientByClientId(token : String, email : String, clientId: String)
+    suspend fun getClientByClientId(session: NewtonSession, clientId: String)
             : BaseResponse<ResponseData<Client>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getClientByClientId(token, email, clientId)
+            NewtonApiClient.endpoints.getClientByClientId(session.idToken, session.loggedUser, clientId)
         )
     }
 
-    suspend fun addClientToUser(token : String, email : String, clientPayLoad: ClientPayLoad)
+    suspend fun addClientToUser(session: NewtonSession, clientPayLoad: ClientPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.addClientToUser(token, email, clientPayLoad)
+            NewtonApiClient.endpoints.addClientToUser(session.idToken, session.loggedUser, clientPayLoad)
         )
     }
 
-    suspend fun updateClientInUser(token : String, email : String, clientId: String, clientPayLoad: ClientPayLoad)
+    suspend fun updateClientInUser(session: NewtonSession, clientId: String, clientPayLoad: ClientPayLoad)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.updateClientInUser(token, email, clientId, clientPayLoad)
+            NewtonApiClient.endpoints.updateClientInUser(session.idToken, session.loggedUser, clientId, clientPayLoad)
         )
     }
 }

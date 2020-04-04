@@ -35,9 +35,9 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
                 val response = cognitoRepository.initiateAuth(initiateAuthPayLoad)
                 if (response.isSuccess){
                     val currentSession = response.response!!.data
-                    activityViewModel.setSessionExpiration(Date().addSeconds(currentSession.expirationTime))
+                    currentSession.loggedUser = email
+                    currentSession.sessionExpiration = Date().addSeconds(currentSession.expirationTime)
                     activityViewModel.createSession(currentSession)
-                    activityViewModel.setLoggedUser(email)
                     navigateToClientFragment()
                 }
                 else {

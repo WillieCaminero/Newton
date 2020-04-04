@@ -63,6 +63,7 @@ class AddClientFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
+                btnAddClient.isEnabled = !it
             }
         )
     }

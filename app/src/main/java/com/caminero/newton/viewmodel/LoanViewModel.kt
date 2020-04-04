@@ -31,9 +31,7 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
                 activityViewModel.session.value?.let {session ->
-                    val currentUser =  activityViewModel.loggedUser.value!!
-                    val currentClientId = activityViewModel.currentClientId.value!!
-                    val response = loanRepository.getLoanByLoanId(session.idToken, currentUser, currentClientId, loanId)
+                    val response = loanRepository.getLoanByLoanId(session, loanId)
                     if (response.isSuccess){
                         val loan = response.response!!.data
                         mLoan.postValue(loan)
@@ -51,8 +49,7 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
                 activityViewModel.session.value?.let {session ->
-                    val currentUser =  activityViewModel.loggedUser.value!!
-                    val response = loanRepository.addLoanInClient(session.idToken, currentUser, clientId, loanPayLoad)
+                    val response = loanRepository.addLoanInClient(session, clientId, loanPayLoad)
                     if (response.isSuccess){
                         navigateBack()
                     }
@@ -69,9 +66,7 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
                 activityViewModel.session.value?.let {session ->
-                    val currentUser =  activityViewModel.loggedUser.value!!
-                    val currentClientId = activityViewModel.currentClientId.value!!
-                    val response = loanRepository.updateLoanInClient(session.idToken, currentUser, currentClientId, loanId, loanPayLoad)
+                    val response = loanRepository.updateLoanInClient(session, loanId, loanPayLoad)
                     if (response.isSuccess){
                         navigateBack()
                     }
@@ -88,9 +83,7 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
                 activityViewModel.session.value?.let {session ->
-                    val currentUser =  activityViewModel.loggedUser.value!!
-                    val currentClientId = activityViewModel.currentClientId.value!!
-                    val response = loanRepository.deleteLoanInClient(session.idToken, currentUser, currentClientId, loanId)
+                    val response = loanRepository.deleteLoanInClient(session, loanId)
                     if (response.isSuccess){
                         navigateBack()
                     }

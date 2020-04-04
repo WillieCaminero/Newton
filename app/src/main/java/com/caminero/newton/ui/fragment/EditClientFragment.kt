@@ -82,6 +82,7 @@ class EditClientFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
+                btnEditClient.isEnabled = !it
             }
         )
     }

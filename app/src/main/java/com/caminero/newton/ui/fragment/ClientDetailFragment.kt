@@ -81,6 +81,8 @@ class ClientDetailFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
+                btnAddPayment.isEnabled = !it
+                btnEditClient.isEnabled = !it
             }
         )
     }
