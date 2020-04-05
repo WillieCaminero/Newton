@@ -37,16 +37,21 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.google.android.material:material:$materialVersion"
+
     implementation "androidx.appcompat:appcompat:$appCompat"
     implementation "androidx.core:core-ktx:$androidCore"
     implementation "androidx.recyclerview:recyclerview:$recyclerView"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
+
+    implementation "androidx.navigation:navigation-fragment:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui:$navigationVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion"
     implementation "android.arch.lifecycle:common-java8:$lifecycleVersion"
-    implementation "com.google.android.material:material:$materialVersion"
 
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
@@ -57,7 +62,7 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp-urlconnection:$okHttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
 
-    //jUnit
+    //JUnit
     testImplementation "junit:junit:$jUnitTest"
 
     //Koin
