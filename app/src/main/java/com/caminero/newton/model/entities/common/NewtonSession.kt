@@ -13,5 +13,6 @@ data class NewtonSession (
     //Tags
     var loggedUser: String,
     var sessionExpiration: Date,
-    var currentClientId: String
+    var currentClientId: String,
+    var firstLogin:Boolean
 )

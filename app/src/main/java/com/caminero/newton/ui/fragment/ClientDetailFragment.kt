@@ -1,5 +1,6 @@
 package com.caminero.newton.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.caminero.newton.R
 import com.caminero.newton.core.utils.enums.LoanStatusType
 import com.caminero.newton.model.entities.Client
 import com.caminero.newton.model.entities.Loan
+import com.caminero.newton.model.listeners.ActionBarListener
 import com.caminero.newton.model.listeners.LoanListener
 import com.caminero.newton.ui.adapter.LoanAdapter
 import com.caminero.newton.ui.fragment.base.BaseFragment
@@ -28,6 +30,16 @@ class ClientDetailFragment : BaseFragment() {
     private val safeArgs: ClientDetailFragmentArgs by navArgs()
     private lateinit var viewModel: ClientViewModel
     private val activityViewModel: MainActivityViewModel by activityViewModels()
+    private lateinit var actionBarListener: ActionBarListener
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            actionBarListener = context as ActionBarListener
+        } catch (cce: ClassCastException) {
+            throw IllegalArgumentException("The Activity should implement Listeners")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +53,7 @@ class ClientDetailFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_client_detail, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        actionBarListener.showBackButtonActionBar()
         setupListeners()
         setupObservers()
         viewModel.setLoadingActive()

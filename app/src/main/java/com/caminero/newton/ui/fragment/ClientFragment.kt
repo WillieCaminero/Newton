@@ -1,5 +1,6 @@
 package com.caminero.newton.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.caminero.newton.R
 import com.caminero.newton.model.entities.Client
+import com.caminero.newton.model.listeners.ActionBarListener
 import com.caminero.newton.model.listeners.ClientListener
+import com.caminero.newton.model.listeners.NavigationDrawerListener
 import com.caminero.newton.ui.adapter.ClientAdapter
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.ClientViewModel
@@ -24,6 +27,18 @@ class ClientFragment : BaseFragment() {
 
     private lateinit var viewModel: ClientViewModel
     private val activityViewModel: MainActivityViewModel by activityViewModels()
+    private lateinit var navigationDrawerListener: NavigationDrawerListener
+    private lateinit var actionBarListener: ActionBarListener
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            navigationDrawerListener = context as NavigationDrawerListener
+            actionBarListener = context as ActionBarListener
+        } catch (cce: ClassCastException) {
+            throw IllegalArgumentException("The Activity should implement Listeners")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +52,7 @@ class ClientFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_client, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setupFirstLogin()
         setupObservers()
         setupListeners()
         viewModel.setLoadingActive()
@@ -72,5 +88,18 @@ class ClientFragment : BaseFragment() {
             }
         })
         rvPayments.adapter = adapter
+    }
+
+    private fun setupFirstLogin(){
+        actionBarListener.hideBackButtonActionBar()
+        val session = viewModel.activityViewModel.session.value
+        session.let {
+            if(it?.firstLogin!!){
+                navigationDrawerListener.activeNavigationDrawer()
+                navigationDrawerListener.showNavigationDrawer()
+                actionBarListener.showActionBar()
+                it.firstLogin = false
+            }
+        }
     }
 }

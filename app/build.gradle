@@ -41,6 +41,7 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:$appCompat"
     implementation "androidx.core:core-ktx:$androidCore"
+    implementation "androidx.legacy:legacy-support-v4:$androidLegacy"
     implementation "androidx.recyclerview:recyclerview:$recyclerView"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
 

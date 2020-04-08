@@ -1,5 +1,6 @@
 package com.caminero.newton.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.caminero.newton.R
+import com.caminero.newton.model.listeners.ActionBarListener
+import com.caminero.newton.model.listeners.NavigationDrawerListener
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoginViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
@@ -23,6 +26,18 @@ class LoginFragment : BaseFragment() {
 
     private lateinit var viewModel: LoginViewModel
     private val activityViewModel: MainActivityViewModel by activityViewModels()
+    private lateinit var navigationDrawerListener: NavigationDrawerListener
+    private lateinit var actionBarListener: ActionBarListener
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            navigationDrawerListener = context as NavigationDrawerListener
+            actionBarListener = context as ActionBarListener
+        } catch (cce: ClassCastException) {
+            throw IllegalArgumentException("The Activity should implement Listeners")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +53,8 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navigationDrawerListener.inactivateNavigationDrawer()
+        actionBarListener.hideActionBar()
         setupListeners()
         setupObservers()
     }
