@@ -68,9 +68,9 @@ class LoanDetailFragment : BaseFragment() {
         }
         btnDeleteLoan.setOnClickListener {
              MaterialAlertDialogBuilder(context)
-                .setTitle("Deleting Loan")
-                .setMessage("Are you sure you want delete this loan?")
-                .setPositiveButton("Ok") { _, _ ->
+                .setTitle(R.string.hint_deleting_loan)
+                .setMessage(R.string.hint_deleting_loan_message)
+                .setPositiveButton(R.string.hint_ok) { _, _ ->
                     performDeleteLoan()
                 }.show()
         }
@@ -109,11 +109,11 @@ class LoanDetailFragment : BaseFragment() {
         val adapter = PaymentAdapter(list, object : PaymentListener {
             override fun onItemClick(payment: Payment) {
                 MaterialAlertDialogBuilder(context)
-                    .setTitle("Deleting Payment")
-                    .setMessage("Are you sure you want delete this payment?")
-                    .setPositiveButton("Ok") { _, _ ->
-                        performDeletePayment()
-                    }
+                    .setTitle(R.string.hint_deleting_payment)
+                    .setMessage(R.string.hint_deleting_payment_message)
+                    .setPositiveButton(R.string.hint_ok) { _, _ ->
+                        //ToDo
+                    }.show()
             }
         })
         rvPayments.adapter = adapter

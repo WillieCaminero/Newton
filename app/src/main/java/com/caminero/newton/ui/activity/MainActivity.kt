@@ -17,6 +17,7 @@ import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.app_bar_main.*
 
+
 class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarListener {
     companion object {
         val TAG = MainActivity::class.java.simpleName

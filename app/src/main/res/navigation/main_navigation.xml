@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.caminero.newton.ui.fragment.LoginFragment"
-        android:label="Login"
+        android:label="@string/hint_login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_clientFragment"
@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/navClientFragment"
         android:name="com.caminero.newton.ui.fragment.ClientFragment"
-        android:label="Home"
+        android:label="@string/hint_home"
         tools:layout="@layout/fragment_client" >
         <action
             android:id="@+id/action_clientFragment_to_clientDetailFragment"
@@ -33,14 +33,14 @@
     <fragment
         android:id="@+id/navAddClientFragment"
         android:name="com.caminero.newton.ui.fragment.AddClientFragment"
-        android:label="Add Client"
+        android:label="@string/hint_add_client"
         tools:layout="@layout/fragment_add_client" >
     </fragment>
 
     <fragment
         android:id="@+id/navClientDetailFragment"
         android:name="com.caminero.newton.ui.fragment.ClientDetailFragment"
-        android:label="Client Detail"
+        android:label="@string/hint_client_detail"
         tools:layout="@layout/fragment_client_detail" >
         <argument
             android:name="clientId"
@@ -59,7 +59,7 @@
     <fragment
         android:id="@+id/navAddLoanFragment"
         android:name="com.caminero.newton.ui.fragment.AddLoanFragment"
-        android:label="Add Loan"
+        android:label="@string/hint_add_loan"
         tools:layout="@layout/fragment_add_loan" >
         <argument
             android:name="clientId"
@@ -69,7 +69,7 @@
     <fragment
         android:id="@+id/navLoanDetailFragment"
         android:name="com.caminero.newton.ui.fragment.LoanDetailFragment"
-        android:label="Loan Detail"
+        android:label="@string/hint_loan_detail"
         tools:layout="@layout/fragment_loan_detail" >
         <argument
             android:name="loanId"
@@ -85,7 +85,7 @@
     <fragment
         android:id="@+id/navEditLoanFragment"
         android:name="com.caminero.newton.ui.fragment.EditLoanFragment"
-        android:label="Edit Loan"
+        android:label="@string/hint_edit_loan"
         tools:layout="@layout/fragment_edit_loan" >
         <argument
             android:name="loanId"
@@ -95,7 +95,7 @@
     <fragment
         android:id="@+id/navEditClientFragment"
         android:name="com.caminero.newton.ui.fragment.EditClientFragment"
-        android:label="Edit Client"
+        android:label="@string/hint_edit_client"
         tools:layout="@layout/fragment_edit_client" >
         <argument
             android:name="clientId"
@@ -105,7 +105,7 @@
     <fragment
         android:id="@+id/navAddPaymentFragment"
         android:name="com.caminero.newton.ui.fragment.AddPaymentFragment"
-        android:label="Add Payment"
+        android:label="@string/hint_add_payment"
         tools:layout="@layout/fragment_add_payment" >
         <argument
             android:name="loanId"
@@ -115,7 +115,7 @@
     <fragment
         android:id="@+id/navReport"
         android:name="com.caminero.newton.ui.fragment.ReportFragment"
-        android:label="Report"
+        android:label="@string/hint_report"
         tools:layout="@layout/fragment_report" >
     </fragment>
 </navigation>

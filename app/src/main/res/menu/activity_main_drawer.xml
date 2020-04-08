@@ -5,12 +5,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home" />
+            android:id="@+id/itemClient"
+            android:checkable="true"
+            android:title="@string/hint_clients_options">
+            <menu>
+                <item
+                    android:id="@+id/nav_home"
+                    android:icon="@drawable/ic_home_black_24dp"
+                    android:title="@string/hint_home" />
+                <item
+                    android:id="@+id/nav_report"
+                    android:icon="@drawable/ic_assessment_black_24dp"
+                    android:title="@string/hint_report" />
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="none">
         <item
             android:id="@+id/nav_log_out"
             android:icon="@drawable/ic_close_black_24dp"
-            android:title="Log Out" />
+            android:title="@string/hint_log_out" />
     </group>
 </menu>

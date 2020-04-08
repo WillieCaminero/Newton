@@ -23,8 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/vBar"
         android:src="@drawable/ic_curva_login"
-        android:scaleType="fitXY"
-        android:contentDescription="@string/common_login_header"/>
+        android:scaleType="fitXY"/>
 
     <TextView
         android:id="@+id/lblSignIn"
@@ -36,7 +35,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/colorHeaderText"
         android:textStyle="bold"
-        android:text="@string/login_session"/>
+        android:text="@string/sing_in"/>
 
     <LinearLayout
         android:id="@+id/pnlFields"
@@ -93,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:text="@string/login_login_text"/>
+            android:text="@string/log_in"/>
     </LinearLayout>
 
     <TextView

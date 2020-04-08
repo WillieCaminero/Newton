@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:enabled="false"
-        android:hint="Start Date"
+        android:hint="@string/hint_start_date"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintEnd_toEndOf="@id/glMiddle">
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:enabled="false"
-        android:hint="End Date"
+        android:hint="@string/hint_end_date"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/glMiddle"
         app:layout_constraintEnd_toEndOf="@id/glEnd">
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:enabled="false"
-        android:hint="Mount"
+        android:hint="@string/hint_mount"
         app:layout_constraintTop_toBottomOf="@id/lblStartDate"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintEnd_toEndOf="@id/glMiddle">
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:enabled="false"
-        android:hint="Interest"
+        android:hint="@string/hint_interest"
         app:layout_constraintTop_toBottomOf="@id/lblEndDate"
         app:layout_constraintStart_toStartOf="@id/glMiddle"
         app:layout_constraintEnd_toEndOf="@id/glEnd">
@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:enabled="false"
-        android:hint="Total Days"
+        android:hint="@string/hint_total_days"
         app:layout_constraintTop_toBottomOf="@id/lblMount"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintEnd_toEndOf="@id/glMiddle">
@@ -100,7 +100,7 @@
             android:id="@+id/txtDays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="30"
+            tools:text="30"
             android:maxLength="128"
             android:paddingStart="10dp"
             android:paddingEnd="40dp"/>
@@ -113,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:enabled="false"
-        android:hint="Status"
+        android:hint="@string/hint_status"
         app:layout_constraintTop_toBottomOf="@id/lblInterest"
         app:layout_constraintStart_toStartOf="@id/glMiddle"
         app:layout_constraintEnd_toEndOf="@id/glEnd">
@@ -121,7 +121,7 @@
             android:id="@+id/txtStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="In Progress"
+            android:text="@string/value_in_progress"
             android:maxLength="128"
             android:paddingStart="10dp"
             android:paddingEnd="40dp"/>
@@ -132,7 +132,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Edit"
+        android:text="@string/hint_edit"
         app:layout_constraintTop_toBottomOf="@id/lblDays"
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintEnd_toStartOf="@id/btnDeleteLoan"
@@ -143,7 +143,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Delete"
+        android:text="@string/hint_delete"
         app:layout_constraintTop_toBottomOf="@id/lblDays"
         app:layout_constraintStart_toEndOf="@id/btnEditLoan"
         app:layout_constraintEnd_toEndOf="@id/glEnd"

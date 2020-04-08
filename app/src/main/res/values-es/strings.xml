@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Newton</string>
+    <string name="author">Willie Caminero</string>
+
+    <!--Login-->
+    <string name="sing_in">Iniciar Sesión</string>
+    <string name="powered_by">Powered By</string>
+    <string name="log_in">Iniciar</string>
+
+    <!--labels.Common-->
+    <string name="hint_password">Constraseña</string>
+    <string name="hint_email">Correo</string>
+    <string name="hint_id">Id</string>
+    <string name="hint_name">Nombres</string>
+    <string name="hint_last_name">Apellidos</string>
+    <string name="hint_phone_number">Telefono</string>
+    <string name="hint_address">Dirección</string>
+    <string name="hint_add">Agregar</string>
+    <string name="hint_edit_client">Editar Cliente</string>
+    <string name="hint_edit">Editar</string>
+    <string name="hint_start_date">Fecha Inicio</string>
+    <string name="hint_end_date">Fecha Fin</string>
+    <string name="hint_mount">Monto</string>
+    <string name="hint_interest">Interés</string>
+    <string name="hint_total_days">Total de Dias</string>
+    <string name="hint_status">Estado</string>
+    <string name="value_cero">0</string>
+    <string name="value_in_progress">En Progreso</string>
+    <string name="hint_payment_date">Fecha de Pago</string>
+    <string name="hint_delete">Eliminar</string>
+    <string name="active_loans">Prestamos Activos</string>
+    <string name="label_start_date">Fecha Inicio:</string>
+    <string name="label_end_date">Fecha Fin:</string>
+    <string name="label_base_mount">Monto Base:</string>
+    <string name="label_interest">Interés:</string>
+    <string name="label_status">Estado:</string>
+    <string name="label_payments">Pagados:</string>
+    <string name="label_pending">Pendientes:</string>
+    <string name="hint_client_managment">Manejo de Clientes</string>
+    <string name="value_newton_software">Newton Software</string>
+    <string name="hint_clients_options">Opciones para Clientes</string>
+    <string name="hint_home">Inicio</string>
+    <string name="hint_report">Reporte</string>
+    <string name="hint_log_out">Cerrar Sesión</string>
+    <string name="hint_settings">Opciones</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_add_client">Agregar Cliente</string>
+    <string name="hint_client_detail">Detalle Cliente</string>
+    <string name="hint_add_loan">Agregar Préstamo</string>
+    <string name="hint_loan_detail">Detalle del Préstamo</string>
+    <string name="hint_edit_loan">Editar Préstamo</string>
+    <string name="hint_add_payment">Agregar Pago</string>
+    <string name="hint_deleting_loan">Eliminando Préstamo</string>
+    <string name="hint_deleting_loan_message">¿Estás seguro que deseas eliminar este préstamo?</string>
+    <string name="hint_deleting_payment">Eliminando Pago</string>
+    <string name="hint_deleting_payment_message">¿Estás seguro que deseas eliminar este pago?</string>
+    <string name="hint_ok">Aceptar</string>
+</resources>

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:hintEnabled="true"
-        android:hint="Id"
+        android:hint="@string/hint_id"
         app:counterEnabled="true"
         app:counterMaxLength="50"
         app:errorEnabled="true"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:hintEnabled="true"
-        android:hint="Name"
+        android:hint="@string/hint_name"
         app:counterEnabled="true"
         app:counterMaxLength="50"
         app:errorEnabled="true"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:hintEnabled="true"
-        android:hint="Last name"
+        android:hint="@string/hint_last_name"
         app:counterEnabled="true"
         app:counterMaxLength="50"
         app:errorEnabled="true"
@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:hintEnabled="true"
-        android:hint="Phone number"
+        android:hint="@string/hint_phone_number"
         app:counterEnabled="true"
         app:counterMaxLength="15"
         app:errorEnabled="true"
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:hintEnabled="true"
-        android:hint="Address"
+        android:hint="@string/hint_address"
         app:counterEnabled="true"
         app:counterMaxLength="150"
         app:errorEnabled="true"
@@ -140,7 +140,7 @@
         app:layout_constraintStart_toStartOf="@id/glStart"
         app:layout_constraintEnd_toEndOf="@id/glEnd"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:text="Edit"/>
+        android:text="@string/hint_edit"/>
 
     <ProgressBar
         android:id="@+id/pvProgress"
