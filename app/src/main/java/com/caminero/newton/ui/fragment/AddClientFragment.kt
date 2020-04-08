@@ -56,9 +56,6 @@ class AddClientFragment : BaseFragment() {
     override fun getViewModel(): BaseFragmentViewModel = viewModel
 
     private fun setupListeners(){
-        btnBack.setOnClickListener {
-            handleOnBackPressed()
-        }
         btnAddClient.setOnClickListener {
             viewModel.setLoadingActive()
 

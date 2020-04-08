@@ -56,9 +56,6 @@ class EditClientFragment : BaseFragment() {
     }
 
     private fun setupListeners(){
-        btnBack.setOnClickListener {
-            handleOnBackPressed()
-        }
         btnEditClient.setOnClickListener {
             viewModel.setLoadingActive()
 

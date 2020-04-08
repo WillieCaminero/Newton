@@ -52,9 +52,6 @@ class EditLoanFragment : BaseFragment() {
     override fun getViewModel(): BaseFragmentViewModel = viewModel
 
     private fun setupListeners(){
-        btnBack.setOnClickListener {
-            handleOnBackPressed()
-        }
         btnEditLoan.setOnClickListener {
             viewModel.setLoadingActive()
 

@@ -60,9 +60,6 @@ class LoanDetailFragment : BaseFragment() {
     }
 
     private fun setupListeners(){
-        btnBack.setOnClickListener {
-            handleOnBackPressed()
-        }
         btnAddPayment.setOnClickListener {
             viewModel.navigateToAddPaymentFragment(safeArgs.loanId)
         }
