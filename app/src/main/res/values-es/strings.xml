@@ -50,9 +50,16 @@
     <string name="hint_loan_detail">Detalle del Préstamo</string>
     <string name="hint_edit_loan">Editar Préstamo</string>
     <string name="hint_add_payment">Agregar Pago</string>
+
+    <!--System Alerts-->
+    <string name="hint_required">Required</string>
+    <string name="hint_login_fail">Login Fail</string>
+    <string name="hint_login_fail_message">The user or password are incorrect</string>
     <string name="hint_deleting_loan">Eliminando Préstamo</string>
     <string name="hint_deleting_loan_message">¿Estás seguro que deseas eliminar este préstamo?</string>
     <string name="hint_deleting_payment">Eliminando Pago</string>
     <string name="hint_deleting_payment_message">¿Estás seguro que deseas eliminar este pago?</string>
     <string name="hint_ok">Aceptar</string>
+    <string name="hint_logout">Cerrar Sesión</string>
+    <string name="hint_logout_message">¿Está seguro que desea cerrar la sesión?</string>
 </resources>

@@ -112,26 +112,31 @@ class EditLoanFragment : BaseFragment() {
 
     private fun validateForm(): Boolean {
         var valid = true
+        val message = getString(R.string.hint_required)
 
         if (txtInterest.text.toString().isNullOrBlank()) {
-            txtInterest.error = "Required"
+            lblInterest.error = message
             valid =  false
         }
+        else lblInterest.error = null
+
         if (txtMount.text.toString().isNullOrBlank()) {
-            txtMount.error = "Required"
+            lblMount.error = message
             valid =  false
         }
+        else lblMount.error = null
+
         if (txtStartDate.text.toString().isNullOrBlank()) {
-            txtStartDate.error = "Required"
+            lblStartDate.error = message
             valid =  false
         }
-        else txtStartDate.error = null
+        else lblStartDate.error = null
 
         if (txtEndDate.text.toString().isNullOrBlank()) {
-            txtEndDate.error = "Required"
+            lblEndDate.error = message
             valid =  false
         }
-        else txtEndDate.error = null
+        else lblEndDate.error = null
 
         return valid
     }

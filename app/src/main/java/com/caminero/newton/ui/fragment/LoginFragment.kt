@@ -86,8 +86,8 @@ class LoginFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 MaterialAlertDialogBuilder(context)
-                    .setTitle("Login Fail")
-                    .setMessage("The user and/or password are incorrect!!!")
+                    .setTitle(R.string.hint_login_fail)
+                    .setMessage(R.string.hint_login_fail_message)
                     .show()
             }
         )
@@ -102,16 +102,19 @@ class LoginFragment : BaseFragment() {
 
     private fun validateForm(): Boolean {
         var valid = true
+        val message = getString(R.string.hint_required)
 
         if (txtEmail.text.toString().isNullOrBlank()) {
-            txtEmail.error = "Required"
+            lblEmail.error = message
             valid =  false
         }
+        else lblEmail.error = null
 
         if (txtPassword.text.toString().isNullOrBlank()) {
-            txtPassword.error = "Required"
+            lblPassword.error = message
             valid =  false
         }
+        else lblPassword.error = null
 
         return valid
     }

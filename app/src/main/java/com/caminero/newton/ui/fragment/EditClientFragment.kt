@@ -97,31 +97,37 @@ class EditClientFragment : BaseFragment() {
 
     private fun validateForm(): Boolean {
         var valid = true
+        val message = getString(R.string.hint_required)
 
         if (txtId.text.toString().isNullOrBlank()) {
-            txtId.error = "Required"
+            lblId.error = message
             valid =  false
         }
+        else lblId.error = null
 
         if (txtName.text.toString().isNullOrBlank()) {
-            txtName.error = "Required"
+            lblName.error = message
             valid =  false
         }
+        else lblName.error = null
 
         if (txtLastName.text.toString().isNullOrBlank()) {
-            txtLastName.error = "Required"
+            lblLastName.error = message
             valid =  false
         }
+        else lblLastName.error = null
 
         if (txtPhoneNumber.text.toString().isNullOrBlank()) {
-            txtPhoneNumber.error = "Required"
+            lblPhoneNumber.error = message
             valid =  false
         }
+        else lblPhoneNumber.error = null
 
         if (txtAddress.text.toString().isNullOrBlank()) {
-            txtAddress.error = "Required"
+            lblAddress.error = message
             valid =  false
         }
+        else lblAddress.error = null
 
         return valid
     }

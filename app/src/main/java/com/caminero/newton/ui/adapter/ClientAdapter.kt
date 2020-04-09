@@ -30,7 +30,6 @@ class ClientAdapter(private val items : List<Client>,
 
         holder.lblId.text = item.id
         holder.lblClientFullName.text = StringUtils.getFullName(item.name, item.lastName)
-        holder.lblAddress.text = item.address
         holder.lblNumberLoans.text = loans.size.toString()
 
         holder.itemView.setOnClickListener {
@@ -41,7 +40,6 @@ class ClientAdapter(private val items : List<Client>,
     inner class ClientViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         val lblId: TextView  = itemView.lblId
         val lblClientFullName: TextView  = itemView.lblClientFullName
-        val lblAddress: TextView = itemView.lblAddress
         val lblNumberLoans: TextView  = itemView.lblNumberLoans
     }
 }

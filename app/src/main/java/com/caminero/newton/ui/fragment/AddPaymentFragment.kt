@@ -79,17 +79,19 @@ class AddPaymentFragment : BaseFragment() {
 
     private fun validateForm(): Boolean {
         var valid = true
+        val message = getString(R.string.hint_required)
 
         if (txtPaymentDate.text.toString().isNullOrBlank()) {
-            txtPaymentDate.error = "Required"
+            lblPaymentDate.error = message
             valid =  false
         }
-        else txtPaymentDate.error = null
+        else lblPaymentDate.error = null
 
         if (txtMount.text.toString().isNullOrBlank()) {
-            txtMount.error = "Required"
+            lblMount.error = message
             valid =  false
         }
+        else lblMount.error = null
 
         return valid
     }
