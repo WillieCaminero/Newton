@@ -48,9 +48,10 @@ class AddClientFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_add_client, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        actionBarListener.showBackButtonActionBar()
+        actionBarListener.addBackButtonToActionBar()
         setupListeners()
         setupObservers()
+        viewModel.activityViewModel.setHomePageFlag(false)
     }
 
     override fun getViewModel(): BaseFragmentViewModel = viewModel

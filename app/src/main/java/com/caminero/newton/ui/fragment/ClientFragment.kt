@@ -57,6 +57,7 @@ class ClientFragment : BaseFragment() {
         setupListeners()
         viewModel.setLoadingActive()
         viewModel.getClients()
+        viewModel.activityViewModel.setHomePageFlag(true)
     }
 
     override fun handleOnBackPressed() { }
@@ -91,7 +92,7 @@ class ClientFragment : BaseFragment() {
     }
 
     private fun setupFirstLogin(){
-        actionBarListener.hideBackButtonActionBar()
+        actionBarListener.addDehazeButtonToActionBar()
         val session = viewModel.activityViewModel.session.value
         session.let {
             if(it?.firstLogin!!){

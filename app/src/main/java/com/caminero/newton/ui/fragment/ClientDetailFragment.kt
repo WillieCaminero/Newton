@@ -53,11 +53,12 @@ class ClientDetailFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_client_detail, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        actionBarListener.showBackButtonActionBar()
+        actionBarListener.addBackButtonToActionBar()
         setupListeners()
         setupObservers()
         viewModel.setLoadingActive()
         viewModel.getClientByClientId(safeArgs.clientId)
+        viewModel.activityViewModel.setHomePageFlag(false)
     }
 
     override fun getViewModel(): BaseFragmentViewModel = viewModel

@@ -5,8 +5,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -29,8 +29,9 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var navView: NavigationView
+    private lateinit var navigationView: NavigationView
     private lateinit var viewModel : MainActivityViewModel
+    private var isHomePage: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
         setSupportActionBar(toolbar)
 
         drawerLayout = findViewById(R.id.drawer_layout)
-        navView = findViewById(R.id.nav_view)
+        navigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
 
         // Passing each menu ID as a set of Ids because each
@@ -50,23 +51,31 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
             R.id.nav_log_out), drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        navigationView.setupWithNavController(navController)
     }
 
     override fun onStart() {
         super.onStart()
         setupListeners()
+        setupObservers()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //ToDo
-        //menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
+            android.R.id.home -> {
+                if (isHomePage){
+                    showNavigationDrawer()
+                    true
+                }
+                else
+                    super.onOptionsItemSelected(item)
+            }
             R.id.action_settings -> {
                 Snackbar.make(findViewById(R.id.nav_host_fragment), "Click on Setting", Snackbar.LENGTH_LONG).show()
                 true
@@ -81,10 +90,10 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
     }
 
     override fun showNavigationDrawer() =
-        drawerLayout.openDrawer(navView, true)
+        drawerLayout.openDrawer(navigationView, true)
 
     override fun closeNavigationDrawer() =
-        drawerLayout.closeDrawer(navView, true)
+        drawerLayout.closeDrawer(navigationView, true)
 
     override fun activeNavigationDrawer() =
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
@@ -100,21 +109,27 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
         supportActionBar?.hide()
     }
 
-    override fun showBackButtonActionBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    override fun addBackButtonToActionBar() {
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp)
     }
 
-    override fun hideBackButtonActionBar() {
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    override fun addDehazeButtonToActionBar() {
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_dehaze_white_24dp)
     }
 
     private fun setupListeners() {
         navigationItemListener()
     }
 
+    private fun setupObservers(){
+        viewModel.isHomePage.observe(this, Observer {
+            isHomePage = it
+        })
+    }
+
     private fun navigationItemListener(){
-        navView.setNavigationItemSelectedListener { option ->
-            val navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        navigationView.setNavigationItemSelectedListener { option ->
+            val navController = findNavController(R.id.nav_host_fragment)
             when (option.itemId) {
                 R.id.nav_home -> navController.navigate(R.id.navClientFragment, null, viewModel.navOptions())
                 R.id.nav_report -> navController.navigate(R.id.navReport, null, viewModel.navOptions())
@@ -128,6 +143,8 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
                         }.show()
                 }
             }
+            isHomePage = false
+            addBackButtonToActionBar()
             closeNavigationDrawer()
             return@setNavigationItemSelectedListener true
         }

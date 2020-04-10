@@ -10,9 +10,15 @@ data class NewtonSession (
     @SerializedName("expiresIn") val expirationTime : Int,
     @SerializedName("tokenType") val tokenType : String,
 
-    //Tags
+    //Email current user
     var loggedUser: String,
+
+    //Expiration time, 1 hour
     var sessionExpiration: Date,
+
+    //Flag for current client id
     var currentClientId: String,
+
+    //Flag for first entry to home page after login
     var firstLogin:Boolean
 )
