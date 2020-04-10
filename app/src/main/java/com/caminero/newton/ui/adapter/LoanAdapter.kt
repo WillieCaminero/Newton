@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.convertStringDateTimeISO8601ToStringDateTime
 import com.caminero.newton.core.utils.enums.PaymentStatusType
 import com.caminero.newton.core.utils.round
 import com.caminero.newton.model.entities.Loan
@@ -29,8 +30,8 @@ class LoanAdapter(private val items : List<Loan>,
         val item = items[position]
         val payments = item.payments.filter { it.status == PaymentStatusType.Active.code }
 
-        holder.txtStartDate.text = item.startDate
-        holder.txtEndDate.text = item.endDate
+        holder.txtStartDate.text = convertStringDateTimeISO8601ToStringDateTime(item.startDate)
+        holder.txtEndDate.text = convertStringDateTimeISO8601ToStringDateTime(item.endDate)
         holder.txtMount.text = item.mount.toString()
         holder.txtInterest.text = item.interest.toString()
         holder.txtStatus.text = item.status

@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.convertStringDateTimeISO8601ToStringDateTime
 import com.caminero.newton.core.utils.enums.PaymentStatusType
 import com.caminero.newton.model.entities.Loan
 import com.caminero.newton.model.entities.Payment
@@ -29,6 +30,10 @@ class LoanDetailFragment : BaseFragment() {
     private val safeArgs: LoanDetailFragmentArgs by navArgs()
     private lateinit var viewModel: LoanViewModel
     private val activityViewModel: MainActivityViewModel by activityViewModels()
+
+    //FLAG for AddPaymentFragment
+    private lateinit var startDate:String
+    private lateinit var endDate:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +56,8 @@ class LoanDetailFragment : BaseFragment() {
     override fun getViewModel(): BaseFragmentViewModel = viewModel
 
     private fun initForm(loan: Loan){
-        txtStartDate.setText(loan.startDate)
-        txtEndDate.setText(loan.endDate)
+        txtStartDate.setText(convertStringDateTimeISO8601ToStringDateTime(loan.startDate))
+        txtEndDate.setText(convertStringDateTimeISO8601ToStringDateTime(loan.endDate))
         txtMount.setText(loan.mount.toString())
         txtInterest.setText(loan.interest.toString())
         txtDays.setText(loan.days.toString())
@@ -61,7 +66,7 @@ class LoanDetailFragment : BaseFragment() {
 
     private fun setupListeners(){
         btnAddPayment.setOnClickListener {
-            viewModel.navigateToAddPaymentFragment(safeArgs.loanId)
+            viewModel.navigateToAddPaymentFragment(safeArgs.loanId, startDate, endDate)
         }
         btnEditLoan.setOnClickListener {
             viewModel.navigateToEditLoanFragment(safeArgs.loanId)
@@ -81,14 +86,20 @@ class LoanDetailFragment : BaseFragment() {
         viewModel.deleteLoanInClient(safeArgs.loanId)
     }
 
-    private fun performDeletePayment(){
-        //ToDo
+    //ToDo
+    private fun performDeletePayment(paymentId:String){
+
     }
 
     private fun setupObservers(){
         viewModel.loan.observe(
             viewLifecycleOwner,
             Observer {loan ->
+                //Initializing Flags
+                startDate = loan.startDate
+                endDate = loan.endDate
+
+                //Initializing Form
                 initForm(loan)
                 val payments = loan.payments.filter { payment -> payment.status == PaymentStatusType.Active.code }
                 setupRecyclerView(payments)
@@ -112,7 +123,7 @@ class LoanDetailFragment : BaseFragment() {
                     .setTitle(R.string.hint_deleting_payment)
                     .setMessage(R.string.hint_deleting_payment_message)
                     .setPositiveButton(R.string.hint_ok) { _, _ ->
-                        //ToDo
+                        performDeletePayment(payment.paymentId)
                     }.show()
             }
         })

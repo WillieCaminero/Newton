@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.convertStringDateTimeISO8601ToStringDateTime
 import com.caminero.newton.model.entities.Payment
 import com.caminero.newton.model.listeners.PaymentListener
 import kotlinx.android.synthetic.main.list_item_payment.view.*
@@ -26,7 +27,7 @@ class PaymentAdapter(private val items : List<Payment>,
     override fun onBindViewHolder(holder: PaymentViewHolder, position: Int) {
         val item = items[position]
 
-        holder.txtPaymentDate.text = item.paymentDate
+        holder.txtPaymentDate.text = convertStringDateTimeISO8601ToStringDateTime(item.paymentDate)
         holder.txtMount.text =  "$" + item.mount.toString()
 
         holder.itemView.setOnClickListener {

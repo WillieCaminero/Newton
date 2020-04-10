@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
-import com.caminero.newton.core.utils.daysBetweenDates
+import com.caminero.newton.core.utils.*
 import com.caminero.newton.core.utils.enums.LoanStatusType
-import com.caminero.newton.core.utils.setDatePickerDialog
 import com.caminero.newton.model.api.payloads.LoanPayLoad
 import com.caminero.newton.model.entities.Loan
 import com.caminero.newton.ui.fragment.base.BaseFragment
@@ -19,6 +19,7 @@ import com.caminero.newton.viewmodel.LoanViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_edit_loan.*
+import java.util.*
 
 class EditLoanFragment : BaseFragment() {
     companion object{
@@ -41,8 +42,6 @@ class EditLoanFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_edit_loan, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        txtStartDate.setDatePickerDialog()
-        txtEndDate.setDatePickerDialog()
         setupListeners()
         setupObservers()
         viewModel.setLoadingActive()
@@ -64,6 +63,12 @@ class EditLoanFragment : BaseFragment() {
 
             performEditLoan()
         }
+        txtStartDate.addTextChangedListener {
+            val startDate = convertStringDateToDate(it.toString())
+            val endDate = startDate.addYears(5)
+            txtEndDate.setText("")
+            txtEndDate.setDatePickerDialog(startDate.addDays(1), endDate, true)
+        }
     }
 
     private fun setupObservers(){
@@ -83,19 +88,28 @@ class EditLoanFragment : BaseFragment() {
     }
 
     private fun initForm(loan: Loan){
-        txtStartDate.setText(loan.startDate)
-        txtEndDate.setText(loan.endDate)
+        txtStartDate.setText(convertStringDateTimeISO8601ToStringDate(loan.startDate))
+        txtEndDate.setText(convertStringDateTimeISO8601ToStringDate(loan.endDate))
         txtMount.setText(loan.mount.toString())
         txtInterest.setText(loan.interest.toString())
         txtDays.setText(loan.days.toString())
         txtStatus.setText(loan.status)
+
+        var startDate = convertStringDateTimeISO8601ToDate(loan.startDate)
+        val endDate = startDate.addYears(5)
+
+        //If loan start date is higher that today then start date becomes today too
+        if(startDate >= Date()) startDate = Date()
+
+        txtStartDate.setDatePickerDialog(startDate, endDate, true)
+        txtEndDate.setDatePickerDialog(startDate, endDate, true)
     }
 
     private fun performEditLoan() {
         val interest = txtInterest.text.toString().toInt()
         val mount = txtMount.text.toString().toInt()
-        val startDate = txtStartDate.text.toString()
-        val endDate = txtEndDate.text.toString()
+        val startDate = convertStringDateToStringDateTimeISO8601(txtStartDate.text.toString())
+        val endDate = convertStringDateToStringDateTimeISO8601(txtEndDate.text.toString())
         val days = txtDays.text.toString().toInt()
         val status = LoanStatusType.InProgress.code
 

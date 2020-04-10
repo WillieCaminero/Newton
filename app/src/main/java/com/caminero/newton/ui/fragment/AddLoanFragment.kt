@@ -4,20 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
-import com.caminero.newton.core.utils.daysBetweenDates
+import com.caminero.newton.core.utils.*
 import com.caminero.newton.core.utils.enums.LoanStatusType
-import com.caminero.newton.core.utils.setDatePickerDialog
 import com.caminero.newton.model.api.payloads.LoanPayLoad
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoanViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_add_loan.*
+import java.util.*
 
 class AddLoanFragment : BaseFragment() {
     companion object{
@@ -40,13 +41,17 @@ class AddLoanFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_add_loan, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        txtStartDate.setDatePickerDialog()
-        txtEndDate.setDatePickerDialog()
+        initDatePickerDialogs()
         setupListeners()
         setupObservers()
     }
 
     override fun getViewModel(): BaseFragmentViewModel = viewModel
+
+    private fun initDatePickerDialogs(){
+        txtStartDate.setDatePickerDialog(Date(), Date().addYears(5), true)
+        txtEndDate.setDatePickerDialog(Date(), Date().addYears(5), true)
+    }
 
     private fun setupListeners(){
         btnAddLoan.setOnClickListener {
@@ -60,6 +65,12 @@ class AddLoanFragment : BaseFragment() {
             }
 
             performAddLoan()
+        }
+        txtStartDate.addTextChangedListener {
+            val startDate = convertStringDateToDate(it.toString())
+            val endDate = startDate.addYears(5)
+            txtEndDate.setText("")
+            txtEndDate.setDatePickerDialog(startDate.addDays(1), endDate, true)
         }
     }
 
@@ -76,8 +87,8 @@ class AddLoanFragment : BaseFragment() {
     private fun performAddLoan() {
         val interest = txtInterest.text.toString().toInt()
         val mount = txtMount.text.toString().toInt()
-        val startDate = txtStartDate.text.toString()
-        val endDate = txtEndDate.text.toString()
+        val startDate = convertStringDateToStringDateTimeISO8601(txtStartDate.text.toString())
+        val endDate = convertStringDateToStringDateTimeISO8601(txtEndDate.text.toString())
         val days = txtDays.text.toString().toInt()
         val status = LoanStatusType.InProgress.code
 

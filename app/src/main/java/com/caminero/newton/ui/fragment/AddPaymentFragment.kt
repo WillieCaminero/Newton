@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
+import com.caminero.newton.core.utils.convertStringDateTimeISO8601ToDate
+import com.caminero.newton.core.utils.convertStringDateToStringDateTimeISO8601
 import com.caminero.newton.core.utils.enums.PaymentStatusType
 import com.caminero.newton.core.utils.setDatePickerDialog
 import com.caminero.newton.model.api.payloads.PaymentPayLoad
@@ -39,12 +41,18 @@ class AddPaymentFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_add_payment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        txtPaymentDate.setDatePickerDialog()
+        initDatePickerDialogs()
         setupListeners()
         setupObservers()
     }
 
     override fun getViewModel(): BaseFragmentViewModel = viewModel
+
+    private fun initDatePickerDialogs(){
+        var startDate = convertStringDateTimeISO8601ToDate(safeArgs.startDate)
+        var endDate = convertStringDateTimeISO8601ToDate(safeArgs.endDate)
+        txtPaymentDate.setDatePickerDialog(startDate, endDate, true)
+    }
 
     private fun setupListeners(){
         btnAddPayment.setOnClickListener {
@@ -70,7 +78,7 @@ class AddPaymentFragment : BaseFragment() {
     }
 
     private fun performAddPayment() {
-        val paymentDate = txtPaymentDate.text.toString()
+        val paymentDate = convertStringDateToStringDateTimeISO8601(txtPaymentDate.text.toString())
         val mount = txtMount.text.toString().toInt()
         val status = PaymentStatusType.Active.code
 

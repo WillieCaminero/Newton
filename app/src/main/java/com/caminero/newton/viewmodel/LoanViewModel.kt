@@ -101,8 +101,8 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
         navigate(LoanDetailFragmentDirections.actionLoanDetailFragmentToEditLoanFragment(loanId))
     }
 
-    fun navigateToAddPaymentFragment(loanId: String) {
+    fun navigateToAddPaymentFragment(loanId: String, startDate:String, endDate:String) {
         Log.i(TAG, "Navigating to Add Payment")
-        navigate(LoanDetailFragmentDirections.actionLoanDetailFragmentToAddPaymentFragment(loanId))
+        navigate(LoanDetailFragmentDirections.actionLoanDetailFragmentToAddPaymentFragment(loanId, startDate, endDate))
     }
 }

@@ -5,7 +5,7 @@ import android.widget.EditText
 import java.util.*
 import kotlin.math.round
 
-fun EditText.setDatePickerDialog(){
+fun EditText.setDatePickerDialog(minDate: Date = Date(), maxDate:Date = Date(), applyRange:Boolean = false){
     this.apply {
         this.isClickable = true
         this.isFocusable = false
@@ -20,10 +20,15 @@ fun EditText.setDatePickerDialog(){
             val datePickerDialog = DatePickerDialog(
                 this.context!!,
                 DatePickerDialog.OnDateSetListener { _, selectedYear, monthOfYear, dayOfMonth ->
-                    val date = String.format("%02d-%02d-%02d", selectedYear, (monthOfYear + 1), dayOfMonth)
+                    val date = String.format("%02d-%02d-%02d", dayOfMonth, (monthOfYear + 1), selectedYear)
                     this.setText(date)
                 }, year, month, day
             )
+
+            if(applyRange) {
+                datePickerDialog.datePicker.minDate = minDate.time
+                datePickerDialog.datePicker.maxDate = maxDate.time
+            }
 
             datePickerDialog.show()
         }
