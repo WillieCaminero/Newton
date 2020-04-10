@@ -10,10 +10,10 @@ import com.caminero.newton.model.entities.common.NewtonSession
 
 class ClientRepository {
 
-    suspend fun getClientsByUser(session: NewtonSession, status : String)
+    suspend fun getClientsByUser(session: NewtonSession, id : String, status : String)
             : BaseResponse<ResponseData<List<Client>>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getClientsByUser(session.idToken, session.loggedUser, status)
+            NewtonApiClient.endpoints.getClientsByUser(session.idToken, session.loggedUser, id, status)
         )
     }
 

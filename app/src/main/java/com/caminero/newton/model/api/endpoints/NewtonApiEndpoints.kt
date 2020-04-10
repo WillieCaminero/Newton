@@ -27,6 +27,7 @@ interface NewtonApiEndpoints {
     suspend fun getClientsByUser(
         @Header("Authorization") token: String,
         @Path("email") email: String,
+        @Query("id") id: String,
         @Query("status") status: String
     ): Response<ResponseData<List<Client>>>
 

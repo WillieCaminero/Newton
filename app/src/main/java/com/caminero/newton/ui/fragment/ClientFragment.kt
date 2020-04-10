@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,7 @@ import com.caminero.newton.viewmodel.ClientViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_client.*
+
 
 class ClientFragment : BaseFragment() {
     companion object{
@@ -68,6 +70,18 @@ class ClientFragment : BaseFragment() {
         btnAddClient.setOnClickListener {
             viewModel.navigateToAddClientFragment()
         }
+        svClient.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query.let {
+                    viewModel.setLoadingActive()
+                    viewModel.getClients(it.toString())
+                }
+                return false
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+                return true
+            }
+        })
     }
 
     private fun setupObservers(){

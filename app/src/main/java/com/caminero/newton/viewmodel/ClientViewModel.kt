@@ -32,11 +32,11 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
     private var mClient = MutableLiveData<Client>()
     val client : LiveData<Client> get() = mClient
 
-    fun getClients(){
+    fun getClients(id:String = ""){
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
                 activityViewModel.session.value?.let { session ->
-                    val response = clientRepository.getClientsByUser(session, ClientStatusType.Active.code)
+                    val response = clientRepository.getClientsByUser(session, id, ClientStatusType.Active.code)
                     if (response.isSuccess){
                         val clients = response.response!!.data
                         mClientList.postValue(clients)
