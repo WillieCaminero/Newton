@@ -50,6 +50,14 @@
     <string name="hint_loan_detail">Loan Detail</string>
     <string name="hint_edit_loan">Edit Loan</string>
     <string name="hint_add_payment">Add Payment</string>
+    <string name="hint_report_date">Report Date</string>
+    <string name="hint_search">Search</string>
+    <string name="hint_summary_account">Summary Account</string>
+    <string name="hint_previous_base">Previous base:</string>
+    <string name="hint_paid">Paids:</string>
+    <string name="hint_sale">Sales:</string>
+    <string name="hint_expense">Expenses:</string>
+    <string name="hint_current_base">CURRENT BASE:</string>
 
     <!--System Alerts-->
     <string name="hint_required">Required</string>
@@ -62,5 +70,6 @@
     <string name="hint_ok">Ok</string>
     <string name="hint_logout">Log out</string>
     <string name="hint_logout_message">Are you sure you want to log out?</string>
+
 
 </resources>

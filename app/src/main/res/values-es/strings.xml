@@ -50,6 +50,14 @@
     <string name="hint_loan_detail">Detalle del Préstamo</string>
     <string name="hint_edit_loan">Editar Préstamo</string>
     <string name="hint_add_payment">Agregar Pago</string>
+    <string name="hint_report_date">Fecha Reporte</string>
+    <string name="hint_search">Buscar</string>
+    <string name="hint_summary_account">Resumen de Cuenta</string>
+    <string name="hint_previous_base">Base anterior:</string>
+    <string name="hint_paid">Abonado:</string>
+    <string name="hint_sale">Ventas:</string>
+    <string name="hint_expense">Gastos:</string>
+    <string name="hint_current_base">BASE ACTUAL:</string>
 
     <!--System Alerts-->
     <string name="hint_required">Required</string>
