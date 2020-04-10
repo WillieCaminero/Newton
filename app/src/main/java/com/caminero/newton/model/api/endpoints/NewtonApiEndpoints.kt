@@ -112,4 +112,13 @@ interface NewtonApiEndpoints {
         @Path("loanId") loanId: String,
         @Body payLoad: PaymentPayLoad
     ): Response<ResponseData<String>>
+
+    @DELETE("{email}/clients/{clientId}/loans/{loanId}/payments/{paymentId}/delete")
+    suspend fun deletePaymentInLoan(
+        @Header("Authorization") token: String,
+        @Path("email") email: String,
+        @Path("clientId") clientId: String,
+        @Path("loanId") loanId: String,
+        @Path("paymentId") paymentId: String
+    ): Response<ResponseData<String>>
 }

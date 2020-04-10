@@ -11,7 +11,7 @@ import com.caminero.newton.model.entities.Payment
 import com.caminero.newton.model.listeners.PaymentListener
 import kotlinx.android.synthetic.main.list_item_payment.view.*
 
-class PaymentAdapter(private val items : List<Payment>,
+class PaymentAdapter(private var items : List<Payment>,
                      private val listener: PaymentListener
 ) : RecyclerView.Adapter<PaymentAdapter.PaymentViewHolder>() {
 
@@ -33,6 +33,15 @@ class PaymentAdapter(private val items : List<Payment>,
         holder.itemView.setOnClickListener {
             listener.onItemClick(item)
         }
+
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(item)
+        }
+    }
+
+    fun deleteElement(paymentId: String){
+        items = items.filter { it.paymentId != paymentId }
+        notifyDataSetChanged()
     }
 
     inner class PaymentViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {

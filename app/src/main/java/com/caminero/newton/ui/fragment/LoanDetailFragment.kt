@@ -17,6 +17,7 @@ import com.caminero.newton.model.listeners.PaymentListener
 import com.caminero.newton.ui.adapter.PaymentAdapter
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoanViewModel
+import com.caminero.newton.viewmodel.PaymentViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -28,17 +29,22 @@ class LoanDetailFragment : BaseFragment() {
     }
 
     private val safeArgs: LoanDetailFragmentArgs by navArgs()
-    private lateinit var viewModel: LoanViewModel
+    private lateinit var loanViewModel: LoanViewModel
+    private lateinit var paymentViewModel: PaymentViewModel
     private val activityViewModel: MainActivityViewModel by activityViewModels()
+    private lateinit var paymentAdapter: PaymentAdapter
 
-    //FLAG for AddPaymentFragment
-    private lateinit var startDate:String
-    private lateinit var endDate:String
+    //FLAG for Payment
+    private lateinit var flagStartDate:String
+    private lateinit var flagEndDate:String
+    private lateinit var flagPaymentId:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoanViewModel::class.java)
-        viewModel.activityViewModel = activityViewModel
+        loanViewModel = ViewModelProvider(this).get(LoanViewModel::class.java)
+        paymentViewModel = ViewModelProvider(this).get(PaymentViewModel::class.java)
+        loanViewModel.activityViewModel = activityViewModel
+        paymentViewModel.activityViewModel = activityViewModel
     }
 
     override fun onCreateView(
@@ -49,11 +55,11 @@ class LoanDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupListeners()
         setupObservers()
-        viewModel.setLoadingActive()
-        viewModel.getLoanByLoanId(safeArgs.loanId)
+        loanViewModel.setLoadingActive()
+        loanViewModel.getLoanByLoanId(safeArgs.loanId)
     }
 
-    override fun getViewModel(): BaseFragmentViewModel = viewModel
+    override fun getViewModel(): BaseFragmentViewModel = loanViewModel
 
     private fun initForm(loan: Loan){
         txtStartDate.setText(convertStringDateTimeISO8601ToStringDateTime(loan.startDate))
@@ -66,10 +72,10 @@ class LoanDetailFragment : BaseFragment() {
 
     private fun setupListeners(){
         btnAddPayment.setOnClickListener {
-            viewModel.navigateToAddPaymentFragment(safeArgs.loanId, startDate, endDate)
+            loanViewModel.navigateToAddPaymentFragment(safeArgs.loanId, flagStartDate, flagEndDate)
         }
         btnEditLoan.setOnClickListener {
-            viewModel.navigateToEditLoanFragment(safeArgs.loanId)
+            loanViewModel.navigateToEditLoanFragment(safeArgs.loanId)
         }
         btnDeleteLoan.setOnClickListener {
              MaterialAlertDialogBuilder(context)
@@ -82,22 +88,23 @@ class LoanDetailFragment : BaseFragment() {
     }
 
     private fun performDeleteLoan(){
-        viewModel.setLoadingActive()
-        viewModel.deleteLoanInClient(safeArgs.loanId)
+        loanViewModel.setLoadingActive()
+        loanViewModel.deleteLoanInClient(safeArgs.loanId)
     }
 
-    //ToDo
-    private fun performDeletePayment(paymentId:String){
 
+    private fun performDeletePayment(paymentId:String){
+        paymentViewModel.setLoadingActive()
+        paymentViewModel.deleteLoanInClient(safeArgs.loanId, paymentId)
     }
 
     private fun setupObservers(){
-        viewModel.loan.observe(
+        loanViewModel.loan.observe(
             viewLifecycleOwner,
             Observer {loan ->
                 //Initializing Flags
-                startDate = loan.startDate
-                endDate = loan.endDate
+                flagStartDate = loan.startDate
+                flagEndDate = loan.endDate
 
                 //Initializing Form
                 initForm(loan)
@@ -105,7 +112,22 @@ class LoanDetailFragment : BaseFragment() {
                 setupRecyclerView(payments)
             }
         )
-        viewModel.isLoading.observe(
+        loanViewModel.isLoading.observe(
+            viewLifecycleOwner,
+            Observer {
+                pvProgress.visibility = if (it) View.VISIBLE else View.GONE
+                btnAddPayment.isEnabled = !it
+                btnEditLoan.isEnabled = !it
+                btnDeleteLoan.isEnabled = !it
+            }
+        )
+        paymentViewModel.updatePayments.observe(
+            viewLifecycleOwner,
+            Observer {
+                if(it) paymentAdapter.deleteElement(flagPaymentId)
+            }
+        )
+        paymentViewModel.isLoading.observe(
             viewLifecycleOwner,
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
@@ -117,16 +139,17 @@ class LoanDetailFragment : BaseFragment() {
     }
 
     private fun setupRecyclerView(list : List<Payment>){
-        val adapter = PaymentAdapter(list, object : PaymentListener {
+        paymentAdapter = PaymentAdapter(list, object : PaymentListener {
             override fun onItemClick(payment: Payment) {
                 MaterialAlertDialogBuilder(context)
                     .setTitle(R.string.hint_deleting_payment)
                     .setMessage(R.string.hint_deleting_payment_message)
                     .setPositiveButton(R.string.hint_ok) { _, _ ->
+                        flagPaymentId = payment.paymentId
                         performDeletePayment(payment.paymentId)
                     }.show()
             }
         })
-        rvPayments.adapter = adapter
+        rvPayments.adapter = paymentAdapter
     }
 }
