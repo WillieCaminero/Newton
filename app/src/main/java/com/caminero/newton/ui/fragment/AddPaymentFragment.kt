@@ -12,6 +12,7 @@ import com.caminero.newton.R
 import com.caminero.newton.core.utils.convertStringDateTimeISO8601ToDate
 import com.caminero.newton.core.utils.convertStringDateToStringDateTimeISO8601
 import com.caminero.newton.core.utils.enums.PaymentStatusType
+import com.caminero.newton.core.utils.hideKeyboard
 import com.caminero.newton.core.utils.setDatePickerDialog
 import com.caminero.newton.model.api.payloads.PaymentPayLoad
 import com.caminero.newton.ui.fragment.base.BaseFragment
@@ -78,6 +79,8 @@ class AddPaymentFragment : BaseFragment() {
     }
 
     private fun performAddPayment() {
+        activity?.hideKeyboard()
+
         val paymentDate = convertStringDateToStringDateTimeISO8601(txtPaymentDate.text.toString())
         val mount = txtMount.text.toString().toInt()
         val status = PaymentStatusType.Active.code

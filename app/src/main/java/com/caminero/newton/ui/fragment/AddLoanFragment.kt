@@ -85,6 +85,8 @@ class AddLoanFragment : BaseFragment() {
     }
 
     private fun performAddLoan() {
+        activity?.hideKeyboard()
+
         val interest = txtInterest.text.toString().toInt()
         val mount = txtMount.text.toString().toInt()
         val startDate = convertStringDateToStringDateTimeISO8601(txtStartDate.text.toString())

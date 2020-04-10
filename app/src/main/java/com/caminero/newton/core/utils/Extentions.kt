@@ -1,6 +1,9 @@
 package com.caminero.newton.core.utils
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import java.util.*
 import kotlin.math.round
@@ -39,4 +42,11 @@ fun Double.round(decimals: Int): Double {
     var multiplier = 1.0
     repeat(decimals) { multiplier *= 10 }
     return round(this * multiplier) / multiplier
+}
+
+fun Activity.hideKeyboard() {
+    val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    var view = this.currentFocus
+    if (view == null) view = View(this)
+    imm.hideSoftInputFromWindow(view.windowToken, 0)
 }
