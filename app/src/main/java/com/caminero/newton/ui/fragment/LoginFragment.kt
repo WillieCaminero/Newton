@@ -91,6 +91,15 @@ class LoginFragment : BaseFragment() {
                     .show()
             }
         )
+        viewModel.isConnectedInternet.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.hint_internet_connection)
+                    .setMessage(R.string.hint_internet_connection_message)
+                    .show()
+            }
+        )
     }
 
     private fun performLogin() {

@@ -70,6 +70,9 @@
     <string name="hint_ok">Ok</string>
     <string name="hint_logout">Log out</string>
     <string name="hint_logout_message">Are you sure you want to log out?</string>
-
+    <string name="hint_internet_connection">Connecting to Internet</string>
+    <string name="hint_internet_connection_message">Can\'t Connect to Internet</string>
+    <string name="hint_internal_error">Contact your administrator</string>
+    <string name="hint_internal_error_message">An internal error has occurred in the application</string>
 
 </resources>

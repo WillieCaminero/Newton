@@ -136,6 +136,42 @@ class LoanDetailFragment : BaseFragment() {
                 btnDeleteLoan.isEnabled = !it
             }
         )
+        loanViewModel.isConnectedInternet.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.hint_internet_connection)
+                    .setMessage(R.string.hint_internet_connection_message)
+                    .show()
+            }
+        )
+        loanViewModel.transactionError.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.hint_internal_error)
+                    .setMessage(R.string.hint_internal_error_message)
+                    .show()
+            }
+        )
+        paymentViewModel.isConnectedInternet.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.hint_internet_connection)
+                    .setMessage(R.string.hint_internet_connection_message)
+                    .show()
+            }
+        )
+        paymentViewModel.transactionError.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.hint_internal_error)
+                    .setMessage(R.string.hint_internal_error_message)
+                    .show()
+            }
+        )
     }
 
     private fun setupRecyclerView(list : List<Payment>){

@@ -34,10 +34,13 @@ class ReportViewModel (app : Application) : BaseFragmentViewModel(app) {
                         mAccountSummary.postValue(summary)
                     }
                     else {
+                        validateSessionExpiration(session.sessionExpiration)
                         handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }

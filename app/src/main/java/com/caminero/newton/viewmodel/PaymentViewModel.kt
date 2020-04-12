@@ -33,10 +33,13 @@ class PaymentViewModel (app : Application) : BaseFragmentViewModel(app) {
                         navigateBack()
                     }
                     else {
+                        validateSessionExpiration(session.sessionExpiration)
                         handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }
@@ -50,10 +53,13 @@ class PaymentViewModel (app : Application) : BaseFragmentViewModel(app) {
                         mUpdatePayments.postValue(true)
                     }
                     else {
+                        validateSessionExpiration(session.sessionExpiration)
                         handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }

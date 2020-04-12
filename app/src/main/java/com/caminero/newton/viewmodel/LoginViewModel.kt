@@ -46,6 +46,8 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
                     handleHttpErrorMessage(response.responseError)
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }

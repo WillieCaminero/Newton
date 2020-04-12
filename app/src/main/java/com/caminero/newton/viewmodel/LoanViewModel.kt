@@ -37,10 +37,13 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
                         mLoan.postValue(loan)
                     }
                     else {
+                        validateSessionExpiration(session.sessionExpiration)
                         handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }
@@ -54,10 +57,13 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
                         navigateBack()
                     }
                     else {
+                        validateSessionExpiration(session.sessionExpiration)
                         handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }
@@ -71,10 +77,13 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
                         navigateBack()
                     }
                     else {
+                        validateSessionExpiration(session.sessionExpiration)
                         handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }
@@ -88,10 +97,13 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
                         navigateBack()
                     }
                     else {
+                        validateSessionExpiration(session.sessionExpiration)
                         handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }

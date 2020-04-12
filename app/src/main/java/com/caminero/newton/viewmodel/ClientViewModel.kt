@@ -42,11 +42,14 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
                         mClientList.postValue(clients)
                     }
                     else {
+                        validateSessionExpiration(session.sessionExpiration)
                         mClientList.postValue(mutableListOf())
                         handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }
@@ -61,10 +64,13 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
                         mClient.postValue(client)
                     }
                     else {
+                        validateSessionExpiration(session.sessionExpiration)
                         handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }
@@ -78,10 +84,13 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
                         navigateBack()
                     }
                     else {
+                        validateSessionExpiration(session.sessionExpiration)
                         handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }
@@ -95,10 +104,13 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
                         navigateBack()
                     }
                     else {
+                        validateSessionExpiration(session.sessionExpiration)
                         handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
+            else setIsConnectedToInternet()
+
             setLoadingInactive()
         }
     }

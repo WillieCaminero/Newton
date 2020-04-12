@@ -19,6 +19,7 @@ import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.PaymentViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_add_payment.*
 
 class AddPaymentFragment : BaseFragment() {
@@ -74,6 +75,24 @@ class AddPaymentFragment : BaseFragment() {
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
                 btnAddPayment.isEnabled = !it
+            }
+        )
+        viewModel.isConnectedInternet.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.hint_internet_connection)
+                    .setMessage(R.string.hint_internet_connection_message)
+                    .show()
+            }
+        )
+        viewModel.transactionError.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.hint_internal_error)
+                    .setMessage(R.string.hint_internal_error_message)
+                    .show()
             }
         )
     }

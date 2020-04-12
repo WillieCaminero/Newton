@@ -70,4 +70,9 @@
     <string name="hint_ok">Aceptar</string>
     <string name="hint_logout">Cerrar Sesión</string>
     <string name="hint_logout_message">¿Está seguro que desea cerrar la sesión?</string>
+    <string name="hint_internet_connection">Conectando a Internet</string>
+    <string name="hint_internet_connection_message">No se puedo conectar a internet</string>
+    <string name="hint_internal_error">Contacte a su Administrador</string>
+    <string name="hint_internal_error_message">Ha ocurrido un error interno en la aplicación</string>
+
 </resources>
