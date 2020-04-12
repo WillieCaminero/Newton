@@ -18,7 +18,6 @@ import com.caminero.newton.model.listeners.NavigationDrawerListener
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 
@@ -77,7 +76,7 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
                     super.onOptionsItemSelected(item)
             }
             R.id.action_settings -> {
-                Snackbar.make(findViewById(R.id.nav_host_fragment), "Click on Setting", Snackbar.LENGTH_LONG).show()
+                //Snackbar.make(findViewById(R.id.nav_host_fragment), "Click on Setting", Snackbar.LENGTH_LONG).show()
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -5,10 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.caminero.newton.model.entities.AccountSummary
+import com.caminero.newton.model.repositories.ReportRepository
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.core.inject
 
 class ReportViewModel (app : Application) : BaseFragmentViewModel(app) {
 
@@ -17,6 +19,7 @@ class ReportViewModel (app : Application) : BaseFragmentViewModel(app) {
     }
 
     lateinit var activityViewModel: MainActivityViewModel
+    private val reportRepository : ReportRepository by inject()
 
     private var mAccountSummary = MutableLiveData<AccountSummary>()
     val accountSummary : LiveData<AccountSummary> get() = mAccountSummary
@@ -25,8 +28,14 @@ class ReportViewModel (app : Application) : BaseFragmentViewModel(app) {
         viewModelScope.launch(Dispatchers.IO) {
             if (isConnectedToInternet()){
                 activityViewModel.session.value?.let {session ->
-                    val accountSummary = AccountSummary(30000.76, 200.44,400.55,35.33, 34000.22)
-                    mAccountSummary.postValue(accountSummary)
+                    val response = reportRepository.getPaymentsByLoan(session, reportDate)
+                    if (response.isSuccess){
+                        val summary = response.response!!.data
+                        mAccountSummary.postValue(summary)
+                    }
+                    else {
+                        handleHttpErrorMessage(response.responseError)
+                    }
                 }
             }
             setLoadingInactive()

@@ -8,8 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.caminero.newton.R
-import com.caminero.newton.core.utils.convertStringDateToStringDateTimeISO8601
-import com.caminero.newton.core.utils.hideKeyboard
+import com.caminero.newton.core.utils.convertStringDateToStringDateTimeISO8601TimeZone
 import com.caminero.newton.core.utils.setDatePickerDialog
 import com.caminero.newton.model.entities.AccountSummary
 import com.caminero.newton.ui.fragment.base.BaseFragment
@@ -54,7 +53,6 @@ class ReportFragment : BaseFragment() {
         txtPreviousBase.text = "$ ${accountSummary.previousBase}"
         txtPaid.text = "$ ${accountSummary.paid}"
         txtSale.text = "$ ${accountSummary.sale}"
-        txtExpense.text = "$ ${accountSummary.expense}"
         txtCurrentBase.text = "$ ${accountSummary.currentBase}"
     }
 
@@ -67,7 +65,9 @@ class ReportFragment : BaseFragment() {
                 return@setOnClickListener
             }
 
-            performSummaryAccount()
+            val reportDate = convertStringDateToStringDateTimeISO8601TimeZone(txtReportDate.text.toString())
+
+            viewModel.getAccountSummary(reportDate)
         }
     }
 
@@ -82,16 +82,9 @@ class ReportFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
+                btnSearch.isEnabled = !it
             }
         )
-    }
-
-    private fun performSummaryAccount() {
-        activity?.hideKeyboard()
-
-        val reportDate = convertStringDateToStringDateTimeISO8601(txtReportDate.text.toString())
-
-        viewModel.getAccountSummary(reportDate)
     }
 
     private fun validateForm(): Boolean {

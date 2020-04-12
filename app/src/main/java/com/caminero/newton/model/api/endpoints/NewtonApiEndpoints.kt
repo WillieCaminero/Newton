@@ -5,6 +5,7 @@ import com.caminero.newton.model.api.payloads.InitiateAuthPayLoad
 import com.caminero.newton.model.api.payloads.LoanPayLoad
 import com.caminero.newton.model.api.payloads.PaymentPayLoad
 import com.caminero.newton.model.api.responses.ResponseData
+import com.caminero.newton.model.entities.AccountSummary
 import com.caminero.newton.model.entities.Client
 import com.caminero.newton.model.entities.Loan
 import com.caminero.newton.model.entities.Payment
@@ -122,4 +123,13 @@ interface NewtonApiEndpoints {
         @Path("loanId") loanId: String,
         @Path("paymentId") paymentId: String
     ): Response<ResponseData<String>>
+
+    //Report sections
+
+    @GET("{email}/report/account-summary")
+    suspend fun getAccountSummaryByUser(
+        @Header("Authorization") token: String,
+        @Path("email") email: String,
+        @Query("reportDate") reportDate: String
+    ): Response<ResponseData<AccountSummary>>
 }
