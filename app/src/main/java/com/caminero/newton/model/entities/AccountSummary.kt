@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class AccountSummary(
     @SerializedName("previousBase") val previousBase:Int,
-    @SerializedName("paid") val paid:Int,
+    @SerializedName("payment") val payment:Int,
     @SerializedName("sell") val sale:Int,
     @SerializedName("currentBase") val currentBase:Int
 )

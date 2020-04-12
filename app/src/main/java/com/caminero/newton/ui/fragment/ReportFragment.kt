@@ -51,7 +51,7 @@ class ReportFragment : BaseFragment() {
 
     private fun initForm(accountSummary: AccountSummary){
         txtPreviousBase.text = "$ ${accountSummary.previousBase}"
-        txtPaid.text = "$ ${accountSummary.paid}"
+        txtPayment.text = "$ ${accountSummary.payment}"
         txtSale.text = "$ ${accountSummary.sale}"
         txtCurrentBase.text = "$ ${accountSummary.currentBase}"
     }

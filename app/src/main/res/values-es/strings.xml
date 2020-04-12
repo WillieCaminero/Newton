@@ -54,7 +54,7 @@
     <string name="hint_search">Buscar</string>
     <string name="hint_summary_account">Resumen de Cuenta</string>
     <string name="hint_previous_base">Base anterior:</string>
-    <string name="hint_paid">Abonado:</string>
+    <string name="hint_payment">Abonado:</string>
     <string name="hint_sale">Ventas:</string>
     <string name="hint_expense">Gastos:</string>
     <string name="hint_current_base">BASE ACTUAL:</string>
