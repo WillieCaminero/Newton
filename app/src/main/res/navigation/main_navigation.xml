@@ -119,9 +119,16 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navReport"
+        android:id="@+id/navReportFragment"
         android:name="com.caminero.newton.ui.fragment.ReportFragment"
         android:label="@string/hint_report"
         tools:layout="@layout/fragment_report" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navExpenseFragment"
+        android:name="com.caminero.newton.ui.fragment.ExpenseFragment"
+        android:label="Expenses"
+        tools:layout="@layout/fragment_expense" >
     </fragment>
 </navigation>

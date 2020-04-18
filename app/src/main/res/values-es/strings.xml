@@ -28,7 +28,7 @@
     <string name="value_in_progress">En Progreso</string>
     <string name="hint_payment_date">Fecha de Pago</string>
     <string name="hint_delete">Eliminar</string>
-    <string name="active_loans">Prestamos Activos</string>
+    <string name="active_loans">Préstamos</string>
     <string name="label_start_date">Fecha Inicio:</string>
     <string name="label_end_date">Fecha Fin:</string>
     <string name="label_base_mount">Monto Base:</string>

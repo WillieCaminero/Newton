@@ -17,8 +17,5 @@ data class NewtonSession (
     var sessionExpiration: Date,
 
     //Flag for current client id
-    var currentClientId: String,
-
-    //Flag for first entry to home page after login
-    var firstLogin:Boolean
+    var currentClientId: String
 )

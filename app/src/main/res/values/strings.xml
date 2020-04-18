@@ -28,7 +28,7 @@
     <string name="value_in_progress">In Progress</string>
     <string name="hint_payment_date">Payment Date</string>
     <string name="hint_delete">Delete</string>
-    <string name="active_loans">Active Loans</string>
+    <string name="active_loans">Loans</string>
     <string name="label_start_date">Start Date:</string>
     <string name="label_end_date">End Date:</string>
     <string name="label_base_mount">Base Mount:</string>

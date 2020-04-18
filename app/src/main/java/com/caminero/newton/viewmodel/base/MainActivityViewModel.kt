@@ -16,19 +16,12 @@ class MainActivityViewModel (val app : Application) : AndroidViewModel(app) {
     private var mSession = MutableLiveData<NewtonSession>()
     val session : LiveData<NewtonSession> get() = mSession
 
-    private var mIsHomePage = MutableLiveData<Boolean>()
-    val isHomePage : LiveData<Boolean> get() = mIsHomePage
-
     fun createSession(session : NewtonSession) {
         mSession.postValue(session)
     }
 
     fun destroySession() {
         mSession.postValue(null)
-    }
-
-    fun setHomePageFlag(value: Boolean){
-        mIsHomePage.postValue(value)
     }
 
     fun navOptions() = NavOptions

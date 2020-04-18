@@ -45,6 +45,8 @@ class ClientFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        navigationDrawerListener.activeNavigationDrawer()
+        actionBarListener.showActionBar()
         viewModel = ViewModelProvider(this).get(ClientViewModel::class.java)
         viewModel.activityViewModel = activityViewModel
     }
@@ -55,10 +57,8 @@ class ClientFragment : BaseFragment() {
     ): View? = inflater.inflate(R.layout.fragment_client, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupFirstLogin()
         setupObservers()
         setupListeners()
-        viewModel.activityViewModel.setHomePageFlag(true)
         viewModel.setLoadingActive()
         viewModel.getClients()
     }
@@ -104,15 +104,6 @@ class ClientFragment : BaseFragment() {
                     .show()
             }
         )
-        viewModel.transactionError.observe(
-            viewLifecycleOwner,
-            Observer {
-                MaterialAlertDialogBuilder(context)
-                    .setTitle(R.string.hint_internal_error)
-                    .setMessage(R.string.hint_internal_error_message)
-                    .show()
-            }
-        )
     }
 
     private fun setupRecyclerView(list : List<Client>){
@@ -122,17 +113,5 @@ class ClientFragment : BaseFragment() {
             }
         })
         rvPayments.adapter = adapter
-    }
-
-    private fun setupFirstLogin(){
-        actionBarListener.addDehazeButtonToActionBar()
-        val session = viewModel.activityViewModel.session.value
-        session.let {
-            if(it?.firstLogin!!){
-                navigationDrawerListener.activeNavigationDrawer()
-                actionBarListener.showActionBar()
-                it.firstLogin = false
-            }
-        }
     }
 }

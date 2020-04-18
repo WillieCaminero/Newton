@@ -2,10 +2,8 @@ package com.caminero.newton.ui.activity
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -30,7 +28,6 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var viewModel : MainActivityViewModel
-    private var isHomePage: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +43,9 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.nav_home,
-            R.id.nav_log_out), drawerLayout)
+            R.id.navClientFragment,
+            R.id.nav_home
+        ), drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navigationView.setupWithNavController(navController)
@@ -56,7 +54,6 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
     override fun onStart() {
         super.onStart()
         setupListeners()
-        setupObservers()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -65,31 +62,10 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
-            android.R.id.home -> {
-                if (isHomePage){
-                    showNavigationDrawer()
-                    true
-                }
-                else
-                    super.onOptionsItemSelected(item)
-            }
-            R.id.action_settings -> {
-                //Snackbar.make(findViewById(R.id.nav_host_fragment), "Click on Setting", Snackbar.LENGTH_LONG).show()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
-    override fun showNavigationDrawer() =
-        drawerLayout.openDrawer(navigationView, true)
 
     override fun closeNavigationDrawer() =
         drawerLayout.closeDrawer(navigationView, true)
@@ -108,22 +84,8 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
         supportActionBar?.hide()
     }
 
-    override fun addBackButtonToActionBar() {
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp)
-    }
-
-    override fun addDehazeButtonToActionBar() {
-        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_dehaze_white_24dp)
-    }
-
     private fun setupListeners() {
         navigationItemListener()
-    }
-
-    private fun setupObservers(){
-        viewModel.isHomePage.observe(this, Observer {
-            isHomePage = it
-        })
     }
 
     private fun navigationItemListener(){
@@ -131,7 +93,8 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
             val navController = findNavController(R.id.nav_host_fragment)
             when (option.itemId) {
                 R.id.nav_home -> navController.navigate(R.id.navClientFragment, null, viewModel.navOptions())
-                R.id.nav_report -> navController.navigate(R.id.navReport, null, viewModel.navOptions())
+                R.id.nav_expense -> navController.navigate(R.id.navExpenseFragment, null, viewModel.navOptions())
+                R.id.nav_report -> navController.navigate(R.id.navReportFragment, null, viewModel.navOptions())
                 R.id.nav_log_out -> {
                     MaterialAlertDialogBuilder(this)
                         .setTitle(R.string.hint_log_out)
@@ -142,8 +105,6 @@ class MainActivity : AppCompatActivity(), NavigationDrawerListener, ActionBarLis
                         }.show()
                 }
             }
-            isHomePage = false
-            addBackButtonToActionBar()
             closeNavigationDrawer()
             return@setNavigationItemSelectedListener true
         }
