@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.caminero.newton.model.entities.AccountSummary
-import com.caminero.newton.model.repositories.ReportRepository
+import com.caminero.newton.model.api.payloads.ExpensePayLoad
+import com.caminero.newton.model.repositories.ExpenseRepository
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,5 +19,28 @@ class ExpenseViewModel (app : Application) : BaseFragmentViewModel(app) {
     }
 
     lateinit var activityViewModel: MainActivityViewModel
+    private val expenseRepository : ExpenseRepository by inject()
 
+    private var mExpenseCreated = MutableLiveData<Boolean>()
+    val expenseCreated : LiveData<Boolean> get() = mExpenseCreated
+
+    fun addExpenseToUser(expensePayLoad: ExpensePayLoad){
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isConnectedToInternet()){
+                activityViewModel.session.value?.let {session ->
+                    val response = expenseRepository.addExpenseToUser(session, expensePayLoad)
+                    if (response.isSuccess){
+                        mExpenseCreated.postValue(true)
+                    }
+                    else {
+                        validateSessionExpiration(session.sessionExpiration)
+                        handleHttpErrorMessage(response.responseError)
+                    }
+                }
+            }
+            else setIsConnectedToInternet()
+
+            setLoadingInactive()
+        }
+    }
 }

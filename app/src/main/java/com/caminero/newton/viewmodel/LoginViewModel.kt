@@ -42,7 +42,7 @@ class LoginViewModel(app : Application) : BaseFragmentViewModel(app), KoinCompon
                 }
                 else {
                     mLoginFail.postValue(true)
-                    handleHttpErrorMessage(response.responseError)
+                    //handleHttpErrorMessage(response.responseError)
                 }
             }
             else setIsConnectedToInternet()

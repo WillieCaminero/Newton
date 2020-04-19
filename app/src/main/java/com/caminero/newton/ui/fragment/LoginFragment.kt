@@ -59,6 +59,8 @@ class LoginFragment : BaseFragment() {
         setupObservers()
     }
 
+    override fun handleOnBackPressed() { }
+
     override fun getViewModel(): BaseFragmentViewModel = viewModel
 
     private fun setupListeners() {
@@ -88,15 +90,6 @@ class LoginFragment : BaseFragment() {
                 MaterialAlertDialogBuilder(context)
                     .setTitle(R.string.hint_login_fail)
                     .setMessage(R.string.hint_login_fail_message)
-                    .show()
-            }
-        )
-        viewModel.isConnectedInternet.observe(
-            viewLifecycleOwner,
-            Observer {
-                MaterialAlertDialogBuilder(context)
-                    .setTitle(R.string.hint_internet_connection)
-                    .setMessage(R.string.hint_internet_connection_message)
                     .show()
             }
         )

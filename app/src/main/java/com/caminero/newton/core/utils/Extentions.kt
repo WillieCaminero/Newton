@@ -38,6 +38,12 @@ fun EditText.setDatePickerDialog(minDate: Date = Date(), maxDate:Date = Date(), 
     }
 }
 
+fun Float.round(decimals: Int): Float {
+    var multiplier = 1.0
+    repeat(decimals) { multiplier *= 10 }
+    return (round(this * multiplier) / multiplier).toFloat()
+}
+
 fun Double.round(decimals: Int): Double {
     var multiplier = 1.0
     repeat(decimals) { multiplier *= 10 }

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.caminero.newton.R
 import com.caminero.newton.core.utils.NavigationCommand
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 abstract class BaseFragment : Fragment() {
 
@@ -26,6 +27,7 @@ abstract class BaseFragment : Fragment() {
         activity?.onBackPressedDispatcher?.addCallback(this, callback)
 
         observeNavigation()
+        observeEnvironmentValidation()
     }
 
     private fun observeNavigation() = getViewModel().navigationCommand.observe(
@@ -64,6 +66,48 @@ abstract class BaseFragment : Fragment() {
             }
         }
     )
+
+    private fun observeEnvironmentValidation(){
+        getViewModel().isConnectedInternet.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.hint_internet_connection)
+                    .setMessage(R.string.hint_internet_connection_message)
+                    .show()
+            }
+        )
+        getViewModel().transactionError.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.hint_internal_error)
+                    .setMessage(R.string.hint_internal_error_message)
+                    .show()
+            }
+        )
+    }
+
+    protected open fun observeEnvironmentValidation(viewModel: BaseFragmentViewModel){
+        viewModel.isConnectedInternet.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.hint_internet_connection)
+                    .setMessage(R.string.hint_internet_connection_message)
+                    .show()
+            }
+        )
+        viewModel.transactionError.observe(
+            viewLifecycleOwner,
+            Observer {
+                MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.hint_internal_error)
+                    .setMessage(R.string.hint_internal_error_message)
+                    .show()
+            }
+        )
+    }
 
     protected open fun handleOnBackPressed() = getViewModel().navigateBack()
 }

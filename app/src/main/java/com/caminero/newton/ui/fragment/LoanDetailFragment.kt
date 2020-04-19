@@ -99,9 +99,10 @@ class LoanDetailFragment : BaseFragment() {
     }
 
     private fun setupObservers(){
+        observeEnvironmentValidation(paymentViewModel)
         loanViewModel.loan.observe(
             viewLifecycleOwner,
-            Observer {loan ->
+            Observer { loan ->
                 //Initializing Flags
                 flagStartDate = loan.startDate
                 flagEndDate = loan.endDate
@@ -110,6 +111,12 @@ class LoanDetailFragment : BaseFragment() {
                 initForm(loan)
                 val payments = loan.payments.filter { payment -> payment.status == PaymentStatusType.Active.code }
                 setupRecyclerView(payments)
+            }
+        )
+        paymentViewModel.updatePayments.observe(
+            viewLifecycleOwner,
+            Observer {
+                if(it) paymentAdapter.deleteElement(flagPaymentId)
             }
         )
         loanViewModel.isLoading.observe(
@@ -121,12 +128,6 @@ class LoanDetailFragment : BaseFragment() {
                 btnDeleteLoan.isEnabled = !it
             }
         )
-        paymentViewModel.updatePayments.observe(
-            viewLifecycleOwner,
-            Observer {
-                if(it) paymentAdapter.deleteElement(flagPaymentId)
-            }
-        )
         paymentViewModel.isLoading.observe(
             viewLifecycleOwner,
             Observer {
@@ -134,42 +135,6 @@ class LoanDetailFragment : BaseFragment() {
                 btnAddPayment.isEnabled = !it
                 btnEditLoan.isEnabled = !it
                 btnDeleteLoan.isEnabled = !it
-            }
-        )
-        loanViewModel.isConnectedInternet.observe(
-            viewLifecycleOwner,
-            Observer {
-                MaterialAlertDialogBuilder(context)
-                    .setTitle(R.string.hint_internet_connection)
-                    .setMessage(R.string.hint_internet_connection_message)
-                    .show()
-            }
-        )
-        loanViewModel.transactionError.observe(
-            viewLifecycleOwner,
-            Observer {
-                MaterialAlertDialogBuilder(context)
-                    .setTitle(R.string.hint_internal_error)
-                    .setMessage(R.string.hint_internal_error_message)
-                    .show()
-            }
-        )
-        paymentViewModel.isConnectedInternet.observe(
-            viewLifecycleOwner,
-            Observer {
-                MaterialAlertDialogBuilder(context)
-                    .setTitle(R.string.hint_internet_connection)
-                    .setMessage(R.string.hint_internet_connection_message)
-                    .show()
-            }
-        )
-        paymentViewModel.transactionError.observe(
-            viewLifecycleOwner,
-            Observer {
-                MaterialAlertDialogBuilder(context)
-                    .setTitle(R.string.hint_internal_error)
-                    .setMessage(R.string.hint_internal_error_message)
-                    .show()
             }
         )
     }

@@ -128,7 +128,7 @@
     <fragment
         android:id="@+id/navExpenseFragment"
         android:name="com.caminero.newton.ui.fragment.ExpenseFragment"
-        android:label="Expenses"
+        android:label="@string/hint_nav_expense"
         tools:layout="@layout/fragment_expense" >
     </fragment>
 </navigation>

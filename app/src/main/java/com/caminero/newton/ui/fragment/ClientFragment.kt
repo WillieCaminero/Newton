@@ -19,7 +19,6 @@ import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.ClientViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_client.*
 
 
@@ -93,15 +92,6 @@ class ClientFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        )
-        viewModel.isConnectedInternet.observe(
-            viewLifecycleOwner,
-            Observer {
-                MaterialAlertDialogBuilder(context)
-                    .setTitle(R.string.hint_internet_connection)
-                    .setMessage(R.string.hint_internet_connection_message)
-                    .show()
             }
         )
     }

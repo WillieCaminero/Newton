@@ -1,9 +1,6 @@
 package com.caminero.newton.model.api.endpoints
 
-import com.caminero.newton.model.api.payloads.ClientPayLoad
-import com.caminero.newton.model.api.payloads.InitiateAuthPayLoad
-import com.caminero.newton.model.api.payloads.LoanPayLoad
-import com.caminero.newton.model.api.payloads.PaymentPayLoad
+import com.caminero.newton.model.api.payloads.*
 import com.caminero.newton.model.api.responses.ResponseData
 import com.caminero.newton.model.entities.AccountSummary
 import com.caminero.newton.model.entities.Client
@@ -15,14 +12,23 @@ import retrofit2.http.*
 
 interface NewtonApiEndpoints {
 
-    //Cognito sections
+    //Cognito section
 
     @POST("auth/initiate-auth ")
     suspend fun initiateAuth(
         @Body payLoad: InitiateAuthPayLoad
     ): Response<ResponseData<NewtonSession>>
 
-    //Clients sections
+    //Expense section
+
+    @POST("{email}/expenses/add")
+    suspend fun addExpenseToUser(
+        @Header("Authorization") token: String,
+        @Path("email") email: String,
+        @Body expensePayLoad: ExpensePayLoad
+    ): Response<ResponseData<String>>
+
+    //Clients section
 
     @GET("{email}/clients")
     suspend fun getClientsByUser(
@@ -54,7 +60,7 @@ interface NewtonApiEndpoints {
         @Body payLoad: ClientPayLoad
     ): Response<ResponseData<String>>
 
-    //Loans sections
+    //Loans section
 
     @GET("{email}/clients/{clientId}/loans")
     suspend fun getLoansByClient(
@@ -96,7 +102,7 @@ interface NewtonApiEndpoints {
         @Path("loanId") loanId: String
     ): Response<ResponseData<String>>
 
-    //Payments sections
+    //Payments section
 
     @GET("{email}/clients/{clientId}/loans/{loanId}/payments")
     suspend fun getPaymentsByLoan(
@@ -124,7 +130,7 @@ interface NewtonApiEndpoints {
         @Path("paymentId") paymentId: String
     ): Response<ResponseData<String>>
 
-    //Report sections
+    //Report section
 
     @GET("{email}/report/account-summary")
     suspend fun getAccountSummaryByUser(
