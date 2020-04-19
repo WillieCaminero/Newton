@@ -3,10 +3,12 @@ package com.caminero.newton.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.caminero.newton.R
 import com.caminero.newton.core.utils.convertStringDateTimeISO8601ToStringDateTime
+import com.caminero.newton.core.utils.enums.PaymentStatusType
 import com.caminero.newton.model.entities.Payment
 import com.caminero.newton.model.listeners.PaymentListener
 import kotlinx.android.synthetic.main.list_item_payment.view.*
@@ -14,6 +16,9 @@ import kotlinx.android.synthetic.main.list_item_payment.view.*
 class PaymentAdapter(private var items : List<Payment>,
                      private val listener: PaymentListener
 ) : RecyclerView.Adapter<PaymentAdapter.PaymentViewHolder>() {
+
+    //Managing internal events
+    private var isClickable: Boolean = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -27,24 +32,27 @@ class PaymentAdapter(private var items : List<Payment>,
     override fun onBindViewHolder(holder: PaymentViewHolder, position: Int) {
         val item = items[position]
 
+        holder.cbStatus.isChecked = item.status == PaymentStatusType.Paid.code
         holder.txtPaymentDate.text = convertStringDateTimeISO8601ToStringDateTime(item.paymentDate)
         holder.txtMount.text =  "$" + item.mount.toString()
 
-        holder.itemView.setOnClickListener {
-            listener.onItemClick(item)
-        }
-
-        holder.itemView.setOnClickListener {
-            listener.onItemClick(item)
+        holder.cbStatus.setOnCheckedChangeListener { _, isChecked ->
+            if(isClickable) listener.OnCheckedChange(item.paymentId, isChecked)
         }
     }
 
-    fun deleteElement(paymentId: String){
-        items = items.filter { it.paymentId != paymentId }
+    fun updateElement(paymentId: String, isChecked: Boolean){
+        val status = if(isChecked) PaymentStatusType.Paid.code else PaymentStatusType.InProgress.code
+        items.filter { it.paymentId == paymentId }.forEach{ it.status = status}
         notifyDataSetChanged()
     }
 
+    fun isClickable(isClickable: Boolean){
+        this.isClickable = isClickable
+    }
+
     inner class PaymentViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+        val cbStatus: CheckBox = itemView.cbStatus
         val txtPaymentDate: TextView = itemView.txtPaymentDate
         val txtMount: TextView = itemView.txtMount
     }

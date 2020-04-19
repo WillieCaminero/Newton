@@ -24,10 +24,10 @@ class PaymentRepository {
         )
     }
 
-    suspend fun deletePaymentInLoan(session: NewtonSession, loanId: String, paymentId: String)
+    suspend fun updatePaymentInLoan(session: NewtonSession, loanId: String, paymentId: String, status: String)
             : BaseResponse<ResponseData<String>> {
         return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.deletePaymentInLoan(session.idToken, session.loggedUser, session.currentClientId, loanId, paymentId)
+            NewtonApiClient.endpoints.updatePaymentInLoan(session.idToken, session.loggedUser, session.currentClientId, loanId, paymentId, status)
         )
     }
 }

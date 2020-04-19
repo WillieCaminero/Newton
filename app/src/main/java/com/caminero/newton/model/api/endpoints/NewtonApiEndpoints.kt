@@ -121,13 +121,14 @@ interface NewtonApiEndpoints {
         @Body payLoad: PaymentPayLoad
     ): Response<ResponseData<String>>
 
-    @DELETE("{email}/clients/{clientId}/loans/{loanId}/payments/{paymentId}/delete")
-    suspend fun deletePaymentInLoan(
+    @PUT("{email}/clients/{clientId}/loans/{loanId}/payments/{paymentId}/update")
+    suspend fun updatePaymentInLoan(
         @Header("Authorization") token: String,
         @Path("email") email: String,
         @Path("clientId") clientId: String,
         @Path("loanId") loanId: String,
-        @Path("paymentId") paymentId: String
+        @Path("paymentId") paymentId: String,
+        @Query("status") status: String
     ): Response<ResponseData<String>>
 
     //Report section

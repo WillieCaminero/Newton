@@ -75,9 +75,6 @@
             android:name="loanId"
             app:argType="string" />
         <action
-            android:id="@+id/action_loanDetailFragment_to_PaymentDetailFragment"
-            app:destination="@id/navPaymentDetailFragment"/>
-        <action
             android:id="@+id/action_loanDetailFragment_to_editLoanFragment"
             app:destination="@id/navEditLoanFragment"/>
     </fragment>
@@ -99,22 +96,6 @@
         tools:layout="@layout/fragment_edit_client" >
         <argument
             android:name="clientId"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/navPaymentDetailFragment"
-        android:name="com.caminero.newton.ui.fragment.PaymentDetailFragment"
-        android:label="@string/hint_payment_detail"
-        tools:layout="@layout/fragment_payment_detail" >
-        <argument
-            android:name="loanId"
-            app:argType="string" />
-        <argument
-            android:name="startDate"
-            app:argType="string" />
-        <argument
-            android:name="endDate"
             app:argType="string" />
     </fragment>
 

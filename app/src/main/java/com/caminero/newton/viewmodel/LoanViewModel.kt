@@ -112,9 +112,4 @@ class LoanViewModel (app : Application) : BaseFragmentViewModel(app) {
         Log.i(TAG, "Navigating to Edit Loan")
         navigate(LoanDetailFragmentDirections.actionLoanDetailFragmentToEditLoanFragment(loanId))
     }
-
-    fun navigateToPaymentDetailFragment(loanId: String, startDate:String, endDate:String) {
-        Log.i(TAG, "Navigating to Add Payment")
-        navigate(LoanDetailFragmentDirections.actionLoanDetailFragmentToPaymentDetailFragment(loanId, startDate, endDate))
-    }
 }

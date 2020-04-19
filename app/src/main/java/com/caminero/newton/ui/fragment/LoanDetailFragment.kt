@@ -33,9 +33,7 @@ class LoanDetailFragment : BaseFragment() {
     private lateinit var paymentAdapter: PaymentAdapter
     private val safeArgs: LoanDetailFragmentArgs by navArgs()
 
-    //FLAGs for Payment
-    private lateinit var flagStartDate:String
-    private lateinit var flagEndDate:String
+    //FLAG for Payment
     private lateinit var flagPaymentId:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,9 +68,6 @@ class LoanDetailFragment : BaseFragment() {
     }
 
     private fun setupListeners(){
-        btnAddPayment.setOnClickListener {
-            loanViewModel.navigateToPaymentDetailFragment(safeArgs.loanId, flagStartDate, flagEndDate)
-        }
         btnEditLoan.setOnClickListener {
             loanViewModel.navigateToEditLoanFragment(safeArgs.loanId)
         }
@@ -92,9 +87,10 @@ class LoanDetailFragment : BaseFragment() {
     }
 
 
-    private fun performDeletePayment(paymentId:String){
+    private fun performUpdatePayment(paymentId:String, isChecked: Boolean){
         paymentViewModel.setLoadingActive()
-        paymentViewModel.deleteLoanInClient(safeArgs.loanId, paymentId)
+        flagPaymentId = paymentId
+        paymentViewModel.updateLoanInClient(safeArgs.loanId, paymentId, isChecked)
     }
 
     private fun setupObservers(){
@@ -102,26 +98,20 @@ class LoanDetailFragment : BaseFragment() {
         loanViewModel.loan.observe(
             viewLifecycleOwner,
             Observer { loan ->
-                //Initializing Flags
-                flagStartDate = loan.startDate
-                flagEndDate = loan.endDate
-
-                //Initializing Form
                 initForm(loan)
                 setupRecyclerView(loan.payments)
             }
         )
         paymentViewModel.updatePayments.observe(
             viewLifecycleOwner,
-            Observer {
-                if(it) paymentAdapter.deleteElement(flagPaymentId)
+            Observer { isChecked ->
+                paymentAdapter.updateElement(flagPaymentId, isChecked)
             }
         )
         loanViewModel.isLoading.observe(
             viewLifecycleOwner,
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
-                btnAddPayment.isEnabled = !it
                 btnEditLoan.isEnabled = !it
                 btnDeleteLoan.isEnabled = !it
             }
@@ -130,23 +120,17 @@ class LoanDetailFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
-                btnAddPayment.isEnabled = !it
                 btnEditLoan.isEnabled = !it
                 btnDeleteLoan.isEnabled = !it
+                paymentAdapter.isClickable(!it)
             }
         )
     }
 
     private fun setupRecyclerView(list : List<Payment>){
         paymentAdapter = PaymentAdapter(list, object : PaymentListener {
-            override fun onItemClick(payment: Payment) {
-                MaterialAlertDialogBuilder(context)
-                    .setTitle(R.string.hint_deleting_payment)
-                    .setMessage(R.string.hint_deleting_payment_message)
-                    .setPositiveButton(R.string.hint_ok) { _, _ ->
-                        flagPaymentId = payment.paymentId
-                        performDeletePayment(payment.paymentId)
-                    }.show()
+            override fun OnCheckedChange(paymentId: String, isChecked: Boolean) {
+                performUpdatePayment(paymentId, isChecked)
             }
         })
         rvPayments.adapter = paymentAdapter
