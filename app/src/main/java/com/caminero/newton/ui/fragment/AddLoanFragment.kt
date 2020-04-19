@@ -17,6 +17,7 @@ import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.LoanViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.fragment_add_loan.*
 import java.util.*
 
@@ -57,9 +58,7 @@ class AddLoanFragment : BaseFragment() {
         btnAddLoan.setOnClickListener {
             viewModel.setLoadingActive()
 
-            calculateDays()
-
-            if(!validateForm()) {
+            if(!validateForm() || !calculateDays()) {
                 viewModel.setLoadingInactive()
                 return@setOnClickListener
             }
@@ -88,21 +87,37 @@ class AddLoanFragment : BaseFragment() {
         activity?.hideKeyboard()
 
         val interest = txtInterest.text.toString().toInt()
-        val mount = txtMount.text.toString().toInt()
+        val mount = txtMount.text.toString().toFloat()
         val startDate = convertStringDateToStringDateTimeISO8601(txtStartDate.text.toString())
         val endDate = convertStringDateToStringDateTimeISO8601(txtEndDate.text.toString())
         val days = txtDays.text.toString().toInt()
+        val dues = txtDues.text.toString().toInt()
         val status = LoanStatusType.InProgress.code
 
-        viewModel.addLoanToClient(safeArgs.clientId, LoanPayLoad(interest, days, mount, startDate, endDate, status))
+        viewModel.addLoanToClient(safeArgs.clientId, LoanPayLoad(interest, days, dues, mount, startDate, endDate, status))
     }
 
-    private fun calculateDays() {
-        if (!txtStartDate.text.toString().isNullOrBlank() && !txtEndDate.text.toString().isNullOrBlank() ){
+    private fun calculateDays() : Boolean{
+        if (!txtStartDate.text.toString().isNullOrBlank() && !txtEndDate.text.toString().isNullOrBlank()) {
+
             val startDate = txtStartDate.text.toString()
             val endDate = txtEndDate.text.toString()
             txtDays.setText(daysBetweenDates(startDate, endDate).toString())
+
+            if (!txtDues.text.toString().isNullOrBlank()) {
+                val dues = txtDues.text.toString().toInt()
+                val days = txtDays.text.toString().toInt()
+                if (dues > days) {
+                    MaterialAlertDialogBuilder(context)
+                        .setTitle("Warning")
+                        .setMessage("Dues has to be less or equal than total days")
+                        .show()
+                    return false
+                }
+            }
         }
+
+        return true
     }
 
     private fun validateForm(): Boolean {
@@ -120,6 +135,12 @@ class AddLoanFragment : BaseFragment() {
             valid =  false
         }
         else lblMount.error = null
+
+        if (txtDues.text.toString().isNullOrBlank()) {
+            lblDues.error = message
+            valid =  false
+        }
+        else lblDues.error = null
 
         if (txtStartDate.text.toString().isNullOrBlank()) {
             lblStartDate.error = message

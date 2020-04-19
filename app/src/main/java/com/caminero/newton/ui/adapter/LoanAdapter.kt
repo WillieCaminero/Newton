@@ -27,23 +27,23 @@ class LoanAdapter(private val items : List<Loan>,
     override fun getItemCount() : Int = items.size
 
     override fun onBindViewHolder(holder: LoanViewHolder, position: Int) {
-        val item = items[position]
-        val payments = item.payments
+        val loan = items[position]
+        val payments = loan.payments
 
-        holder.txtStartDate.text = convertStringDateTimeISO8601ToStringDateTime(item.startDate)
-        holder.txtEndDate.text = convertStringDateTimeISO8601ToStringDateTime(item.endDate)
-        holder.txtMount.text = item.mount.toString()
-        holder.txtInterest.text = item.interest.toString()
-        holder.txtStatus.text = item.status
-        val totalMount = (item.interest.toDouble() / 100 * item.mount) + item.mount
-        val currentMount = (payments.sumBy { it.mount }).toString()
+        holder.txtStartDate.text = convertStringDateTimeISO8601ToStringDateTime(loan.startDate)
+        holder.txtEndDate.text = convertStringDateTimeISO8601ToStringDateTime(loan.endDate)
+        holder.txtMount.text = loan.mount.toString()
+        holder.txtInterest.text = loan.interest.toString()
+        holder.txtStatus.text = loan.status
+        val totalMount = (loan.interest.toDouble() / 100 * loan.mount) + loan.mount
+        val currentMount = (payments.filter { it.status == PaymentStatusType.Paid.code }.sumBy { it.mount }).toString()
+        holder.txtCurrentMount.text = currentMount
         holder.txtTotalMount.text = (totalMount - currentMount.toDouble()).round(2).toString()
-        holder.txtCurrentMount.text = currentMount.toString()
-        holder.txtCurrentPayments.text = payments.size.toString()
-        holder.txtPendingPayments.text = (item.days - payments.size).toString()
+        holder.txtCurrentPayments.text = loan.dues.toString()
+        holder.txtPendingPayments.text = payments.filter { it.status ==  PaymentStatusType.InProgress.code}.size.toString()
 
         holder.itemView.setOnClickListener {
-            listener.onItemClick(item)
+            listener.onItemClick(loan)
         }
     }
 
