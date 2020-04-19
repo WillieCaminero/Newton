@@ -49,7 +49,7 @@
     <string name="hint_add_loan">Add Loan</string>
     <string name="hint_loan_detail">Loan Detail</string>
     <string name="hint_edit_loan">Edit Loan</string>
-    <string name="hint_add_payment">Add Payment</string>
+    <string name="hint_payment_detail">Payment Detail</string>
     <string name="hint_report_date">Report Date</string>
     <string name="hint_search">Search</string>
     <string name="hint_summary_account">Summary Account</string>

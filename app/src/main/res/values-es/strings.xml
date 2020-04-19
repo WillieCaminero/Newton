@@ -49,7 +49,7 @@
     <string name="hint_add_loan">Agregar Préstamo</string>
     <string name="hint_loan_detail">Detalle del Préstamo</string>
     <string name="hint_edit_loan">Editar Préstamo</string>
-    <string name="hint_add_payment">Agregar Pago</string>
+    <string name="hint_payment_detail">Detalle de Pago</string>
     <string name="hint_report_date">Fecha Reporte</string>
     <string name="hint_search">Buscar</string>
     <string name="hint_summary_account">Resumen de Cuenta</string>

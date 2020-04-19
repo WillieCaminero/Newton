@@ -19,14 +19,14 @@ import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.PaymentViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
 import com.caminero.newton.viewmodel.base.MainActivityViewModel
-import kotlinx.android.synthetic.main.fragment_add_payment.*
+import kotlinx.android.synthetic.main.fragment_payment_detail.*
 
-class AddPaymentFragment : BaseFragment() {
+class PaymentDetailFragment : BaseFragment() {
     companion object{
-        val TAG: String = AddPaymentFragment::class.java.simpleName
+        val TAG: String = PaymentDetailFragment::class.java.simpleName
     }
 
-    private val safeArgs: AddPaymentFragmentArgs by navArgs()
+    private val safeArgs: PaymentDetailFragmentArgs by navArgs()
     private lateinit var viewModel: PaymentViewModel
     private val activityViewModel: MainActivityViewModel by activityViewModels()
 
@@ -39,7 +39,7 @@ class AddPaymentFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_add_payment, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_payment_detail, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initDatePickerDialogs()

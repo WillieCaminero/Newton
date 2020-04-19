@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.caminero.newton.R
 import com.caminero.newton.core.utils.convertStringDateTimeISO8601ToStringDateTime
-import com.caminero.newton.core.utils.enums.PaymentStatusType
 import com.caminero.newton.model.entities.Loan
 import com.caminero.newton.model.entities.Payment
 import com.caminero.newton.model.listeners.PaymentListener
@@ -28,13 +27,13 @@ class LoanDetailFragment : BaseFragment() {
         val TAG: String = LoanDetailFragment::class.java.simpleName
     }
 
-    private val safeArgs: LoanDetailFragmentArgs by navArgs()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
     private lateinit var loanViewModel: LoanViewModel
     private lateinit var paymentViewModel: PaymentViewModel
-    private val activityViewModel: MainActivityViewModel by activityViewModels()
     private lateinit var paymentAdapter: PaymentAdapter
+    private val safeArgs: LoanDetailFragmentArgs by navArgs()
 
-    //FLAG for Payment
+    //FLAGs for Payment
     private lateinit var flagStartDate:String
     private lateinit var flagEndDate:String
     private lateinit var flagPaymentId:String
@@ -72,7 +71,7 @@ class LoanDetailFragment : BaseFragment() {
 
     private fun setupListeners(){
         btnAddPayment.setOnClickListener {
-            loanViewModel.navigateToAddPaymentFragment(safeArgs.loanId, flagStartDate, flagEndDate)
+            loanViewModel.navigateToPaymentDetailFragment(safeArgs.loanId, flagStartDate, flagEndDate)
         }
         btnEditLoan.setOnClickListener {
             loanViewModel.navigateToEditLoanFragment(safeArgs.loanId)
