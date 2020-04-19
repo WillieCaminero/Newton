@@ -1,25 +1,31 @@
 package com.caminero.newton.model.api.endpoints
 
-import com.caminero.newton.model.api.payloads.*
+import com.caminero.newton.model.api.payloads.ClientPayLoad
+import com.caminero.newton.model.api.payloads.ExpensePayLoad
+import com.caminero.newton.model.api.payloads.InitiateAuthPayLoad
+import com.caminero.newton.model.api.payloads.LoanPayLoad
 import com.caminero.newton.model.api.responses.ResponseData
 import com.caminero.newton.model.entities.AccountSummary
 import com.caminero.newton.model.entities.Client
 import com.caminero.newton.model.entities.Loan
-import com.caminero.newton.model.entities.Payment
 import com.caminero.newton.model.entities.common.NewtonSession
 import retrofit2.Response
 import retrofit2.http.*
 
 interface NewtonApiEndpoints {
 
-    //Cognito section
+    /***
+     ***     Cognito section
+     ***/
 
     @POST("auth/initiate-auth ")
     suspend fun initiateAuth(
         @Body payLoad: InitiateAuthPayLoad
     ): Response<ResponseData<NewtonSession>>
 
-    //Expense section
+    /***
+     ***     Expenses section
+     ***/
 
     @POST("{email}/expenses/add")
     suspend fun addExpenseToUser(
@@ -28,7 +34,9 @@ interface NewtonApiEndpoints {
         @Body expensePayLoad: ExpensePayLoad
     ): Response<ResponseData<String>>
 
-    //Clients section
+    /***
+     ***     Clients section
+     ***/
 
     @GET("{email}/clients")
     suspend fun getClientsByUser(
@@ -60,14 +68,9 @@ interface NewtonApiEndpoints {
         @Body payLoad: ClientPayLoad
     ): Response<ResponseData<String>>
 
-    //Loans section
-
-    @GET("{email}/clients/{clientId}/loans")
-    suspend fun getLoansByClient(
-        @Header("Authorization") token: String,
-        @Path("email") email: String,
-        @Path("clientId") clientId: String
-    ): Response<ResponseData<List<Loan>>>
+    /***
+     ***     Loans section
+     ***/
 
     @POST("{email}/clients/{clientId}/loans/add")
     suspend fun addLoanInClient(
@@ -102,24 +105,9 @@ interface NewtonApiEndpoints {
         @Path("loanId") loanId: String
     ): Response<ResponseData<String>>
 
-    //Payments section
-
-    @GET("{email}/clients/{clientId}/loans/{loanId}/payments")
-    suspend fun getPaymentsByLoan(
-        @Header("Authorization") token: String,
-        @Path("email") email: String,
-        @Path("clientId") clientId: String,
-        @Path("loanId") loanId: String
-    ): Response<ResponseData<List<Payment>>>
-
-    @POST("{email}/clients/{clientId}/loans/{loanId}/payments/add")
-    suspend fun addPaymentInLoan(
-        @Header("Authorization") token: String,
-        @Path("email") email: String,
-        @Path("clientId") clientId: String,
-        @Path("loanId") loanId: String,
-        @Body payLoad: PaymentPayLoad
-    ): Response<ResponseData<String>>
+    /***
+     ***     Payments section
+     ***/
 
     @PUT("{email}/clients/{clientId}/loans/{loanId}/payments/{paymentId}/update")
     suspend fun updatePaymentInLoan(
@@ -131,7 +119,9 @@ interface NewtonApiEndpoints {
         @Query("status") status: String
     ): Response<ResponseData<String>>
 
-    //Report section
+    /***
+     ***     Reports section
+     ***/
 
     @GET("{email}/report/account-summary")
     suspend fun getAccountSummaryByUser(

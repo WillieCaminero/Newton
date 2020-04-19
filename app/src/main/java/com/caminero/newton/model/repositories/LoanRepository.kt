@@ -10,13 +10,6 @@ import com.caminero.newton.model.entities.common.NewtonSession
 
 class LoanRepository {
 
-    suspend fun getLoansByClient(session: NewtonSession, clientId: String)
-            : BaseResponse<ResponseData<List<Loan>>> {
-        return ResponseHandler().handleResponse(
-            NewtonApiClient.endpoints.getLoansByClient(session.idToken, session.loggedUser, clientId)
-        )
-    }
-
     suspend fun getLoanByLoanId(session: NewtonSession, loanId: String)
             : BaseResponse<ResponseData<Loan>> {
         return ResponseHandler().handleResponse(
