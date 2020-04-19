@@ -109,8 +109,7 @@ class LoanDetailFragment : BaseFragment() {
 
                 //Initializing Form
                 initForm(loan)
-                val payments = loan.payments.filter { payment -> payment.status == PaymentStatusType.Active.code }
-                setupRecyclerView(payments)
+                setupRecyclerView(loan.payments)
             }
         )
         paymentViewModel.updatePayments.observe(

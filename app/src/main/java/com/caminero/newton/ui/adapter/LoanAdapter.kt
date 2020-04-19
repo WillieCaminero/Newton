@@ -28,7 +28,7 @@ class LoanAdapter(private val items : List<Loan>,
 
     override fun onBindViewHolder(holder: LoanViewHolder, position: Int) {
         val item = items[position]
-        val payments = item.payments.filter { it.status == PaymentStatusType.Active.code }
+        val payments = item.payments
 
         holder.txtStartDate.text = convertStringDateTimeISO8601ToStringDateTime(item.startDate)
         holder.txtEndDate.text = convertStringDateTimeISO8601ToStringDateTime(item.endDate)

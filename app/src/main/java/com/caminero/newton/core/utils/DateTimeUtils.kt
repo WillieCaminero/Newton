@@ -42,15 +42,8 @@ fun convertStringDateToStringDateTimeISO8601(stringDate: String): String {
 }
 
 fun convertStringDateToStringDateTimeISO8601TimeZone(stringDate: String): String {
-    val currentDate = Calendar.getInstance()
-    val hour = completeIntegerWithZero(currentDate.get(Calendar.HOUR_OF_DAY))
-    val minute = completeIntegerWithZero(currentDate.get(Calendar.MINUTE))
-    val second = completeIntegerWithZero(currentDate.get(Calendar.SECOND))
-
     val dateTime = "${stringDate}T00:00:00${timeZone()}"
-
     val dateFormat = SimpleDateFormat("dd-MM-yyyy'T'HH:mm:ssZ", Locale.getDefault())
-
     return SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.getDefault()).format(dateFormat.parse(dateTime))
 }
 

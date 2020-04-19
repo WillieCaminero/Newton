@@ -2,8 +2,8 @@ package com.caminero.newton.core.utils.enums
 
 enum class PaymentStatusType (val code: String, val description: String) {
     StatusNull("SN","Status"),
-    Active("AC","Active"),
-    Inactive("IN","Inactive");
+    Paid("OK","Paid"),
+    InProgress("EC", "In Progress");
 
     override fun toString() : String{
         return description

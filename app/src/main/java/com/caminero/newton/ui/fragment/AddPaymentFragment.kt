@@ -83,7 +83,7 @@ class AddPaymentFragment : BaseFragment() {
 
         val paymentDate = convertStringDateToStringDateTimeISO8601(txtPaymentDate.text.toString())
         val mount = txtMount.text.toString().toInt()
-        val status = PaymentStatusType.Active.code
+        val status = PaymentStatusType.InProgress.code
 
         viewModel.addPaymentToLoan(safeArgs.loanId, PaymentPayLoad(paymentDate, mount, status))
     }
