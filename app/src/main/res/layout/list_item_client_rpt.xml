@@ -23,6 +23,20 @@
             android:layout_marginBottom="10dp">
 
             <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/glOneQuater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.35" />
+
+            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/glTowQuater"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,8 +50,7 @@
                 android:textColor="@color/colorPrimaryText"
                 tools:text="223-1233444-5"
                 android:textSize="15sp"
-                android:layout_marginStart="10dp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/glStart"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
@@ -46,10 +59,69 @@
                 android:layout_height="wrap_content"
                 tools:text="Willie Manuel Caminero Mejia"
                 android:textSize="14sp"
-                android:layout_marginStart="10dp"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/glStart"
                 app:layout_constraintEnd_toStartOf="@id/glTowQuater"
                 app:layout_constraintTop_toBottomOf="@id/lblId"/>
+
+            <TextView
+                android:id="@+id/lblBaseMount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_base_mount"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/lblClientFullName"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                />
+
+            <TextView
+                android:id="@+id/txtBaseMount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="1000"
+                app:layout_constraintStart_toEndOf="@id/glOneQuater"
+                app:layout_constraintTop_toTopOf="@id/lblBaseMount"
+                />
+
+            <TextView
+                android:id="@+id/lblInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_interest"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/lblBaseMount"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                />
+
+            <TextView
+                android:id="@+id/txtInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="15%"
+                app:layout_constraintStart_toEndOf="@id/glOneQuater"
+                app:layout_constraintTop_toTopOf="@id/lblInterest"
+                />
+
+            <TextView
+                android:id="@+id/lblStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_status"
+                android:textStyle="normal|bold"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/lblInterest"
+                app:layout_constraintStart_toStartOf="@id/glStart"
+                />
+
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="EC"
+                app:layout_constraintStart_toEndOf="@id/glOneQuater"
+                app:layout_constraintTop_toTopOf="@id/lblStatus"
+                />
 
             <TextView
                 android:id="@+id/lblMount"
@@ -58,6 +130,7 @@
                 android:textSize="20sp"
                 tools:text="15"
                 android:layout_marginTop="10dp"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="@id/glTowQuater"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>

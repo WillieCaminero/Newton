@@ -7,5 +7,8 @@ data class RPTClient (
     @SerializedName("id") val id : String,
     @SerializedName("name") val name : String,
     @SerializedName("lastName") val lastName : String,
-    @SerializedName("mount") val mount : Float
+    @SerializedName("mount") val mount : Float,
+    @SerializedName("baseMount") val baseMount : Float,
+    @SerializedName("interest") val interest : Int,
+    @SerializedName("status") val status : String
 )

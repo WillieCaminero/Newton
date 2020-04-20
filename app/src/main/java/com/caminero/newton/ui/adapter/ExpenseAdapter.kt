@@ -1,9 +1,11 @@
 package com.caminero.newton.ui.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.caminero.newton.R
 import com.caminero.newton.core.utils.convertStringDateTimeISO8601ToStringTime
@@ -28,9 +30,12 @@ class ExpenseAdapter(private val items : List<Expense>) : RecyclerView.Adapter<E
         holder.lblDescription.text = item.description
         holder.lblMount.text = item.mount.round(2).toString()
         holder.lblTime.text = convertStringDateTimeISO8601ToStringTime(item.expenseDate)
+
+        holder.cvPrincipal.setBackgroundColor(Color.rgb(193,229,206))
     }
 
     inner class ExpenseViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+        val cvPrincipal: CardView = itemView.cvPrincipal
         val lblDescription: TextView  = itemView.lblDescription
         val lblMount: TextView  = itemView.lblMount
         val lblTime: TextView  = itemView.lblTime

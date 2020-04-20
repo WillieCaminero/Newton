@@ -70,7 +70,7 @@ class ClientDetailFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {client ->
                 initForm(client)
-                val loans = client.loans.filter { loan -> loan.status == LoanStatusType.InProgress.code }
+                val loans = client.loans.filter { loan -> loan.status != LoanStatusType.Deleted.code }
                 setupRecyclerView(loans)
             }
         )

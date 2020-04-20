@@ -206,6 +206,17 @@
                 app:layout_constraintTop_toTopOf="@id/lblPendingPayments"
                 />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_error_outline_black_24dp"
+                />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
