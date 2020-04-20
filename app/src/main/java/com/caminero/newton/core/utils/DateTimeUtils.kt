@@ -10,7 +10,7 @@ private const val baseDateApiFormat = "yyyy-MM-dd'T'HH:mm:ss"
 
 fun convertStringDateTimeISO8601ToStringDateTime(stringDate: String): String {
     val dateFormat = SimpleDateFormat(baseDateApiFormat, Locale.getDefault())
-    return SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(dateFormat.parse(stringDate))
+    return SimpleDateFormat("dd-MM-yyyy hh:mm aa", Locale.getDefault()).format(dateFormat.parse(stringDate))
 }
 
 fun convertStringDateTimeISO8601ToStringTime(stringDate: String): String {
