@@ -8,7 +8,7 @@ data class AccountSummary(
     @SerializedName("sell") val sale: Float,
     @SerializedName("expense") val expense: Float,
     @SerializedName("currentBase") val currentBase: Float,
-    @SerializedName("payments") val payments: List<Client>,
-    @SerializedName("sells") val sells: List<Client>,
+    @SerializedName("payments") val payments: List<RPTClient>,
+    @SerializedName("sells") val sells: List<RPTClient>,
     @SerializedName("expenses") val expenses: List<Expense>
 )

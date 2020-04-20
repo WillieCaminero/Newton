@@ -13,6 +13,11 @@ fun convertStringDateTimeISO8601ToStringDateTime(stringDate: String): String {
     return SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault()).format(dateFormat.parse(stringDate))
 }
 
+fun convertStringDateTimeISO8601ToStringTime(stringDate: String): String {
+    val dateFormat = SimpleDateFormat(baseDateApiFormat, Locale.getDefault())
+    return SimpleDateFormat("hh:mm:ss aa", Locale.getDefault()).format(dateFormat.parse(stringDate))
+}
+
 fun convertStringDateTimeISO8601ToDate(stringDate: String): Date {
     val dateFormat = SimpleDateFormat(baseDateApiFormat, Locale.getDefault())
     return dateFormat.parse(stringDate)

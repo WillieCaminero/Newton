@@ -77,5 +77,6 @@
     <string name="hint_nav_expense">Expenses</string>
     <string name="hint_expense_date">Expense date</string>
     <string name="hint_description">Description</string>
+    <string name="hint_sells">Sells:</string>
 
 </resources>

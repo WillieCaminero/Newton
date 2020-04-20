@@ -12,6 +12,10 @@ import com.caminero.newton.core.utils.convertStringDateToStringDateTimeISO8601Ti
 import com.caminero.newton.core.utils.round
 import com.caminero.newton.core.utils.setDatePickerDialog
 import com.caminero.newton.model.entities.AccountSummary
+import com.caminero.newton.model.entities.Expense
+import com.caminero.newton.model.entities.RPTClient
+import com.caminero.newton.ui.adapter.ExpenseAdapter
+import com.caminero.newton.ui.adapter.RPTClientAdapter
 import com.caminero.newton.ui.fragment.base.BaseFragment
 import com.caminero.newton.viewmodel.ReportViewModel
 import com.caminero.newton.viewmodel.base.BaseFragmentViewModel
@@ -78,6 +82,9 @@ class ReportFragment : BaseFragment() {
             viewLifecycleOwner,
             Observer {
                 initForm(it)
+                setupRecyclerViewPayments(it.payments)
+                setupRecyclerViewSells(it.sells)
+                setupRecyclerViewExpenses(it.expenses)
             }
         )
         viewModel.isLoading.observe(
@@ -87,6 +94,27 @@ class ReportFragment : BaseFragment() {
                 btnSearch.isEnabled = !it
             }
         )
+    }
+
+    private fun setupRecyclerViewPayments(list : List<RPTClient>){
+        lblPaymentClients.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
+        rvPaymentClients.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
+        val adapter = RPTClientAdapter(list)
+        rvPaymentClients.adapter = adapter
+    }
+
+    private fun setupRecyclerViewSells(list : List<RPTClient>){
+        lblSellClients.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
+        rvSellClients.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
+        val adapter = RPTClientAdapter(list)
+        rvSellClients.adapter = adapter
+    }
+
+    private fun setupRecyclerViewExpenses(list : List<Expense>){
+        lblExpenses.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
+        rvExpenses.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
+        val adapter = ExpenseAdapter(list)
+        rvExpenses.adapter = adapter
     }
 
     private fun validateForm(): Boolean {

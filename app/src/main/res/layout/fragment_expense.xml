@@ -36,6 +36,8 @@
         app:hintEnabled="true"
         android:hint="@string/hint_mount"
         app:errorEnabled="true"
+        app:counterEnabled="true"
+        app:counterMaxLength="6"
         android:layout_marginStart="1dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="@id/glMiddle"

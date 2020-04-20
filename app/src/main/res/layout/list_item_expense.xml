@@ -38,7 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="@id/glStart"
                 app:layout_constraintEnd_toEndOf="@id/glEnd"
