@@ -36,7 +36,7 @@ class LoanAdapter(private val items : List<Loan>,
         holder.txtInterest.text = loan.interest.toString()
         holder.txtStatus.text = loan.status
         val totalMount = (loan.interest.toDouble() / 100 * loan.mount) + loan.mount
-        val currentMount = (payments.filter { it.status == PaymentStatusType.Paid.code }.sumBy { it.mount }).toString()
+        val currentMount = (payments.filter { it.status == PaymentStatusType.Paid.code }.sumByDouble { it.mount.toDouble() }).round(2).toString()
         holder.txtCurrentMount.text = currentMount
         holder.txtTotalMount.text = (totalMount - currentMount.toDouble()).round(2).toString()
         holder.txtCurrentPayments.text = loan.dues.toString()

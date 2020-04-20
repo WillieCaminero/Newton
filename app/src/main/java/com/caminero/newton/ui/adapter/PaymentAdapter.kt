@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.caminero.newton.R
 import com.caminero.newton.core.utils.convertStringDateTimeISO8601ToStringDateTime
 import com.caminero.newton.core.utils.enums.PaymentStatusType
+import com.caminero.newton.core.utils.round
 import com.caminero.newton.model.entities.Payment
 import com.caminero.newton.model.listeners.PaymentListener
 import kotlinx.android.synthetic.main.list_item_payment.view.*
@@ -16,9 +17,6 @@ import kotlinx.android.synthetic.main.list_item_payment.view.*
 class PaymentAdapter(private var items : List<Payment>,
                      private val listener: PaymentListener
 ) : RecyclerView.Adapter<PaymentAdapter.PaymentViewHolder>() {
-
-    //Managing internal events
-    private var isClickable: Boolean = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -34,21 +32,19 @@ class PaymentAdapter(private var items : List<Payment>,
 
         holder.cbStatus.isChecked = item.status == PaymentStatusType.Paid.code
         holder.txtPaymentDate.text = convertStringDateTimeISO8601ToStringDateTime(item.paymentDate)
-        holder.txtMount.text =  "$" + item.mount.toString()
+        holder.txtMount.text =  "$" + item.mount.round(2).toString()
 
-        holder.cbStatus.setOnCheckedChangeListener { _, isChecked ->
-            if(isClickable) listener.OnCheckedChange(item.paymentId, isChecked)
+        holder.cbStatus.setOnClickListener {
+            listener.OnCheckedChange(item.paymentId, holder.cbStatus.isChecked)
         }
     }
 
     fun updateElement(paymentId: String, isChecked: Boolean){
         val status = if(isChecked) PaymentStatusType.Paid.code else PaymentStatusType.InProgress.code
-        items.filter { it.paymentId == paymentId }.forEach{ it.status = status}
+        var data = items
+        data.filter { it.paymentId == paymentId }.forEach{ it.status = status}
+        items = data
         notifyDataSetChanged()
-    }
-
-    fun isClickable(isClickable: Boolean){
-        this.isClickable = isClickable
     }
 
     inner class PaymentViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {

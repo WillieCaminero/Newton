@@ -122,7 +122,6 @@ class LoanDetailFragment : BaseFragment() {
                 pvProgress.visibility = if (it) View.VISIBLE else View.GONE
                 btnEditLoan.isEnabled = !it
                 btnDeleteLoan.isEnabled = !it
-                paymentAdapter.isClickable(!it)
             }
         )
     }

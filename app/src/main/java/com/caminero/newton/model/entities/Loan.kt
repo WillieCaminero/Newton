@@ -7,7 +7,7 @@ data class Loan (
     @SerializedName("interest") val interest : Int,
     @SerializedName("days") val days : Int,
     @SerializedName("dues") val dues : Int,
-    @SerializedName("mount") val mount : Int,
+    @SerializedName("mount") val mount : Float,
     @SerializedName("startDate") val startDate : String,
     @SerializedName("endDate") val endDate : String,
     @SerializedName("payments") val payments : List<Payment>,

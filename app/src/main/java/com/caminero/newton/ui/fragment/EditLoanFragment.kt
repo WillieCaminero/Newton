@@ -57,7 +57,7 @@ class EditLoanFragment : BaseFragment() {
 
             calculateDays()
 
-            if(!validateForm()) {
+            if(!validateForm() || !calculateDays()) {
                 viewModel.setLoadingInactive()
                 return@setOnClickListener
             }

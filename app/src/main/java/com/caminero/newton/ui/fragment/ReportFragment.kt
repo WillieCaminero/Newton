@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.caminero.newton.R
 import com.caminero.newton.core.utils.convertStringDateToStringDateTimeISO8601TimeZone
+import com.caminero.newton.core.utils.round
 import com.caminero.newton.core.utils.setDatePickerDialog
 import com.caminero.newton.model.entities.AccountSummary
 import com.caminero.newton.ui.fragment.base.BaseFragment
@@ -50,10 +51,11 @@ class ReportFragment : BaseFragment() {
     }
 
     private fun initForm(accountSummary: AccountSummary){
-        txtPreviousBase.text = "$ ${accountSummary.previousBase}"
-        txtPayment.text = "$ ${accountSummary.payment}"
-        txtSale.text = "$ ${accountSummary.sale}"
-        txtCurrentBase.text = "$ ${accountSummary.currentBase}"
+        txtPreviousBase.text = "$ ${accountSummary.previousBase.round(2)}"
+        txtPayment.text = "$ ${accountSummary.payment.round(2)}"
+        txtSale.text = "$ ${accountSummary.sale.round(2)}"
+        txtExpense.text = "$ ${accountSummary.expense.round(2)}"
+        txtCurrentBase.text = "$ ${accountSummary.currentBase.round(2)}"
     }
 
     private fun setupListeners() {

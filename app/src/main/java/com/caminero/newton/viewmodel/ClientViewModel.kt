@@ -44,7 +44,7 @@ class ClientViewModel(app : Application) : BaseFragmentViewModel(app) {
                     else {
                         validateSessionExpiration(session.sessionExpiration)
                         mClientList.postValue(mutableListOf())
-                        handleHttpErrorMessage(response.responseError)
+                        //handleHttpErrorMessage(response.responseError)
                     }
                 }
             }
